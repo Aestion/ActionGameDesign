@@ -1,21 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
+import { parseCoverageLedger } from "../src/build/coverage-ledger";
 import { loadContent } from "../src/build/load-content";
-
-interface CoverageItem {
-  id: string;
-  sourceId: string;
-  kind: "source-section" | "game-example" | "media";
-  locator: string;
-  status: "mapped" | "excluded" | "unmapped";
-  targets: string[];
-  disposition?: "duplicate" | "contact-info" | "search-method" | "non-design";
-}
-
-interface CoverageLedger {
-  version: 1;
-  items: CoverageItem[];
-}
 
 const sourceIds = [
   "source-action-design-difficulty",
@@ -24,7 +10,7 @@ const sourceIds = [
   "source-combat-approaches",
   "source-low-poise-boss",
   "source-inaba-interviews"
-];
+] as const;
 
 const taskConceptIds = [
   "domain-type-boundary",
@@ -108,6 +94,7 @@ const combatAndBossScenarioIds: Array<[id: string, gameId: string]> = [
   ["neutral-gow4-sigrun", "god-of-war"],
   ["neutral-elden-malenia", "elden-ring"],
   ["neutral-sekiro-isshin", "sekiro"],
+  ["neutral-sekiro-genichiro-phase-3", "sekiro"],
   ["neutral-nioh2-saito", "nioh"],
   ["neutral-sifu-yang", "sifu"],
   ["neutral-mgrr-sam", "metal-gear-rising"],
@@ -537,7 +524,7 @@ describe("system and presentation migration", () => {
 
 describe("combat, Boss, detailed-case, and ledger migration", () => {
   it("has no unmapped source sections, examples, or media and only allowed exclusions", async () => {
-    const ledger = JSON.parse(await readFile("content/coverage.json", "utf8")) as CoverageLedger;
+    const ledger = parseCoverageLedger(JSON.parse(await readFile("content/coverage.json", "utf8")));
     const allowedDispositions = new Set(["duplicate", "contact-info", "search-method", "non-design"]);
 
     expect(ledger.version).toBe(1);
@@ -579,6 +566,7 @@ describe("combat, Boss, detailed-case, and ledger migration", () => {
     const gameIds = new Set(content.entities.filter(({ kind }) => kind === "game").map(({ id }) => id));
     const sourceIdSet = new Set(content.entities.filter(({ kind }) => kind === "source").map(({ id }) => id));
 
+    expect(combatAndBossScenarioIds).toHaveLength(94);
     expect(new Set(examples.map(({ id }) => id)).size).toBe(examples.length);
     for (const [id, gameId] of combatAndBossScenarioIds) {
       expect(examplesById.get(id)?.gameId, id).toBe(gameId);
@@ -587,12 +575,57 @@ describe("combat, Boss, detailed-case, and ledger migration", () => {
     expect(examples.filter(({ sourceIds }) => sourceIds.some((sourceId) => !sourceIdSet.has(sourceId)))).toEqual([]);
   });
 
+  it("preserves the exact Vergil, Malenia, Isshin, and Genichiro qualifiers", async () => {
+    const content = await loadContent("content");
+    const examples = content.entities.flatMap(({ examples }) => examples);
+    const examplesById = new Map(examples.map((example) => [example.id, example]));
+    const lowPoise = content.entities.find(({ id }) => id === "low-poise-neutral");
+    const vergil = examplesById.get("neutral-dmc3-vergil");
+    const malenia = examplesById.get("neutral-elden-malenia");
+    const isshin = examplesById.get("neutral-sekiro-isshin");
+    const genichiro = examplesById.get("neutral-sekiro-genichiro-phase-3");
+
+    expect(`${vergil?.mechanism} ${vergil?.outcome}`).toMatch(/13\s*hit/iu);
+    expect(malenia?.mechanism).toMatch(/吸血/u);
+    expect(malenia?.outcome).toMatch(/水鸟[\s\S]*神经刀[\s\S]*出手择[\s\S]*(?:combo|连段)[\s\S]*有意压低[\s\S]*人物性能/iu);
+    expect(isshin?.outcome).toMatch(/不一定[\s\S]*遵循[\s\S]*思路/u);
+    expect(genichiro?.subject).toMatch(/三阶段弦一郎/u);
+    expect(`${genichiro?.mechanism} ${genichiro?.outcome}`).toMatch(/霸体人形[\s\S]*转防御[\s\S]*反击/u);
+    expect(genichiro?.sourceIds).toEqual(["source-combat-approaches"]);
+    expect(lowPoise?.bodyHtml).toMatch(/机制[\s\S]*吸血[\s\S]*招式[\s\S]*水鸟[\s\S]*神经刀[\s\S]*人物性能/u);
+    expect(lowPoise?.bodyHtml).toMatch(/一心[\s\S]*不一定[\s\S]*遵循[\s\S]*三阶段弦一郎/u);
+  });
+
+  it("keeps the three action TPS examples source-neutral and positive AI applicability editorial", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const tps = entitiesById.get("coop-musou-action-shooter-jrpg");
+    const conflict = entitiesById.get("high-ai-vs-learnability");
+    const tpsExamples = new Map(tps?.examples.map((example) => [example.id, example]));
+
+    for (const id of ["shooter-gungrave", "shooter-bionic", "shooter-nelo"]) {
+      const example = tpsExamples.get(id);
+      const sourceText = `${example?.mechanism} ${example?.outcome}`;
+      expect(sourceText, id).toMatch(/风格迥异[\s\S]*动作 TPS|动作 TPS[\s\S]*风格差异/u);
+      expect(sourceText, id).toMatch(/未展开[\s\S]*具体机制/u);
+      expect(sourceText, id).not.toMatch(/机械臂|高速[\s\S]*动作移动|角色动作感|机动路线|独立作品路线/u);
+      expect(example?.sourceIds, id).toEqual(["source-act-classification-2"]);
+    }
+    expect(tps?.bodyHtml).toMatch(/动作 TPS[\s\S]*铳墓[\s\S]*生化尖兵[\s\S]*Nelo[\s\S]*展示不同[\s\S]*风格/u);
+
+    const positive = conflict?.conflictSides?.[0];
+    expect(positive?.conditions).toMatch(/^来源只说明模拟玩家性能与局部复刻 PVP 的设计初衷，没有给出正向适用条件。$/u);
+    expect(positive?.conditions).not.toMatch(/可读|练习|稳定|边界/u);
+    expect(positive?.sourceIds).toEqual(["source-low-poise-boss"]);
+    expect(conflict?.editorialSynthesis).toMatch(/编者归纳[\s\S]*可识别边界[\s\S]*练习[\s\S]*稳定性[\s\S]*适用性推导[\s\S]*不属于来源/u);
+  });
+
   it("makes every ledger target auditable against an entity, example, or media reference", async () => {
     const [content, ledgerText] = await Promise.all([
       loadContent("content"),
       readFile("content/coverage.json", "utf8")
     ]);
-    const ledger = JSON.parse(ledgerText) as CoverageLedger;
+    const ledger = parseCoverageLedger(JSON.parse(ledgerText));
     const entityIds = new Set(content.entities.map(({ id }) => id));
     const exampleIds = new Set(content.entities.flatMap(({ examples }) => examples).map(({ id }) => id));
     const mediaTargets = new Set(content.entities.flatMap(({ media }) => media).map(({ src }) => `media:${src}`));
@@ -624,7 +657,7 @@ describe("combat, Boss, detailed-case, and ledger migration", () => {
       loadContent("content"),
       readFile("content/coverage.json", "utf8")
     ]);
-    const ledger = JSON.parse(ledgerText) as CoverageLedger;
+    const ledger = parseCoverageLedger(JSON.parse(ledgerText));
     const ledgerMedia = ledger.items.filter(({ kind, status }) => kind === "media" && status === "mapped");
     const ledgerTargets = ledgerMedia.flatMap(({ targets }) => targets);
     const contentTargets = content.entities.flatMap(({ media }) => media).map(({ src }) => `media:${src}`);

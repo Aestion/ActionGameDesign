@@ -31,9 +31,9 @@ examples:
   - { id: shooter-shadow-warrior, gameId: shadow-warrior, subject: 影子武士, mechanism: 复古 FPS 与武士刀近战、火力结合, outcome: 2 代混合刷子，3 代转向 DOOM 式框架, sourceIds: [source-act-classification-2] }
   - { id: shooter-borderlands, gameId: borderlands, subject: 无主之地, mechanism: 开放区域刷装射击, outcome: 被影子武士 2 借入作为玩法融合参照, sourceIds: [source-act-classification-2] }
   - { id: shooter-vanquish, gameId: vanquish, subject: 绝对征服, mechanism: 滑行、翻滚、掩体工具和子弹时间, outcome: 掩体服务华丽运动战而非静态龟缩, sourceIds: [source-act-classification-2] }
-  - { id: shooter-gungrave, gameId: gungrave, subject: 铳墓, mechanism: 第三人称射击强调角色动作感, outcome: 展示动作 TPS 的风格差异, sourceIds: [source-act-classification-2] }
-  - { id: shooter-bionic, gameId: bionic-commando, subject: 生化尖兵, mechanism: 机械臂机动与射击, outcome: 展示动作 TPS 的机动路径, sourceIds: [source-act-classification-2] }
-  - { id: shooter-nelo, gameId: nelo, subject: Nelo, mechanism: 高速第三人称射击与动作移动, outcome: 展示动作 TPS 的独立作品路径, sourceIds: [source-act-classification-2] }
+  - { id: shooter-gungrave, gameId: gungrave, subject: 铳墓, mechanism: 与另外两例并列为风格迥异的动作 TPS, outcome: 来源未展开具体机制，只用其说明动作 TPS 内部存在风格差异, sourceIds: [source-act-classification-2] }
+  - { id: shooter-bionic, gameId: bionic-commando, subject: 生化尖兵, mechanism: 与另外两例并列为风格迥异的动作 TPS, outcome: 来源未展开具体机制，只用其说明动作 TPS 内部存在风格差异, sourceIds: [source-act-classification-2] }
+  - { id: shooter-nelo, gameId: nelo, subject: Nelo, mechanism: 与另外两例并列为风格迥异的动作 TPS, outcome: 来源未展开具体机制，只用其说明动作 TPS 内部存在风格差异, sourceIds: [source-act-classification-2] }
   - { id: jrpg-elder, gameId: the-elder-scrolls, subject: 上古卷轴, mechanism: 即时战斗服务角色扮演、探索和构筑, outcome: 通常不因实时战斗被称为动作类游戏, sourceIds: [source-act-classification-2] }
   - { id: jrpg-diablo, gameId: diablo, subject: 暗黑破坏神, mechanism: 即时战斗重心在数值 build 与刷装, outcome: 说明 ARPG 不等于大众 ACT, sourceIds: [source-act-classification-2] }
   - { id: jrpg-witcher, gameId: the-witcher, subject: 巫师, mechanism: 即时战斗嵌入叙事角色扮演, outcome: 通常不直接归为动作类, sourceIds: [source-act-classification-2] }
