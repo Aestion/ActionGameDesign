@@ -281,6 +281,28 @@ button:focus-visible, input:focus-visible, a:focus-visible {
 .view-placeholder h2 { margin: 0 0 10px; }
 .view-placeholder > p:last-child { color: var(--muted); line-height: 1.7; }
 
+.graph-explorer { min-height: 0; }
+.graph-breadcrumbs { min-height: 42px; display: flex; align-items: center; gap: 5px; overflow-x: auto; border-bottom: 1px solid var(--line); }
+.graph-breadcrumbs span { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.graph-breadcrumbs i { color: var(--muted); font-style: normal; }
+.graph-breadcrumbs button { padding: 5px 7px; border: 0; color: var(--muted); background: transparent; cursor: pointer; }
+.graph-breadcrumbs button:hover, .graph-breadcrumbs button[aria-current="page"] { color: var(--cyan); }
+.graph-stage { position: relative; min-height: 560px; border-bottom: 1px solid var(--line); background: radial-gradient(circle at center, rgba(97, 228, 201, 0.06), transparent 58%); overflow: hidden; }
+.graph-canvas { position: absolute; inset: 0; }
+.graph-legend { position: absolute; z-index: 2; right: 10px; bottom: 10px; display: flex; flex-wrap: wrap; justify-content: end; gap: 6px 12px; max-width: 360px; padding: 8px 10px; border: 1px solid var(--line); color: var(--muted); background: rgba(8, 17, 25, 0.9); font-size: 9px; }
+.graph-legend span:nth-child(2), .graph-legend span:nth-child(4) { color: var(--orange); }
+.graph-tooltip { position: absolute; z-index: 3; left: 14px; bottom: 14px; width: min(360px, calc(100% - 28px)); padding: 12px 14px; border: 1px solid var(--cyan); background: rgba(8, 17, 25, 0.96); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35); pointer-events: none; }
+.graph-tooltip strong { display: block; font-size: 13px; }
+.graph-tooltip p { margin: 6px 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.graph-tooltip span { color: var(--cyan); font-size: 9px; letter-spacing: 0.08em; }
+.graph-node-access { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 0; }
+.graph-node-access button { display: flex; align-items: center; gap: 7px; padding: 6px 9px; border: 1px solid var(--line); color: var(--muted); background: var(--surface); font-size: 10px; cursor: pointer; }
+.graph-node-access button:hover, .graph-node-access button[data-active="true"] { border-color: var(--cyan); color: var(--text); }
+.graph-node-access button[data-kind="conflict"] { border-style: dashed; border-color: var(--orange); }
+.graph-node-access button span { color: var(--cyan); }
+.graph-node-access button[data-kind="conflict"] span { color: var(--orange); }
+.mobile-tree { display: none; }
+
 .detail-panel {
   min-width: 0;
   min-height: 0;
@@ -379,6 +401,20 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   .focus-readout { position: static; width: 100%; margin-top: 14px; transform: none; }
   .detail-panel { min-height: 70vh; border-top: 1px solid var(--line); border-left: 0; }
   .detail-scroll-region { overflow: visible; }
+  .graph-explorer { display: none; }
+  .mobile-tree { display: block; padding: 18px 0; }
+  .mobile-tree h2 { margin: 0 0 12px; font-size: 14px; }
+  .mobile-tree ul { margin: 0; padding: 0; list-style: none; }
+  .mobile-tree ul ul { margin: 5px 0 9px 42px; padding-left: 12px; border-left: 1px dashed var(--line); }
+  .mobile-tree li + li { margin-top: 5px; }
+  .mobile-tree button { padding: 9px 10px; border: 1px solid var(--line); text-align: left; background: var(--surface); cursor: pointer; }
+  .mobile-tree button[aria-current="page"] { border-color: var(--cyan); color: var(--cyan); }
+  .mobile-tree-row { display: grid; grid-template-columns: 36px 1fr; gap: 6px; }
+  .mobile-tree-row > button:last-child { width: 100%; }
+  .mobile-tree .disclosure-button { display: grid; place-items: center; padding: 0; color: var(--cyan); }
+  .mobile-tree ul ul button { width: 100%; }
+  .mobile-tree ul ul button[data-kind="conflict"] { border-left: 3px dashed var(--orange); }
+  .mobile-root { width: 100%; margin-bottom: 8px; font-weight: 700; }
 }
 
 @media (max-width: 540px) {
