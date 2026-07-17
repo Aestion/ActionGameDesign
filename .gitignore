@@ -1,0 +1,7 @@
+.worktrees/
+.superpowers/
+node_modules/
+dist/
+dist-last-good/
+.build-tmp/
+src/generated/knowledge.ts
