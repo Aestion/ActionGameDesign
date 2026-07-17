@@ -159,6 +159,7 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
   }, [visible, selectedId, highlightedIds]);
 
   const entityById = (id: string) => id === GRAPH_ROOT_ID ? rootEntity : dataset.entities.find((entity) => entity.id === id);
+  const highlightedSet = new Set(highlightedIds);
   const selectedParentId = parentIdFor(selectedId, dataset);
   const crumbs = [rootEntity];
   if (selectedId !== GRAPH_ROOT_ID) {
@@ -197,7 +198,7 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
       <div className="graph-node-access" role="list" aria-label="可键盘浏览的图谱节点">
         {visible.entities.map((entity, index) => {
           const metrics = countMetrics(entity, dataset);
-          return <span role="listitem" key={entity.id}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} onFocus={() => setTooltipId(entity.id)} onBlur={() => setTooltipId(undefined)} onMouseEnter={() => setTooltipId(entity.id)} onMouseLeave={() => setTooltipId(undefined)} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={`${entity.title}，关系 ${metrics.relations}，案例 ${metrics.cases}，冲突 ${metrics.conflicts}`}><span aria-hidden="true">{entity.kind === "conflict" ? "◇" : entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>;
+          return <span role="listitem" key={entity.id} data-testid={`graph-node-${entity.id}`} data-highlighted={highlightedSet.has(entity.id) ? "true" : "false"}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} data-highlighted={highlightedSet.has(entity.id) ? "true" : undefined} onFocus={() => setTooltipId(entity.id)} onBlur={() => setTooltipId(undefined)} onMouseEnter={() => setTooltipId(entity.id)} onMouseLeave={() => setTooltipId(undefined)} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={`${entity.title}，关系 ${metrics.relations}，案例 ${metrics.cases}，冲突 ${metrics.conflicts}`}><span aria-hidden="true">{entity.kind === "conflict" ? "◇" : entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>;
         })}
       </div>
     </section>

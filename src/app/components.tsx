@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import type {
   InlineExample,
   KnowledgeDataset,
@@ -24,6 +24,9 @@ const viewLabels: Array<{ id: AtlasView; label: string; code: string }> = [
   { id: "conflicts", label: "冲突索引", code: "04" },
   { id: "sources", label: "来源档案", code: "05" }
 ];
+const conflictTypeLabels: Record<string, string> = {
+  definition: "定义冲突", goal: "目标冲突", condition: "条件差异", direct: "直接分歧"
+};
 
 export function getDomainEntities(dataset: KnowledgeDataset): KnowledgeEntity[] {
   return dataset.entities
@@ -38,11 +41,10 @@ export function getDomainEntities(dataset: KnowledgeDataset): KnowledgeEntity[] 
 
 interface AtlasHeaderProps {
   dataset: KnowledgeDataset;
-  query: string;
-  onQueryChange: (query: string) => void;
+  children: ReactNode;
 }
 
-export function AtlasHeader({ dataset, query, onQueryChange }: AtlasHeaderProps) {
+export function AtlasHeader({ dataset, children }: AtlasHeaderProps) {
   return (
     <header className="atlas-header">
       <a className="atlas-brand" href="#atlas-workspace" aria-label="动作游戏设计知识图谱首页">
@@ -52,15 +54,7 @@ export function AtlasHeader({ dataset, query, onQueryChange }: AtlasHeaderProps)
           <small>TACTICAL KNOWLEDGE ATLAS</small>
         </span>
       </a>
-      <label className="global-search">
-        <span>全局检索</span>
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => onQueryChange(event.currentTarget.value)}
-          placeholder="概念 / 游戏 / Boss / 来源"
-        />
-      </label>
+      {children}
       <dl className="build-status" aria-label="知识库状态">
         <div><dt>节点</dt><dd>{dataset.stats.concepts}</dd></div>
         <div><dt>案例</dt><dd>{dataset.stats.cases}</dd></div>
@@ -202,12 +196,24 @@ function ExampleCard({ example, dataset }: { example: InlineExample; dataset?: K
   );
 }
 
-function MediaCard({ media }: { media: MediaRef }) {
+function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDataset }) {
+  const [failed, setFailed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const source = dataset?.entities.find(({ id }) => id === media.sourceId);
   return (
-    <figure className="media-card">
-      <img src={media.src} alt={media.alt} loading="lazy" />
-      <figcaption>{media.caption || media.alt}</figcaption>
-    </figure>
+    <>
+      <figure className="media-card">
+        {failed ? <div className="media-fallback" role="status">媒体加载失败：{media.alt}<small>{media.caption}</small></div> : (
+          <button type="button" className="media-open" aria-label={`放大：${media.alt}`} onClick={() => setOpen(true)}>
+            <img src={media.src} alt={media.alt} loading="lazy" onError={() => setFailed(true)} />
+          </button>
+        )}
+        <figcaption><span>{media.caption || media.alt}</span><small>来源：{source?.title ?? media.sourceId}</small></figcaption>
+      </figure>
+      {open && !failed && <dialog className="media-dialog" open aria-label={media.alt} onClick={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+        <div><button type="button" className="dialog-close" onClick={() => setOpen(false)} aria-label="关闭媒体">×</button><img src={media.src} alt={media.alt} /><p>{media.caption || media.alt}</p><small>来源：{source?.title ?? media.sourceId}</small></div>
+      </dialog>}
+    </>
   );
 }
 
@@ -221,6 +227,7 @@ export function NodeDetail({
   const relations = edgesFor(entity, dataset);
   const related = relatedEntities(entity, dataset);
   const relatedConcepts = related.filter(({ kind }) => kind === "concept");
+  const relatedCases = related.filter(({ kind }) => kind === "case");
   const conflicts = related.filter(({ kind }) => kind === "conflict");
   const domainTitles = entity.domainIds.map((id) =>
     dataset?.entities.find((candidate) => candidate.id === id)?.title ?? id
@@ -323,30 +330,31 @@ export function NodeDetail({
                     <ExampleCard key={example.id} example={example} dataset={dataset} />
                   ))}
                 </div>
+              ) : relatedCases.length ? (
+                <ul className="related-list">{relatedCases.map((caseEntity) => <li key={caseEntity.id}><button type="button" onClick={() => onSelectEntity?.(caseEntity.id)}>{caseEntity.title}<span aria-hidden="true">↗</span></button></li>)}</ul>
               ) : <p className="empty-state">暂无直接案例。</p>}
             </section>
             <section className="detail-section" aria-labelledby="detail-conflicts-title">
               <h3 id="detail-conflicts-title">冲突观点</h3>
               {entity.conflictSides?.length ? (
-                <div className="research-grid">
+                <><p className="conflict-question">争议问题：{entity.summary}</p><p className="conflict-type-label">类型：{conflictTypeLabels[entity.conflictType ?? ""] ?? "未分类"}</p><div className="research-grid">
                   {entity.conflictSides.map((side) => (
                     <article className="research-card conflict-card" key={side.label}>
                       <h4>{side.label}</h4>
                       <p>{side.claim}</p>
                       <p className="card-outcome">条件：{side.conditions}</p>
+                      <p className="conflict-sources"><strong>来源：</strong>{side.sourceIds.map((id) => dataset?.entities.find((source) => source.id === id)?.title ?? id).join("、") || "未记录"}</p>
                     </article>
                   ))}
-                </div>
+                </div></>
               ) : conflicts.length ? (
-                <ul className="related-list">
-                  {conflicts.map((conflict) => <li key={conflict.id}>{conflict.title}</li>)}
-                </ul>
+                <ul className="related-list">{conflicts.map((conflict) => <li key={conflict.id}><button type="button" onClick={() => onSelectEntity?.(conflict.id)}>{conflict.title}<span aria-hidden="true">↗</span></button></li>)}</ul>
               ) : <p className="empty-state">当前节点没有直接冲突卡。</p>}
             </section>
             <section className="detail-section" aria-labelledby="detail-media-title">
               <h3 id="detail-media-title">媒体</h3>
               {entity.media.length ? (
-                <div className="media-grid">{entity.media.map((media) => <MediaCard key={media.src} media={media} />)}</div>
+                <div className="media-grid">{entity.media.map((media) => <MediaCard key={media.src} media={media} dataset={dataset} />)}</div>
               ) : <p className="empty-state">当前节点没有关联媒体。</p>}
             </section>
             <section className="detail-section" aria-labelledby="detail-citations-title">

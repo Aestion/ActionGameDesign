@@ -150,4 +150,38 @@ describe("NodeDetail", () => {
     fireEvent.click(screen.getByRole("button", { name: "展开理解" }));
     expect(onDepthChange).toHaveBeenCalledWith(2);
   });
+
+  it("shows every conflict side with conditions, source labels, and separate synthesis", () => {
+    const conflict = entity({
+      id: "readability-conflict", title: "可读性还是观赏性", kind: "conflict", conflictType: "goal",
+      conflictSides: [
+        { label: "可读性优先", claim: "先传达功能。", conditions: "高惩罚实时操作", sourceIds: ["source-combat"] },
+        { label: "观赏性可优先", claim: "可接受部分遮挡。", conditions: "低失败成本", sourceIds: ["source-combat"] }
+      ],
+      editorialSynthesis: "编者归纳：取舍取决于玩家是否必须立即负责结果。"
+    });
+    render(<NodeDetail entity={conflict} dataset={fixtureDataset} depth={3} />);
+    expect(screen.getByText("可读性优先")).toBeTruthy();
+    expect(screen.getByText("条件：高惩罚实时操作")).toBeTruthy();
+    expect(screen.getAllByText("战斗资料")).toHaveLength(2);
+    expect(screen.getByText("取舍取决于玩家是否必须立即负责结果。")).toBeTruthy();
+  });
+
+  it("lazy-loads media, opens a sourced dialog, and degrades on image error", async () => {
+    const user = userEvent.setup();
+    const mediaEntity = entity({
+      id: "media-node", title: "动作媒体", media: [{
+        sourcePath: "clip.gif", src: "media/clip.gif", alt: "压制循环演示", caption: "起身窗口中的重新击倒",
+        kind: "gif", sourceId: "source-combat"
+      }]
+    });
+    render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} depth={3} />);
+    const image = screen.getByRole("img", { name: "压制循环演示" });
+    expect(image.getAttribute("loading")).toBe("lazy");
+    expect(screen.getByText("来源：战斗资料")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "放大：压制循环演示" }));
+    expect(screen.getByRole("dialog", { name: "压制循环演示" })).toBeTruthy();
+    fireEvent.error(image);
+    expect(screen.getByText("媒体加载失败：压制循环演示")).toBeTruthy();
+  });
 });

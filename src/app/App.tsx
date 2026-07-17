@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useReducer } from "react";
 import type { KnowledgeDataset } from "../model";
+import { searchDataset } from "../search";
 import { atlasReducer, createInitialState, nodeHash, nodeIdFromHash } from "./app-state";
 import {
   AtlasHeader,
   AtlasNavigation,
-  AtlasWorkspace,
   EmptyDetail,
   NodeDetail
 } from "./components";
+import { ComparisonMatrix } from "./ComparisonMatrix";
 import { GRAPH_ROOT_ID, GraphExplorer } from "./GraphExplorer";
+import { IndexViews } from "./IndexViews";
 import { MobileTree } from "./MobileTree";
+import { SearchPanel } from "./SearchPanel";
 
 export interface AppProps {
   dataset: KnowledgeDataset;
@@ -26,13 +29,27 @@ export function App({ dataset }: AppProps) {
     ? state.selectedId
     : GRAPH_ROOT_ID;
   const selected = dataset.entities.find(({ id }) => id === selectedId);
+  const searchActive = Boolean(state.query.trim() || Object.values(state.filters).some((values) => values.length));
+  const resultIds = useMemo(() => searchDataset(dataset, state.query, state.filters), [dataset, state.filters, state.query]);
   const highlightedIds = useMemo(() => {
-    const query = state.query.trim().toLocaleLowerCase();
-    if (!query) return [];
-    return dataset.searchRecords.filter((record) =>
-      `${record.title} ${record.text} ${record.tokens.join(" ")}`.toLocaleLowerCase().includes(query)
-    ).map(({ id }) => id);
-  }, [dataset.searchRecords, state.query]);
+    if (!searchActive) return [];
+    const highlighted = new Set(resultIds);
+    const resultSet = new Set(resultIds);
+    for (const entity of dataset.entities) {
+      if (resultSet.has(entity.id)) entity.domainIds.forEach((id) => highlighted.add(id));
+      if (entity.examples.some(({ gameId }) => resultSet.has(gameId))) {
+        highlighted.add(entity.id);
+        entity.domainIds.forEach((id) => highlighted.add(id));
+      }
+    }
+    for (const edge of dataset.edges) {
+      if (resultSet.has(edge.source) || resultSet.has(edge.target)) {
+        const relatedId = resultSet.has(edge.source) ? edge.target : edge.source;
+        dataset.entities.find(({ id }) => id === relatedId)?.domainIds.forEach((id) => highlighted.add(id));
+      }
+    }
+    return [...highlighted];
+  }, [dataset.edges, dataset.entities, resultIds, searchActive]);
 
   useEffect(() => {
     const onHashChange = () => {
@@ -50,14 +67,20 @@ export function App({ dataset }: AppProps) {
     const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
     window.history.replaceState(window.history.state, "", nextUrl);
   };
+  const openInGraph = (id: string) => {
+    dispatch({ type: "set-view", view: "graph" });
+    selectEntity(id);
+  };
 
   return (
     <div className="atlas-shell">
-      <AtlasHeader
-        dataset={dataset}
-        query={state.query}
-        onQueryChange={(query) => dispatch({ type: "set-query", query })}
-      />
+      <AtlasHeader dataset={dataset}>
+        <SearchPanel dataset={dataset} query={state.query} filters={state.filters} resultIds={resultIds}
+          onQueryChange={(query) => dispatch({ type: "set-query", query })}
+          onFiltersChange={(filters) => dispatch({ type: "set-filters", filters })}
+          onClear={() => { dispatch({ type: "set-query", query: "" }); dispatch({ type: "clear-filters" }); }}
+          onSelect={openInGraph} />
+      </AtlasHeader>
       <div className="atlas-layout">
         <AtlasNavigation
           view={state.view}
@@ -72,7 +95,12 @@ export function App({ dataset }: AppProps) {
             <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={highlightedIds} onSelect={selectEntity} />
             <MobileTree dataset={dataset} selectedId={selectedId} onSelect={selectEntity} />
           </main>
-        ) : <AtlasWorkspace dataset={dataset} selectedId={selectedId} view={state.view} onSelect={selectEntity} />}
+        ) : (
+          <main className="atlas-workspace" id="atlas-workspace">
+            <div className="workspace-heading"><div><p className="eyebrow">研究视图</p><h1>{state.view === "matrix" ? "游戏比较矩阵" : state.view === "cases" ? "案例索引" : state.view === "conflicts" ? "冲突索引" : "来源档案"}</h1></div><p className="workspace-instruction">从结构化记录打开依据；右侧详情与稳定链接会同步保留。</p></div>
+            {state.view === "matrix" ? <ComparisonMatrix dataset={dataset} onSelect={openInGraph} /> : <IndexViews dataset={dataset} view={state.view} onSelect={selectEntity} />}
+          </main>
+        )}
         {selected ? (
           <NodeDetail
             entity={selected}
