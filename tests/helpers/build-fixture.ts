@@ -13,7 +13,10 @@ export async function createBuildFixture(roots: string[]): Promise<string> {
 <html><head></head><body><main id="app"></main><img src="./media/sample.gif" alt="sample"><script type="module" src="/src/main.ts"></script></body></html>`);
   await writeFile(path.join(root, "src", "main.ts"), `import "./styles.css";
 import dataset from "./generated/knowledge";
-document.querySelector("#app")!.textContent = String(dataset.stats.concepts);`);
+const largeAsset = new URL("../assets/large.svg", import.meta.url).href;
+const app = document.querySelector("#app")!;
+app.textContent = String(dataset.stats.concepts);
+app.setAttribute("data-large-asset", largeAsset);`);
   await writeFile(path.join(root, "src", "styles.css"), `.fixture { color: rgb(1, 2, 3); }`);
   await writeFile(path.join(root, "content", "concepts", "concept.md"), `---
 id: local-concept
@@ -56,12 +59,13 @@ citations: []
 media: []
 examples: []
 sourceMeta:
-  primaryUrls: []
+  primaryUrls: [https://example.com/source]
   secondaryUrls: []
 ---
 
 来源正文。
 `);
   await writeFile(path.join(root, "assets", "sample.gif"), Buffer.from("GIF89a"));
+  await writeFile(path.join(root, "assets", "large.svg"), `<svg xmlns="http://www.w3.org/2000/svg"><desc>large-fixture-marker</desc><path d="${"M0 0h1v1z".repeat(500)}"/></svg>`);
   return root;
 }

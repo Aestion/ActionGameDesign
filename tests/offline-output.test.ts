@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { buildAtlas, verifyOfflinePackage } from "../scripts/build-atlas";
+import { buildAtlas, inlineApplicationAssets, verifyOfflinePackage } from "../scripts/build-atlas";
 import { copyMedia } from "../scripts/copy-media";
 import { createBuildFixture } from "./helpers/build-fixture";
 
@@ -27,6 +27,13 @@ describe("offline build output", () => {
     expect(html).not.toMatch(/<script\b[^>]*\bsrc=/iu);
     expect(html).not.toMatch(/<link\b[^>]*rel=["']stylesheet["'][^>]*\bhref=/iu);
     expect(html).not.toMatch(/\bimport\s*\(/u);
+    expect(html).toContain("https://example.com/source");
+    const inlinedAssetReference = html.match(/new URL\((["'`])(\.\/assets\/[^"'`]+\.svg)\1,\s*import\.meta\.url\)/u)?.[2];
+    expect(inlinedAssetReference).toBeTruthy();
+    await expect(access(path.join(root, "dist", inlinedAssetReference!.slice(2)))).resolves.toBeUndefined();
+    const publishedSvg = (await readdir(path.join(root, "dist", "assets"))).find((file) => file.endsWith(".svg"));
+    expect(publishedSvg).toBeTruthy();
+    expect(await readFile(path.join(root, "dist", "assets", publishedSvg!), "utf8")).toContain("large-fixture-marker");
     const localReferences = [...html.matchAll(/\b(?:src|href)=["']([^"']+)["']/giu)]
       .map((match) => match[1])
       .filter((reference) => !reference.startsWith("#") && !reference.startsWith("data:"));
@@ -35,6 +42,31 @@ describe("offline build output", () => {
     const generated = await readFile(path.join(root, "src", "generated", "knowledge.ts"), "utf8");
     expect(generated).toContain("satisfies KnowledgeDataset");
     expect(generated).toContain('"generatedAt": "2026-07-17T00:00:00.000Z"');
+    expect(generated).toContain('"https://example.com/source"');
+  });
+
+  it("rebases Vite-style JavaScript asset URLs when moving code from assets into index.html", async () => {
+    const root = await createBuildFixture(roots);
+    const outputDir = path.join(root, "manual-inline-output");
+    await mkdir(path.join(outputDir, "assets"), { recursive: true });
+    await writeFile(path.join(outputDir, "index.html"), `<!doctype html><script type="module" src="./assets/app.js"></script>`);
+    await writeFile(path.join(outputDir, "assets", "app.js"), `const icon = new URL("./large.svg", import.meta.url).href; document.body.dataset.icon = icon;`);
+    await writeFile(path.join(outputDir, "assets", "large.svg"), `<svg><desc>manual-large-asset</desc></svg>`);
+
+    await inlineApplicationAssets(outputDir);
+    const html = await readFile(path.join(outputDir, "index.html"), "utf8");
+
+    expect(html).toContain(`new URL("./assets/large.svg", import.meta.url)`);
+    await expect(verifyOfflinePackage(outputDir, [])).resolves.toBeUndefined();
+  });
+
+  it("does not treat JavaScript URL construction or citation literals as CSS requests", async () => {
+    const root = await createBuildFixture(roots);
+    const outputDir = path.join(root, "citation-output");
+    await mkdir(outputDir, { recursive: true });
+    await writeFile(path.join(outputDir, "index.html"), `<!doctype html><a href="https://example.com/source">Citation</a><script>const citation = "https://example.com/source"; const parsed = new URL(citation);</script>`);
+
+    await expect(verifyOfflinePackage(outputDir, [])).resolves.toBeUndefined();
   });
 
   it.each([
@@ -43,7 +75,6 @@ describe("offline build output", () => {
     ["WebSocket", "new WebSocket('ws://localhost')"],
     ["EventSource", "new EventSource('./events')"],
     ["sendBeacon", "navigator.sendBeacon('./log')"],
-    ["remote URL", "const endpoint = 'https://example.com/api'"],
     ["dynamic import", "import('./chunk.js')"]
   ])("rejects the network-capable %s pattern in the final package", async (_label, injected) => {
     const root = await createBuildFixture(roots);
@@ -56,8 +87,12 @@ describe("offline build output", () => {
 
   it.each([
     ["CSS URL", `<style>.broken { background: url('./missing.png'); }</style>`],
+    ["remote CSS URL", `<style>.broken { background: url('https://example.com/image.png'); }</style>`],
     ["preload href", `<link rel="preload" href="./missing.js">`],
-    ["image src", `<img src="/absolute.png" alt="broken">`]
+    ["image src", `<img src="/absolute.png" alt="broken">`],
+    ["remote image src", `<img src="https://example.com/image.png" alt="broken">`],
+    ["unquoted remote image src", `<img src=https://example.com/image.png alt=broken>`],
+    ["unquoted remote stylesheet", `<link rel=stylesheet href=https://example.com/site.css>`]
   ])("rejects an invalid final %s reference", async (_label, injected) => {
     const root = await createBuildFixture(roots);
     const outputDir = path.join(root, "reference-output");

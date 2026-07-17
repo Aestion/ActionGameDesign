@@ -61,6 +61,27 @@ function rewriteCssUrls(css: string, cssFile: string, outputDir: string): string
   });
 }
 
+function rebaseJavaScriptAsset(reference: string, scriptFile: string, outputDir: string): string {
+  if (/^(?:[a-z][a-z0-9+.-]*:|\/|#)/iu.test(reference)) return reference;
+  const suffixIndex = reference.search(/[?#]/u);
+  const pathPart = suffixIndex === -1 ? reference : reference.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? "" : reference.slice(suffixIndex);
+  const assetFile = path.resolve(path.dirname(scriptFile), pathPart);
+  if (!isPathWithin(outputDir, assetFile)) {
+    throw new Error(`JavaScript asset URL escapes the output: ${reference}`);
+  }
+  const relative = path.relative(outputDir, assetFile).split(path.sep).join("/");
+  return `./${relative}${suffix}`;
+}
+
+function rewriteJavaScriptAssetUrls(code: string, scriptFile: string, outputDir: string): string {
+  return code.replace(
+    /new URL\(\s*(["'`])([^"'`]+)\1\s*,\s*import\.meta\.url\s*\)/gu,
+    (_whole, quote: string, reference: string) =>
+      `new URL(${quote}${rebaseJavaScriptAsset(reference, scriptFile, outputDir)}${quote}, import.meta.url)`
+  );
+}
+
 export async function inlineApplicationAssets(outputDir: string): Promise<void> {
   const indexFile = path.join(outputDir, "index.html");
   const inlinedFiles = new Set<string>();
@@ -70,7 +91,7 @@ export async function inlineApplicationAssets(outputDir: string): Promise<void> 
     /<script\b[^>]*\bsrc=(["'])([^"']+)\1[^>]*><\/script>/giu,
     async (match) => {
       const scriptFile = resolveOutputAsset(outputDir, match[2]);
-      const applicationCode = await readFile(scriptFile, "utf8");
+      const applicationCode = rewriteJavaScriptAssetUrls(await readFile(scriptFile, "utf8"), scriptFile, outputDir);
       inlinedFiles.add(scriptFile);
       return `<script type="module">${applicationCode.replace(/<\/script/giu, "<\\/script")}</script>`;
     }
@@ -98,21 +119,35 @@ async function verifyLocalReference(outputDir: string, reference: string): Promi
   await access(resolveOutputAsset(outputDir, reference));
 }
 
+function parseTagAttributes(tagSource: string): Map<string, string> {
+  const attributes = new Map<string, string>();
+  for (const match of tagSource.matchAll(/\s([a-z_:][a-z0-9_.:-]*)\s*=\s*(?:(["'])(.*?)\2|([^\s"'=<>`]+))/giu)) {
+    attributes.set(match[1].toLowerCase(), match[3] ?? match[4]);
+  }
+  return attributes;
+}
+
 export async function verifyOfflinePackage(outputDir: string, mediaPaths: string[]): Promise<void> {
   const indexFile = path.join(outputDir, "index.html");
   const html = await readFile(indexFile, "utf8");
   if (/<script\b[^>]*\bsrc=/iu.test(html)) throw new Error("Offline package contains an external script entry.");
   for (const link of html.matchAll(/<link\b[^>]*>/giu)) {
-    const rel = link[0].match(/\brel=(["'])([^"']+)\1/iu)?.[2] ?? "";
-    if (rel.split(/\s+/u).includes("stylesheet") && /\bhref=/iu.test(link[0])) {
+    const attributes = parseTagAttributes(link[0]);
+    const rel = attributes.get("rel")?.toLowerCase() ?? "";
+    if (rel.split(/\s+/u).includes("stylesheet") && attributes.has("href")) {
       throw new Error("Offline package contains an external stylesheet entry.");
     }
   }
   if (!/<script\b[^>]*>[\s\S]*\S[\s\S]*<\/script>/iu.test(html)) {
     throw new Error("Offline package has no inline application code.");
   }
+  const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/giu)].map((match) => match[1]);
+  const styles = [...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/giu)].map((match) => match[1]);
+  const markup = html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, "")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, "");
+  const executable = scripts.join("\n");
   const forbidden: Array<[RegExp, string]> = [
-    [/https?:\/\//iu, "remote HTTP URL"],
     [/\bfetch\s*\(/iu, "fetch"],
     [/\bXMLHttpRequest\b/u, "XMLHttpRequest"],
     [/\bWebSocket\b/u, "WebSocket"],
@@ -121,11 +156,35 @@ export async function verifyOfflinePackage(outputDir: string, mediaPaths: string
     [/\bimport\s*\(/u, "dynamic import"]
   ];
   for (const [pattern, label] of forbidden) {
-    if (pattern.test(html)) throw new Error(`Offline package contains network-capable ${label}.`);
+    if (pattern.test(executable)) throw new Error(`Offline package contains network-capable ${label}.`);
   }
-  const references = [...html.matchAll(/\b(?:src|href)=(["'])([^"']+)\1/giu)].map((match) => match[2]);
-  const cssReferences = [...html.matchAll(/url\(\s*(["']?)([^"')]+)\1\s*\)/giu)].map((match) => match[2]);
-  await Promise.all([...references, ...cssReferences].map((reference) => verifyLocalReference(outputDir, reference)));
+  const markupReferences: Array<{ tag: string; attribute: string; reference: string }> = [];
+  const inlineStyles: string[] = [];
+  for (const tagMatch of markup.matchAll(/<([a-z][a-z0-9:-]*)\b[^>]*>/giu)) {
+    const tag = tagMatch[1].toLowerCase();
+    const attributes = parseTagAttributes(tagMatch[0]);
+    for (const attribute of ["src", "href", "action", "poster"]) {
+      const reference = attributes.get(attribute);
+      if (reference) markupReferences.push({ tag, attribute, reference });
+    }
+    const style = attributes.get("style");
+    if (style) inlineStyles.push(style);
+  }
+  for (const { tag, attribute, reference } of markupReferences) {
+    if (tag === "a" && attribute === "href" && /^https?:\/\//iu.test(reference)) continue;
+    await verifyLocalReference(outputDir, reference);
+  }
+  const cssSources = [...styles, ...inlineStyles];
+  const cssReferences = cssSources.flatMap((css) => [
+    ...[...css.matchAll(/url\(\s*(["']?)([^"')]+)\1\s*\)/giu)].map((match) => match[2]),
+    ...[...css.matchAll(/@import\s+(["'])([^"']+)\1/giu)].map((match) => match[2])
+  ]);
+  await Promise.all(cssReferences.map((reference) => verifyLocalReference(outputDir, reference)));
+  const javaScriptAssets = scripts.flatMap((script) =>
+    [...script.matchAll(/new URL\(\s*(["'`])(\.\.?\/[^"'`]+)\1\s*,\s*import\.meta\.url\s*\)/gu)]
+      .map((match) => match[2])
+  );
+  await Promise.all(javaScriptAssets.map((reference) => verifyLocalReference(outputDir, reference)));
   await Promise.all(mediaPaths.map((mediaPath) => verifyLocalReference(outputDir, `./${mediaPath}`)));
 }
 
