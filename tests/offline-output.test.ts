@@ -12,6 +12,12 @@ afterEach(async () => {
   await Promise.all(roots.splice(0).map((root) => rm(root, { recursive: true, force: true })));
 });
 
+async function writePackagedCandidate(outputDir: string, body: string): Promise<void> {
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(path.join(outputDir, "index.html"), `<!doctype html><html><head></head><body>${body}</body></html>`);
+  await inlineApplicationAssets(outputDir);
+}
+
 describe("offline build output", () => {
   it("inlines application code and styles while keeping every remaining local reference file-compatible", async () => {
     const root = await createBuildFixture(roots);
@@ -63,9 +69,27 @@ describe("offline build output", () => {
   it("does not treat JavaScript URL construction or citation literals as CSS requests", async () => {
     const root = await createBuildFixture(roots);
     const outputDir = path.join(root, "citation-output");
-    await mkdir(outputDir, { recursive: true });
-    await writeFile(path.join(outputDir, "index.html"), `<!doctype html><a href="https://example.com/source">Citation</a><script>const citation = "https://example.com/source"; const parsed = new URL(citation);</script>`);
+    await writePackagedCandidate(outputDir, `<a href="https://example.com/source">Citation</a><script>const citation = "https://example.com/source"; const parsed = new URL(citation);</script>`);
 
+    await expect(verifyOfflinePackage(outputDir, [])).resolves.toBeUndefined();
+  });
+
+  it("requires and generates a restrictive file-compatible content security policy", async () => {
+    const root = await createBuildFixture(roots);
+    const outputDir = path.join(root, "csp-output");
+    await mkdir(outputDir, { recursive: true });
+    await writeFile(path.join(outputDir, "index.html"), `<!doctype html><html><head></head><body><script>void 0</script></body></html>`);
+
+    await expect(verifyOfflinePackage(outputDir, [])).rejects.toThrow(/content security policy|CSP/i);
+    await inlineApplicationAssets(outputDir);
+    const html = await readFile(path.join(outputDir, "index.html"), "utf8");
+    expect(html).toContain(`default-src 'none'`);
+    expect(html).toContain(`script-src 'unsafe-inline'`);
+    expect(html).toContain(`style-src 'unsafe-inline'`);
+    expect(html).toContain(`img-src 'self' file: data: blob:`);
+    expect(html).toContain(`connect-src 'none'`);
+    expect(html).toContain(`object-src 'none'`);
+    expect(html).toContain(`form-action 'none'`);
     await expect(verifyOfflinePackage(outputDir, [])).resolves.toBeUndefined();
   });
 
@@ -79,8 +103,7 @@ describe("offline build output", () => {
   ])("rejects the network-capable %s pattern in the final package", async (_label, injected) => {
     const root = await createBuildFixture(roots);
     const outputDir = path.join(root, "adversarial-output");
-    await mkdir(outputDir, { recursive: true });
-    await writeFile(path.join(outputDir, "index.html"), `<!doctype html><script>${injected}</script>`);
+    await writePackagedCandidate(outputDir, `<script>${injected}</script>`);
 
     await expect(verifyOfflinePackage(outputDir, [])).rejects.toThrow(/offline|network|dynamic/i);
   });
@@ -92,12 +115,15 @@ describe("offline build output", () => {
     ["image src", `<img src="/absolute.png" alt="broken">`],
     ["remote image src", `<img src="https://example.com/image.png" alt="broken">`],
     ["unquoted remote image src", `<img src=https://example.com/image.png alt=broken>`],
-    ["unquoted remote stylesheet", `<link rel=stylesheet href=https://example.com/site.css>`]
+    ["unquoted remote stylesheet", `<link rel=stylesheet href=https://example.com/site.css>`],
+    ["remote image srcset", `<img srcset="https://example.com/one.png 1x, https://example.com/two.png 2x" alt="broken">`],
+    ["remote object data", `<object data="https://example.com/plugin.bin"></object>`],
+    ["remote button formaction", `<button formaction="https://example.com/submit">Submit</button>`],
+    ["meta refresh", `<meta http-equiv="refresh" content="0; url=https://example.com/redirect">`]
   ])("rejects an invalid final %s reference", async (_label, injected) => {
     const root = await createBuildFixture(roots);
     const outputDir = path.join(root, "reference-output");
-    await mkdir(outputDir, { recursive: true });
-    await writeFile(path.join(outputDir, "index.html"), `<!doctype html>${injected}<script>void 0</script>`);
+    await writePackagedCandidate(outputDir, `${injected}<script>void 0</script>`);
 
     await expect(verifyOfflinePackage(outputDir, [])).rejects.toThrow();
   });

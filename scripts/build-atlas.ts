@@ -7,6 +7,22 @@ import { isPathWithin } from "../src/build/media-paths";
 import { copyMedia } from "./copy-media";
 import { generateContent } from "./generate-content";
 
+const offlineContentSecurityPolicy = [
+  "default-src 'none'",
+  "base-uri 'none'",
+  "connect-src 'none'",
+  "script-src 'unsafe-inline'",
+  "style-src 'unsafe-inline'",
+  "img-src 'self' file: data: blob:",
+  "media-src 'self' file: data: blob:",
+  "font-src 'self' file: data:",
+  "object-src 'none'",
+  "form-action 'none'",
+  "frame-src 'none'",
+  "worker-src 'none'",
+  "manifest-src 'none'"
+].join("; ");
+
 export interface BuildAtlasOptions {
   root: string;
   contentRoot: string;
@@ -82,6 +98,24 @@ function rewriteJavaScriptAssetUrls(code: string, scriptFile: string, outputDir:
   );
 }
 
+function injectOfflineContentSecurityPolicy(html: string): string {
+  const withoutExistingPolicy = html.replace(/<meta\b[^>]*>/giu, (tag) => {
+    const attributes = parseTagAttributes(tag);
+    return attributes.get("http-equiv")?.toLowerCase() === "content-security-policy" ? "" : tag;
+  });
+  const meta = `<meta http-equiv="Content-Security-Policy" content="${offlineContentSecurityPolicy}">`;
+  if (/<head\b[^>]*>/iu.test(withoutExistingPolicy)) {
+    return withoutExistingPolicy.replace(/<head\b[^>]*>/iu, (head) => `${head}${meta}`);
+  }
+  if (/<html\b[^>]*>/iu.test(withoutExistingPolicy)) {
+    return withoutExistingPolicy.replace(/<html\b[^>]*>/iu, (root) => `${root}<head>${meta}</head>`);
+  }
+  const doctype = withoutExistingPolicy.match(/^\s*<!doctype\b[^>]*>/iu)?.[0];
+  return doctype
+    ? withoutExistingPolicy.replace(doctype, `${doctype}<head>${meta}</head>`)
+    : `<head>${meta}</head>${withoutExistingPolicy}`;
+}
+
 export async function inlineApplicationAssets(outputDir: string): Promise<void> {
   const indexFile = path.join(outputDir, "index.html");
   const inlinedFiles = new Set<string>();
@@ -107,7 +141,7 @@ export async function inlineApplicationAssets(outputDir: string): Promise<void> 
     inlinedFiles.add(cssFile);
     return `<style>${css.replace(/<\/style/giu, "<\\/style")}</style>`;
   });
-  await writeFile(indexFile, html, "utf8");
+  await writeFile(indexFile, injectOfflineContentSecurityPolicy(html), "utf8");
   await Promise.all([...inlinedFiles].map((file) => rm(file, { force: true })));
 }
 
@@ -127,9 +161,37 @@ function parseTagAttributes(tagSource: string): Map<string, string> {
   return attributes;
 }
 
+function parseSrcsetReferences(srcset: string): string[] {
+  const references: string[] = [];
+  let cursor = 0;
+  while (cursor < srcset.length) {
+    while (cursor < srcset.length && /[\s,]/u.test(srcset[cursor])) cursor += 1;
+    const start = cursor;
+    while (cursor < srcset.length && !/\s/u.test(srcset[cursor])) cursor += 1;
+    let reference = srcset.slice(start, cursor);
+    let endedWithComma = false;
+    while (reference.endsWith(",")) {
+      reference = reference.slice(0, -1);
+      endedWithComma = true;
+    }
+    if (reference) references.push(reference);
+    if (endedWithComma) continue;
+    while (cursor < srcset.length && srcset[cursor] !== ",") cursor += 1;
+    if (srcset[cursor] === ",") cursor += 1;
+  }
+  return references;
+}
+
 export async function verifyOfflinePackage(outputDir: string, mediaPaths: string[]): Promise<void> {
   const indexFile = path.join(outputDir, "index.html");
   const html = await readFile(indexFile, "utf8");
+  const policies = [...html.matchAll(/<meta\b[^>]*>/giu)]
+    .map((match) => parseTagAttributes(match[0]))
+    .filter((attributes) => attributes.get("http-equiv")?.toLowerCase() === "content-security-policy")
+    .map((attributes) => attributes.get("content"));
+  if (policies.length !== 1 || policies[0] !== offlineContentSecurityPolicy) {
+    throw new Error("Offline package is missing the generated restrictive Content Security Policy.");
+  }
   if (/<script\b[^>]*\bsrc=/iu.test(html)) throw new Error("Offline package contains an external script entry.");
   for (const link of html.matchAll(/<link\b[^>]*>/giu)) {
     const attributes = parseTagAttributes(link[0]);
@@ -163,9 +225,24 @@ export async function verifyOfflinePackage(outputDir: string, mediaPaths: string
   for (const tagMatch of markup.matchAll(/<([a-z][a-z0-9:-]*)\b[^>]*>/giu)) {
     const tag = tagMatch[1].toLowerCase();
     const attributes = parseTagAttributes(tagMatch[0]);
+    if (tag === "meta" && attributes.get("http-equiv")?.toLowerCase() === "refresh") {
+      throw new Error("Offline package contains request-capable meta refresh markup.");
+    }
+    if (tag === "object" && attributes.has("data")) {
+      throw new Error("Offline package contains request-capable object data markup.");
+    }
+    if (attributes.has("formaction") || (tag === "form" && attributes.has("action"))) {
+      throw new Error("Offline package contains request-capable form action markup.");
+    }
     for (const attribute of ["src", "href", "action", "poster"]) {
       const reference = attributes.get(attribute);
       if (reference) markupReferences.push({ tag, attribute, reference });
+    }
+    const srcset = attributes.get("srcset");
+    if (srcset) {
+      for (const reference of parseSrcsetReferences(srcset)) {
+        markupReferences.push({ tag, attribute: "srcset", reference });
+      }
     }
     const style = attributes.get("style");
     if (style) inlineStyles.push(style);
