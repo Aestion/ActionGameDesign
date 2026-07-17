@@ -37,8 +37,10 @@ media:
 examples:
   - { id: time-mhx-hitstop, gameId: monster-hunter, subject: 怪物猎人X盾斧狩技, mechanism: 夸张命中配约 8/30 秒帧冻结, outcome: 接近来源作者所称察觉阈值，依赖动作与特效建立预期, sourceIds: [source-action-design-difficulty] }
   - { id: time-nier-startup, gameId: nier, subject: 尼尔机械纪元小剑轻攻击, mechanism: 前摇约 10/60 帧，完整动势约 16 至 18/60 帧, outcome: 形成极快输入响应，并以自由取消降低后续思考约束, sourceIds: [source-action-design-difficulty] }
-  - { id: time-sfv-jab, gameId: street-fighter, subject: 街头霸王5站轻拳, mechanism: 多数角色约 4/60 帧出手并配 10 至 14/60 帧命中冻结, outcome: 快出手后仍给需要决策与搓招的玩家察觉命中的时间, sourceIds: [source-action-design-difficulty] }
+  - { id: time-sfv-jab, gameId: street-fighter, subject: 街头霸王5站轻拳, mechanism: 多数角色约 4/60 帧出手，完整打击帧总长约 8 至 10/60，并配 10 至 14/60 帧命中冻结, outcome: 快出手后仍给需要决策与搓招的玩家察觉命中的时间, sourceIds: [source-action-design-difficulty] }
   - { id: time-dmc4-exceed, gameId: devil-may-cry, subject: 鬼泣4尼禄红剑充能, mechanism: 约零点二秒或更窄窗口内精确输入, outcome: 精确操作获得三倍于非精确操作的充能效果, sourceIds: [source-action-design-difficulty] }
+  - { id: time-dmc-precise-dodge, gameId: devil-may-cry, subject: DMC 的精确闪避, mechanism: 来源把精确闪避列入约 0.2 至 0.4 秒的中时间精度玩法, outcome: 作为多数动作游戏精确玩法窗口的一个来源例子, sourceIds: [source-action-design-difficulty] }
+  - { id: time-mhx-bushido, gameId: monster-hunter, subject: 怪物猎人X的武士道风格, mechanism: 来源把武士道风格列入约 0.2 至 0.4 秒的中时间精度玩法, outcome: 与 DMC 精确闪避并列说明该经验分档, sourceIds: [source-action-design-difficulty] }
   - { id: time-dead-cells-parry, gameId: dead-cells, subject: 死亡细胞盾反, mechanism: 来源把判定列为零点四秒以上的宽松精确玩法, outcome: 降低严格时机门槛, sourceIds: [source-action-design-difficulty] }
   - { id: time-mordor-parry, gameId: middle-earth-shadow, subject: 暗影魔多招架, mechanism: 宽时机窗口配 UI 提示, outcome: 把重点放在群战表演而非极限时间执行, sourceIds: [source-action-design-difficulty] }
   - { id: time-nioh-pulse, gameId: nioh, subject: 仁王残心, mechanism: 在动作后较宽时机内输入以回收精力, outcome: 时间操作与资源收益互通, sourceIds: [source-action-design-difficulty] }
@@ -51,7 +53,7 @@ editorialSynthesis: 编者归纳：零点三秒、零点六秒及高/中/低窗�
 
 ## 来源作者的经验尺度
 
-原文把人的反应时间概括为约 0.1 至 0.5 秒、平均约 0.3 秒，并据此讨论三类表现：常见命中停顿多在 0.1 至 0.2 秒；动作快到约 0.2 秒时需要用停顿帮助察觉；连续舞台事件最好充分错开，作者给出至少约 0.6 秒的经验值。这些数字保留为来源观点，不能脱离设备、刺激类型和玩家条件当作生理定律。
+原文把人的反应时间概括为约 0.1 至 0.5 秒、平均约 0.3 秒，并据此讨论三类表现：常见命中停顿多在 0.1 至 0.2 秒，即 3～5/30 帧；来源作者称自己见过最长的是《怪物猎人X》盾斧光剑命中低肉质部位时的 8/30 = 0.27 秒冻结。动作快到约 0.2 秒时需要用停顿帮助察觉；《街头霸王5》多数角色站轻拳约 4/60 帧出手，算上完整打击帧总长约 8 至 10/60，再以 10 至 14/60 帧命中冻结补偿；连续舞台事件最好充分错开，作者给出至少约 0.6 秒的经验值。这些数字保留为来源作者的经验尺度，不能脱离设备、刺激类型和玩家条件当作生理定律。
 
 ## 精度分档
 

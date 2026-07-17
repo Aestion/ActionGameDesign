@@ -81,7 +81,7 @@ examples:
   - { id: spectacle-burial-blade, gameId: bloodborne, subject: 埋葬之刃蓄力, mechanism: 姿势逐步夸张以建立力量预期, outcome: 不依赖循环特效也能让玩家预感蓄力增长, sourceIds: [source-action-design-difficulty] }
   - { id: spectacle-nier-greatsword, gameId: nier, subject: 尼尔机械纪元大剑长按, mechanism: 极短预备与快速打击后接长 Ease Out、摆臂转体和武器消失弧线, outcome: 力量感较轻但形成舞蹈般优雅与动静对比, sourceIds: [source-action-design-difficulty] }
   - { id: spectacle-overwatch-mei, gameId: overwatch, subject: 守望先锋小美 Highlight, mechanism: 运动镜头、弧线路径和橡皮管式夸张, outcome: 以非写实形态提高动态捕捉和视觉趣味, sourceIds: [source-action-design-difficulty] }
-  - { id: spectacle-souls-arcs, gameId: dark-souls, subject: 亚尔特留斯与法兰不死队, mechanism: 姿态和武器轨迹大量使用鲜明弧线与动作线, outcome: 来源把两者作为弧线增加视觉趣味的简短例子, sourceIds: [source-action-design-difficulty] }
+  - { id: spectacle-souls-arcs, gameId: dark-souls, subject: 亚尔特留斯与法兰不死队, mechanism: 姿态和武器轨迹大量使用鲜明弧线, outcome: 来源把两者作为弧线增加视觉趣味的简短例子, sourceIds: [source-action-design-difficulty] }
   - { id: spectacle-overwatch-dragons, gameId: overwatch, subject: 守望先锋双龙短片, mechanism: 慢镜特写配优雅弧线, outcome: 放大高速运动中正常速度无法感知的细节, sourceIds: [source-action-design-difficulty] }
   - { id: spectacle-sfv-focus, gameId: street-fighter, subject: 街头霸王5隆心眼, mechanism: 命中冻结约 15/60 帧并轻微拉近, outcome: 强调滞阻和命中判断，同时背景特效仍可运动, sourceIds: [source-action-design-difficulty] }
   - { id: spectacle-hellblade-focus, gameId: hellblade, subject: 地狱之刃集中, mechanism: 玩家与环境时间异步，特效减速且多次命中特效叠加, outcome: 在机制许可下提高视觉满足和节奏变化, sourceIds: [source-action-design-difficulty] }
@@ -95,11 +95,15 @@ editorialSynthesis: 编者说明：来源作者明确自称不是动画/特效�
 
 - Anticipation（预备动作）建立对力量和方向的预期，也直接服务可读性。
 - Ease In and Out（缓入缓出）控制加减速节奏，创造动势与动静对比。
-- Arc（弧线）和动作线（Line of Action）组织姿态、形状与轨迹；丰富曲线增加动感。阿尔特留斯与法兰不死队是来源顺带列出的受欢迎弧线动作例。
+- Arc（弧线）组织形状与轨迹；丰富曲线增加动感。阿尔特留斯与法兰不死队是来源顺带列出的受欢迎弧线动作例。
 
 夸张不等于错误。《守望先锋》借橡皮管式不可能形态突出弧线，但尺度仍依赖经验。
 
 来源作者还评论，FromSoftware 通常不以动作动画见长，却在《血源诅咒》的蓄力姿势上比常见“循环动画加逐强特效”更进一步。这是作者审美评价，不是对工作室动画能力的客观排名。
+
+## 编者解释（补充术语）：动作线
+
+Task 5 简报要求使用动作线（Line of Action）作为检索入口。编者用它描述角色姿态中贯穿身体、武器和力量方向的主线，可辅助比较弧线与轮廓；原文只讨论 Arc、姿态和轨迹，没有提出动作线定义，因此该补充不归于来源作者。
 
 ## 时间伸缩与命中停顿
 
@@ -107,7 +111,7 @@ editorialSynthesis: 编者说明：来源作者明确自称不是动画/特效�
 
 ## 震屏
 
-震屏通过 Pan/Dolly、Pitch/Yaw/Roll 及各轴曲线、扰动表现碰撞力量。参数少、反馈直观，使它成为理解相机运动感的入口；原文没有展开完整相机规范。
+来源介绍震屏时点名两份参考演讲：GDC 2016 的 Squirrel Eiserloh《Juicing Your Cameras With Math》，以及 Jan Willem Nijman《The Art of Screenshake》。震屏通过 Pan/Dolly、Pitch/Yaw/Roll 及各轴曲线、扰动表现碰撞力量。参数少、反馈直观，使它成为理解相机运动感的入口；原文没有展开完整相机规范。
 
 ## 特写与操作权
 

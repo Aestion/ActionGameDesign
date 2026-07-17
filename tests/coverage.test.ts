@@ -89,6 +89,7 @@ const systemAndPresentationGameIds = [
   "assassins-creed", "bayonetta", "bloodborne", "dark-souls", "darksiders", "dead-cells",
   "devil-may-cry", "dnf", "double-dragon", "dragons-dogma", "dynasty-warriors", "for-honor",
   "furi", "god-of-war", "hellblade", "honkai-impact-3rd", "knights-of-valour", "middle-earth-shadow",
+  "batman-arkham",
   "monster-hunter", "muramasa", "naruto-ultimate-ninja-storm", "nier", "ninja-gaiden", "nioh",
   "odin-sphere", "osu", "overwatch", "shadow-of-the-colossus", "stanley-parable", "street-fighter",
   "the-king-of-fighters", "titan-souls", "vindictus"
@@ -285,5 +286,96 @@ describe("system and presentation migration", () => {
     expect(systemAndPresentationGameIds.filter((id) => !games.has(id))).toEqual([]);
     expect(systemAndPresentationGameIds.filter((id) => !taskExampleGameIds.includes(id))).toEqual([]);
     expect(unresolvedExampleGames).toEqual([]);
+  });
+
+  it("separates source and editor boundaries in the Task 5 migration", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const commandDimension = entitiesById.get("command-dimension");
+    const interoperation = entitiesById.get("action-external-interoperation");
+    const animation = entitiesById.get("animation-readability");
+    const spectacle = entitiesById.get("spectacle-techniques");
+
+    expect(commandDimension?.examples.find(({ id }) => id === "command-bayonetta-offset")).toBeUndefined();
+    expect(commandDimension?.bodyHtml).toMatch(/Dodge Offset[\s\S]*未完成/u);
+    expect(interoperation?.examples.find(({ id }) => id === "interop-vindictus")?.mechanism)
+      .toMatch(/重氪金[\s\S]*往往[\s\S]*转化途径/u);
+    expect(interoperation?.examples.find(({ id }) => id === "interop-vindictus")?.outcome)
+      .toMatch(/来源未说明[\s\S]*付费资源[\s\S]*降低[\s\S]*挑战/u);
+    expect(animation?.bodyHtml).toMatch(/编者解释（补充术语）[\s\S]*动作线/u);
+    expect(spectacle?.bodyHtml).toMatch(/编者解释（补充术语）[\s\S]*动作线/u);
+    expect(spectacle?.examples.find(({ id }) => id === "spectacle-souls-arcs")?.mechanism)
+      .not.toMatch(/动作线|Line of Action/u);
+  });
+
+  it("keeps Task 5 conflict-side evidence within the source and labels applicability synthesis", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const difficulty = entitiesById.get("difficulty-sources");
+    const readability = entitiesById.get("readability-vs-spectacle");
+    const difficultySides = difficulty?.conflictSides ?? [];
+    const readabilitySides = readability?.conflictSides ?? [];
+
+    expect(difficulty?.conflictType).toBe("condition");
+    expect(difficultySides[0]?.claim).toMatch(/来源作者[\s\S]*反应频率[\s\S]*操控精度/u);
+    expect(difficultySides[0]?.conditions).toMatch(/玩家[\s\S]*耐受[\s\S]*Sweet Spot/u);
+    expect(difficultySides[1]?.conditions).toMatch(/反应频率[\s\S]*操控精度[\s\S]*不变/u);
+    expect(difficultySides.map(({ conditions }) => conditions).join("\n"))
+      .not.toMatch(/沉浸|资源规划|探索压力|耐久目标/u);
+    expect(difficulty?.editorialSynthesis).toMatch(/编者归纳[\s\S]*并不互斥/u);
+
+    expect(readabilitySides[0]?.conditions).toMatch(/动作[\s\S]*功能|游戏[\s\S]*玩家/u);
+    expect(readabilitySides[1]?.conditions).toMatch(/一部分可读性[\s\S]*练习/u);
+    expect(readabilitySides.map(({ claim, conditions }) => `${claim}\n${conditions}`).join("\n"))
+      .not.toMatch(/失败成本|接管|提示补偿|视觉卖点|随机|不一致/u);
+    expect(readability?.editorialSynthesis)
+      .toMatch(/编者归纳[\s\S]*失败成本[\s\S]*操作权[\s\S]*提示补偿[\s\S]*视觉卖点[\s\S]*随机或不一致/u);
+  });
+
+  it("indexes the omitted Task 5 source scenarios individually", async () => {
+    const content = await loadContent("content");
+    const examples = content.entities.flatMap(({ examples }) => examples);
+    const examplesById = new Map(examples.map((example) => [example.id, example]));
+    const expected = [
+      ["allocation-batman-arkham", "batman-arkham", /蝙蝠侠|阿卡姆/u],
+      ["time-dmc-precise-dodge", "devil-may-cry", /DMC.*精确闪避|鬼泣.*精确闪避/u],
+      ["time-mhx-bushido", "monster-hunter", /怪物猎人X.*武士道/u],
+      ["difficulty-souls-no-hit", "dark-souls", /黑暗之魂.*无伤通关/u],
+      ["nonclearing-dw-growth", "dynasty-warriors", /真三国无双.*角色养成/u]
+    ] as const;
+
+    for (const [id, gameId, subject] of expected) {
+      expect(examplesById.get(id)?.gameId, id).toBe(gameId);
+      expect(examplesById.get(id)?.subject, id).toMatch(subject);
+    }
+  });
+
+  it("preserves Task 5 formulas, numerical qualifiers, and named references", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const depth = entitiesById.get("depth-width-feedback-time");
+    const time = entitiesById.get("time-precision");
+    const animation = entitiesById.get("animation-readability");
+    const cues = entitiesById.get("auxiliary-cues");
+    const feedback = entitiesById.get("feedback-loops");
+    const difficulty = entitiesById.get("external-rules-and-difficulty");
+    const spectacle = entitiesById.get("spectacle-techniques");
+
+    expect(depth?.bodyHtml).toMatch(/发生的情况总量\s*\/\s*反馈时间[\s\S]*蕴含的情况总量[\s\S]*对策与执行总量/u);
+    expect(depth?.bodyHtml).toMatch(/外部规则空间\s*=\s*每一个发生的情况所能够造成的其他情况的总量/u);
+    expect(depth?.editorialSynthesis).toMatch(/不是[\s\S]*科学公式|不是[\s\S]*普遍定律/u);
+
+    expect(time?.bodyHtml).toMatch(/3\s*(?:至|～|—|-)\s*5\/30/u);
+    expect(time?.bodyHtml).toMatch(/8\/30\s*=\s*0\.27\s*秒/u);
+    expect(time?.bodyHtml).toMatch(/街头霸王5[\s\S]*8\s*(?:至|～|—|-)\s*10\/60/u);
+    expect(time?.bodyHtml).toMatch(/来源作者[\s\S]*经验尺度[\s\S]*(?:不能|不是)/u);
+
+    expect(animation?.examples.find(({ id }) => id === "readable-nameless")?.outcome).toMatch(/40%/u);
+    expect(cues?.bodyHtml).toMatch(/死亡细胞[\s\S]*2\s*帧/u);
+    expect(feedback?.bodyHtml).toMatch(/怪物猎人[\s\S]*15\s*(?:至|～|—|-)\s*30\s*分钟/u);
+    expect(difficulty?.bodyHtml).toMatch(/连续击中\s*2\s*下[\s\S]*3\s*下/u);
+
+    expect(animation?.bodyHtml).toMatch(/Mariel Cartwright[\s\S]*GDC/u);
+    expect(spectacle?.bodyHtml).toMatch(/Squirrel Eiserloh[\s\S]*Jan Willem Nijman[\s\S]*(?:震屏|Screenshake)/u);
   });
 });

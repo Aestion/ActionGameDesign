@@ -25,6 +25,7 @@ examples:
   - { id: difficulty-bayo-medal, gameId: bayonetta, subject: 猎天使魔女白金奖章, mechanism: 评价系统奖励速度、伤害控制和技巧, outcome: 把深度作为自选挑战而非统一通关门槛, sourceIds: [source-action-design-difficulty] }
   - { id: difficulty-ng-karma, gameId: ninja-gaiden, subject: 忍者龙剑传 Karma, mechanism: 分数目标驱动更高效和更危险的打法, outcome: 以外部评价引导玩家钻研高频系统, sourceIds: [source-action-design-difficulty] }
   - { id: difficulty-mh-speedrun, gameId: monster-hunter, subject: 怪物猎人速杀, mechanism: 玩家自定完成时间目标并优化打点、路线和配装, outcome: 深度可由个人能力探索而非强制难度入口发现, sourceIds: [source-action-design-difficulty] }
+  - { id: difficulty-souls-no-hit, gameId: dark-souls, subject: 黑暗之魂无伤通关, mechanism: 玩家凭个人意志把不受伤完成流程设为自选目标, outcome: 来源用它说明系统深度可由玩家自主探索，不必依赖强制难度入口, sourceIds: [source-action-design-difficulty] }
 editorialSynthesis: 编者解释：来源的达成率、反应次数和容错推导是分析模型；目标、玩家群体与统计方式不固定时，不能把难度约化为单一客观数值。
 ---
 
@@ -43,7 +44,7 @@ editorialSynthesis: 编者解释：来源的达成率、反应次数和容错推
 - 容错性：达成综合目标时，允许多少子目标失败。
 - 惩罚性：某个子目标失败会在多大程度上阻断主目标。
 
-提高某次 Boss 攻击伤害会提高该失败的惩罚并略降整体容错；强化回复主要提高容错；增加生命到多承受一次攻击，则同时降惩罚、升容错。尺度取决于目标：单场 Boss 的死亡惩罚很高，全游戏尺度上篝火与捷径又降低了局部失败的长期损失。
+提高某次 Boss 攻击伤害会提高该失败的惩罚并略降整体容错；强化回复主要提高容错；来源用“从被 Boss 连续击中 2 下就死，变成连续击中 3 下才死”说明增加生命会同时降低惩罚、提高容错。这是用于解释模型的个案数值，不是魂系通用伤害规格。尺度取决于目标：单场 Boss 的死亡惩罚很高，全游戏尺度上篝火与捷径又降低了局部失败的长期损失。
 
 来源还把奖励看作惩罚的反面：奖惩仍可生效通常意味着综合目标尚未彻底结束。这个对称说法用于理解局部结果怎样改变后续机会，不等于所有奖励都能换算成同量惩罚。
 

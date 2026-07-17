@@ -26,6 +26,7 @@ examples:
   - { id: nonclearing-souls, gameId: dark-souls, subject: 黑暗之魂, mechanism: 可背刺、引怪、利用地形、绕过遭遇并以篝火捷径管理风险, outcome: 战斗不必是正面公平对决，探索和氛围参与解题, sourceIds: [source-action-design-difficulty] }
   - { id: nonclearing-mh, gameId: monster-hunter, subject: 怪物猎人, mechanism: 备战配装、选择交战位置，玩家与怪物都可换区脱离, outcome: 动作之外的准备和追踪扩展狩猎空间, sourceIds: [source-action-design-difficulty] }
   - { id: nonclearing-dw, gameId: dynasty-warriors, subject: 真三国无双, mechanism: 大战场原则上可自由移动却大量沿用清版式敌群规则, outcome: 成为清版/非清版边界的来源疑问案例, sourceIds: [source-action-design-difficulty] }
+  - { id: nonclearing-dw-growth, gameId: dynasty-warriors, subject: 真三国无双的角色养成, mechanism: 来源把无双的角色养成列为非清版游戏在动作之外进行备战的例子, outcome: 说明收集与 MetaGame 会扩展装备、道具和成长选择, sourceIds: [source-action-design-difficulty] }
   - { id: hybrid-ac, gameId: assassins-creed, subject: 刺客信条, mechanism: 大世界探索、复杂地形、潜行与正面动作并存, outcome: 同时承担两类结构成本且可能两边都不讨好, sourceIds: [source-action-design-difficulty] }
   - { id: hybrid-mordor, gameId: middle-earth-shadow, subject: 暗影魔多, mechanism: 开放环境与吸附式群战、潜行混合, outcome: 在非清版地图中嵌入受控出手机制, sourceIds: [source-action-design-difficulty] }
   - { id: hybrid-dragons-dogma, gameId: dragons-dogma, subject: 龙之信条, mechanism: 大世界探索和地形穿越配动作战斗, outcome: 代表来源所列的大而全混合结构, sourceIds: [source-action-design-difficulty] }

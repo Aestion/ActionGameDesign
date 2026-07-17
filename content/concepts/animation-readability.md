@@ -57,7 +57,7 @@ examples:
   - { id: readable-rathalos, gameId: monster-hunter, subject: 雄火龙龙吼, mechanism: 约 56/30 帧准备、头颈翅膀同步挤压舒张，约 6/30 帧完成特征变化, outcome: 全身多处可作为闪避视觉参照，来源认为最易读, sourceIds: [source-action-design-difficulty] }
   - { id: readable-diablos, gameId: monster-hunter, subject: 角龙龙吼, mechanism: 约 58/30 帧准备但运动集中头颈，收缩附近停留约 12/30 帧, outcome: 特征变化不明确，来源认为比雄火龙难躲, sourceIds: [source-action-design-difficulty] }
   - { id: readable-teostra, gameId: monster-hunter, subject: 炎王龙龙吼, mechanism: 约 27/30 帧准备，头部缺少挤压舒张，身体节律与吼声错开, outcome: 视觉参照少且干扰强，来源认为三者中最难读, sourceIds: [source-action-design-difficulty] }
-  - { id: readable-nameless, gameId: dark-souls, subject: 黑暗之魂3无名王者, mechanism: 在动势收紧处拖延长刺约 11/30 帧, outcome: 刻意错开 Panic Roll 无敌并造成额外伤害, sourceIds: [source-action-design-difficulty] }
+  - { id: readable-nameless, gameId: dark-souls, subject: 黑暗之魂3无名王者, mechanism: 在动势收紧处拖延长刺约 11/30 帧, outcome: 来源称它会刻意错开 Panic Roll 无敌，并在翻滚时造成 40% 额外伤害, sourceIds: [source-action-design-difficulty] }
   - { id: readable-dragonslayer, gameId: dark-souls, subject: 黑暗之魂3猎龙铠甲, mechanism: 先给假动势诱骗闪避，再用长距离攻击追击, outcome: 以降低可读性挑战既有直观，来源评价更为恶劣, sourceIds: [source-action-design-difficulty] }
   - { id: readable-bloodborne-dlc, gameId: bloodborne, subject: 老猎人研究所小怪与鲨鱼, mechanism: 无明显前兆的连击要求从受击节奏中寻找闪避或枪反, outcome: 来源认为可读性低、惩罚高、体验差，是作者明确负面评价, sourceIds: [source-action-design-difficulty] }
 editorialSynthesis: 编者归纳：同一功能的帧数相近不保证同样好读；身体各部位是否给出一致趋势、特征姿态是否稳定、相机能否看到完整轮廓同样关键。
@@ -65,7 +65,13 @@ editorialSynthesis: 编者归纳：同一功能的帧数相近不保证同样好
 
 ## 剪影、动势和特征帧
 
-剪影是动作外轮廓，完整且差异清楚时更易识别。大型怪物占满画面却只露腹部，尺寸虽大仍因剪影破坏而难读。动势是运动将往哪里发展的趋势；动画中也可用动作线（Line of Action）概括身体与力量的主方向。挤压、拉伸、重心和准备幅度会建立对力量与方向的预期。特征帧则是最能帮助识别功能的关键姿态或趋势节点。
+来源作者把 Mariel Cartwright 的 GDC 讲座称为“针对动作游戏的动画设计”的最佳材料，并在原文附有站外搬运链接；本节点只保留这一来源指引，不把讲座内容冒充本文论证。
+
+剪影是动作外轮廓，完整且差异清楚时更易识别。大型怪物占满画面却只露腹部，尺寸虽大仍因剪影破坏而难读。动势是运动将往哪里发展的趋势；挤压、拉伸、重心和准备幅度会建立对力量与方向的预期。特征帧则是最能帮助识别功能的关键姿态或趋势节点。
+
+## 编者解释（补充术语）：动作线
+
+Task 5 简报要求补充动作线（Line of Action）这一检索术语：它可用来概括身体姿态和力量传递的主方向，帮助分析剪影与动势。原文没有使用或定义该术语，因此本段属于编者解释，不是五十万文章的来源观点，也不由本页的来源引文为它背书。
 
 ## 三个龙吼
 

@@ -17,7 +17,6 @@ citations:
   - { sourceId: source-action-design-difficulty, locator: 3.2.2 主动反应频率的控制；3.3.3 指令维度；3.3.4 其他类型游戏中的操控精度与深度 }
 media: []
 examples:
-  - { id: command-bayonetta-offset, gameId: bayonetta, subject: 猎天使魔女 Dodge Offset, mechanism: 闪避可保存连段进度并继续派生, outcome: 同一个防御事件同时保留主动指令选择，但来源正文明确未完成该部分展开, sourceIds: [source-action-design-difficulty] }
   - { id: command-osu-modes, gameId: osu, subject: osu!mania 与 osu! 点击模式, mechanism: 点击模式减少一部分键位指令并增加光标空间定位, outcome: 指令维度与空间精度可以交换，深度不由单轴决定, sourceIds: [source-action-design-difficulty] }
 editorialSynthesis: 编者说明：原文把本节标为未完成；除已写出的定义、定性判断和跨类型例子外，不补写作者没有完成的技表理论。
 ---
@@ -36,4 +35,4 @@ editorialSynthesis: 编者说明：原文把本节标为未完成；除已写出
 
 ## 未完成边界
 
-来源作者明确说本节因精力有限留坑，并提到以后想讨论 Dodge Offset。本节点保留这一缺口，不把编者推测写成来源结论。
+来源作者明确说本节因精力有限留坑，并提到以后想讨论 Dodge Offset；Dodge Offset 的具体机制说明在来源中并未完成。本节点只保留这个待讨论题目，不为它建立来源支持的机制案例，也不把编者知识写成来源结论。

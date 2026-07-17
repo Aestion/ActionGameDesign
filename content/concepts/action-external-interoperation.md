@@ -32,7 +32,7 @@ examples:
   - { id: interop-furi-parry, gameId: furi, subject: Furi成功防反, mechanism: 精确防反近战后回复少量生命, outcome: 动作成功转化为外部生存资源, sourceIds: [source-action-design-difficulty] }
   - { id: interop-bayo-dodge, gameId: bayonetta, subject: 猎天使魔女精确闪避, mechanism: 触发魔女时间并回复魔晶, outcome: 高风险时机操作同时获得时间窗口与资源奖励, sourceIds: [source-action-design-difficulty] }
   - { id: interop-dnf-command, gameId: dnf, subject: DNF手搓技能, mechanism: 手动输入的技能冷却短于快捷施放, outcome: 执行成本换取外部效率, sourceIds: [source-action-design-difficulty] }
-  - { id: interop-vindictus, gameId: vindictus, subject: 洛奇英雄传长期养成, mechanism: 付费与外部资源通过多条路径降低动作挑战, outcome: 展示互通思路也可能衍生重氪金设计, sourceIds: [source-action-design-difficulty] }
+  - { id: interop-vindictus, gameId: vindictus, subject: 洛奇英雄传与重氪动作游戏, mechanism: 来源作者称重氪金动作游戏往往有丰富的动作玩法与外部规则转化途径，并把 DNF、洛奇英雄传并列举例, outcome: 来源未说明付费资源通过哪些路径降低动作挑战，也未证明氪金与互通设计之间存在因果关系, sourceIds: [source-action-design-difficulty] }
 editorialSynthesis: 编者归纳：互通的价值在于让养成与动作回答同一个风险收益问题；它也可能把技巧差异变成付费差异，不能只按“系统更多”评价。
 ---
 
