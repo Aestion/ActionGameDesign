@@ -314,17 +314,24 @@ describe("system and presentation migration", () => {
     const difficulty = entitiesById.get("difficulty-sources");
     const readability = entitiesById.get("readability-vs-spectacle");
     const difficultySides = difficulty?.conflictSides ?? [];
+    const difficultyExamples = difficulty?.examples ?? [];
     const readabilitySides = readability?.conflictSides ?? [];
+    const difficultySideSourceText = difficultySides
+      .map(({ claim, conditions }) => `${claim}\n${conditions}`)
+      .join("\n");
+    const difficultyExampleSourceText = difficultyExamples
+      .map(({ subject, mechanism, outcome }) => `${subject}\n${mechanism}\n${outcome}`)
+      .join("\n");
 
     expect(difficulty?.conflictType).toBe("condition");
     expect(difficultySides[0]?.claim).toMatch(/来源作者[\s\S]*反应频率[\s\S]*操控精度/u);
     expect(difficultySides[0]?.conditions).toMatch(/玩家[\s\S]*耐受[\s\S]*Sweet Spot/u);
     expect(difficultySides[1]?.conditions).toMatch(/反应频率[\s\S]*操控精度[\s\S]*不变/u);
-    expect(difficultySides.map(({ conditions }) => conditions).join("\n"))
+    expect(difficultySideSourceText)
+      .not.toMatch(/沉浸|资源规划|探索压力|耐久目标/u);
+    expect(difficultyExampleSourceText)
       .not.toMatch(/沉浸|资源规划|探索压力|耐久目标/u);
     expect(difficulty?.editorialSynthesis).toMatch(/编者归纳[\s\S]*并不互斥/u);
-    expect(difficulty?.examples.find(({ id }) => id === "conflict-difficulty-souls")?.outcome)
-      .not.toMatch(/沉浸/u);
     expect(difficulty?.bodyHtml).not.toMatch(/沉浸/u);
     expect(difficulty?.editorialSynthesis).toMatch(/沉浸[\s\S]*适用性推导/u);
 
