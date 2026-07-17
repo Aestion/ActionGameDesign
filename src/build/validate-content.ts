@@ -1,7 +1,12 @@
-import { accessSync, constants } from "node:fs";
+import { accessSync, constants, realpathSync } from "node:fs";
 import path from "node:path";
 import { conflictTypes, type ConflictType, type KnowledgeEdge, type KnowledgeEntity, type RelationKind, type ValidationIssue } from "../model";
 import type { LoadedContent } from "./load-content";
+import { canonicalMediaDestination, isPathWithin, isRelativeMediaSource } from "./media-paths";
+
+export interface ValidationOptions {
+  approvedMediaRoots?: string[];
+}
 
 const symmetricRelationKinds = new Set<RelationKind>([
   "related_to",
@@ -50,33 +55,46 @@ function fileFor(content: LoadedContent, id: string): string {
   return content.filesById.get(id)?.join(", ") ?? id;
 }
 
-function isLocalMediaSource(src: string): boolean {
-  return !/^(https?:|data:)/i.test(src);
-}
-
-function hasReadableLocalMedia(entity: KnowledgeEntity, content: LoadedContent): boolean {
+function mediaSourceIssue(
+  entity: KnowledgeEntity,
+  content: LoadedContent,
+  approvedRoots: string[]
+): "unreadable-media" | "unapproved-media-source" | undefined {
   const sourceFile = content.filesById.get(entity.id)?.[0];
-  return (entity.media ?? []).filter((media) => isLocalMediaSource(media.src)).every((media) => {
-    const mediaPath = sourceFile ? path.resolve(path.dirname(sourceFile), media.src) : media.src;
+  for (const media of entity.media ?? []) {
+    if (!sourceFile || !isRelativeMediaSource(media.sourcePath)) return "unapproved-media-source";
+    const mediaPath = path.resolve(path.dirname(sourceFile), media.sourcePath);
     try {
       accessSync(mediaPath, constants.R_OK);
-      return true;
+      const realMediaPath = realpathSync(mediaPath);
+      if (approvedRoots.length > 0 && !approvedRoots.some((root) => isPathWithin(root, realMediaPath))) {
+        return "unapproved-media-source";
+      }
     } catch {
-      return false;
+      return "unreadable-media";
     }
-  });
+  }
+  return undefined;
 }
 
 function containsExternalLink(entity: KnowledgeEntity): boolean {
   const body = entity.bodyHtml ?? "";
-  return /(?:href|src)=(?:"|')https?:\/\//i.test(body)
-    || (entity.media ?? []).some((media) => /^https?:/i.test(media.src));
+  return /(?:href|src)=(?:"|')https?:\/\//i.test(body);
 }
 
-export function validateContent(content: LoadedContent): ValidationIssue[] {
+export function validateContent(content: LoadedContent, options: ValidationOptions = {}): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const ids = new Set<string>();
   const entitiesById = new Map<string, KnowledgeEntity>();
+  const mediaDestinations = new Map<string, string>();
+  const approvedRoots = (options.approvedMediaRoots ?? [process.cwd()])
+    .map((root) => {
+      try {
+        return realpathSync(root);
+      } catch {
+        return path.resolve(root);
+      }
+    });
 
   if (content.entities.length === 0) {
     issues.push(issue("error", "empty-graph", "content", "No knowledge entities were loaded."));
@@ -167,8 +185,22 @@ export function validateContent(content: LoadedContent): ValidationIssue[] {
       }
     }
 
-    if ((entity.media ?? []).some((media) => !isLocalMediaSource(media.src))) {
-      issues.push(issue("error", "nonlocal-media", entityFile, "Published media must use a local file path."));
+    for (const media of entity.media ?? []) {
+      try {
+        const destination = canonicalMediaDestination(media.src);
+        const collisionKey = destination.toLowerCase();
+        const previous = mediaDestinations.get(collisionKey);
+        if (previous) {
+          issues.push(issue("error", "duplicate-media-destination", entityFile, `Media destination collides with ${previous}: ${destination}.`));
+        } else {
+          mediaDestinations.set(collisionKey, entity.id);
+        }
+      } catch (error) {
+        issues.push(issue("error", "invalid-media-destination", entityFile, error instanceof Error ? error.message : String(error)));
+      }
+      if (!isRelativeMediaSource(media.sourcePath)) {
+        issues.push(issue("error", "nonlocal-media", entityFile, "Media sourcePath must be local and relative to its Markdown file."));
+      }
     }
     if ((entity.media ?? []).some((media) => entitiesById.get(media.sourceId)?.kind !== "source")) {
       issues.push(issue("error", "missing-media-source", entityFile, "Every media reference requires a catalogued source."));
@@ -176,7 +208,10 @@ export function validateContent(content: LoadedContent): ValidationIssue[] {
     if ((entity.citations ?? []).some((citation) => entitiesById.get(citation.sourceId)?.kind !== "source")) {
       issues.push(issue("error", "missing-citation-source", entityFile, "Every citation requires a catalogued source."));
     }
-    if (!hasReadableLocalMedia(entity, content)) {
+    const mediaProblem = mediaSourceIssue(entity, content, approvedRoots);
+    if (mediaProblem === "unapproved-media-source") {
+      issues.push(issue("error", mediaProblem, entityFile, "A media source resolves outside the approved project/content roots."));
+    } else if (mediaProblem === "unreadable-media") {
       issues.push(issue("error", "unreadable-media", entityFile, "A referenced local media file is missing or unreadable."));
     }
 

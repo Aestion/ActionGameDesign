@@ -8,6 +8,7 @@ const RelationSchema = z.object({
 });
 const CitationSchema = z.object({ sourceId: z.string().min(1), locator: z.string().min(1) });
 const MediaSchema = z.object({
+  sourcePath: z.string().min(1),
   src: z.string().min(1),
   alt: z.string().min(1),
   caption: z.string().min(1),

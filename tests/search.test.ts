@@ -34,7 +34,7 @@ describe("compileContent", () => {
           summary: "斋藤利三与贞德",
           bodyHtml: "<p>压制窗口</p>",
           tags: ["Boss"],
-          media: [{ src: "media/example.gif", alt: "示例", caption: "窗口", kind: "gif", sourceId: "a-source" }],
+          media: [{ sourcePath: "example.gif", src: "media/example.gif", alt: "示例", caption: "窗口", kind: "gif", sourceId: "a-source" }],
           examples: [{ id: "example", gameId: "nioh-2", subject: "斋藤利三", mechanism: "削韧", outcome: "处决", sourceIds: ["a-source"] }]
         }),
         entity({ id: "a-source", kind: "source", title: "来源" }),

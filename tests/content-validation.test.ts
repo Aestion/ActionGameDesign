@@ -1,5 +1,14 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
+import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { compileEdges, validateContent } from "../src/build/validate-content";
+
+const mediaRoots: string[] = [];
+
+afterEach(() => {
+  for (const root of mediaRoots.splice(0)) rmSync(root, { recursive: true, force: true });
+});
 
 describe("validateContent", () => {
   it("blocks duplicate IDs, missing relation targets, and one-sided conflicts", () => {
@@ -26,7 +35,7 @@ describe("validateContent", () => {
   it("blocks incomplete cases, unreadable local media, and empty content", () => {
     const issues = validateContent({
       entities: [
-        { id: "case", kind: "case", title: "Case", media: [{ src: "missing.gif" }] }
+        { id: "case", kind: "case", title: "Case", media: [{ sourcePath: "missing.gif", src: "media/missing.gif" }] }
       ],
       declaredEdges: [],
       filesById: new Map([["case", ["C:/content/cases/case.md"]]])
@@ -126,6 +135,43 @@ describe("validateContent", () => {
     expect(issues.filter((item) => item.severity === "error").map((item) => item.code)).toEqual(
       expect.arrayContaining(["nonlocal-media", "missing-media-source", "missing-citation-source"])
     );
+  });
+
+  it("rejects media outside approved roots, publish traversal, and destination collisions", () => {
+    const root = mkdtempSync(path.join(os.tmpdir(), "atlas-media-validation-"));
+    const outside = mkdtempSync(path.join(os.tmpdir(), "atlas-media-outside-"));
+    mediaRoots.push(root, outside);
+    const contentFile = path.join(root, "content", "concepts", "item.md");
+    const approvedAsset = path.join(root, "assets", "approved.gif");
+    const outsideAsset = path.join(outside, "outside.gif");
+    mkdirSync(path.dirname(contentFile), { recursive: true });
+    mkdirSync(path.dirname(approvedAsset), { recursive: true });
+    writeFileSync(contentFile, "fixture");
+    writeFileSync(approvedAsset, "GIF89a");
+    writeFileSync(outsideAsset, "GIF89a");
+    const relativeApproved = path.relative(path.dirname(contentFile), approvedAsset);
+    const relativeOutside = path.relative(path.dirname(contentFile), outsideAsset);
+    const content = {
+      entities: [{ id: "traversal", kind: "concept", title: "Traversal", media: [{ sourcePath: relativeApproved, src: "../escape.gif", sourceId: "source" }] },
+        { id: "collision-a", kind: "concept", title: "A", media: [{ sourcePath: relativeApproved, src: "media/shared.gif", sourceId: "source" }] },
+        { id: "collision-b", kind: "concept", title: "B", media: [{ sourcePath: relativeApproved, src: "media/shared.gif", sourceId: "source" }] },
+        { id: "outside", kind: "concept", title: "Outside", media: [{ sourcePath: relativeOutside, src: "media/outside.gif", sourceId: "source" }] },
+        { id: "source", kind: "source", title: "Source" }],
+      declaredEdges: [],
+      filesById: new Map([
+        ["traversal", [contentFile]], ["collision-a", [contentFile]], ["collision-b", [contentFile]],
+        ["outside", [contentFile]], ["source", [contentFile]]
+      ])
+    } as never;
+
+    const issues = validateContent(content, { approvedMediaRoots: [root] });
+
+    expect(issues.map(({ code }) => code)).toEqual(expect.arrayContaining([
+      "invalid-media-destination",
+      "duplicate-media-destination",
+      "unapproved-media-source"
+    ]));
+    expect(validateContent(content).map(({ code }) => code)).toContain("unapproved-media-source");
   });
 
   it("warns about missing examples, isolated nodes, unverified external links, indirect sources, and term aliases", () => {

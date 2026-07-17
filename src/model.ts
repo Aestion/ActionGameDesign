@@ -11,6 +11,7 @@ export const conflictTypes = ["definition", "goal", "condition", "direct"] as co
 export type ConflictType = (typeof conflictTypes)[number];
 
 export interface MediaRef {
+  sourcePath: string;
   src: string;
   alt: string;
   caption: string;

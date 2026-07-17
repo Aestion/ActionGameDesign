@@ -10,6 +10,7 @@ export interface GenerateContentOptions {
   root: string;
   contentRoot: string;
   generatedAt: string;
+  approvedMediaRoots?: string[];
 }
 
 export interface GenerateContentResult {
@@ -34,7 +35,7 @@ export async function generateContent(options: GenerateContentOptions): Promise<
     ? options.contentRoot
     : path.resolve(options.root, options.contentRoot);
   const loaded = await loadContent(contentRoot);
-  const issues = validateContent(loaded);
+  const issues = validateContent(loaded, { approvedMediaRoots: options.approvedMediaRoots });
   const dataset = compileContent(loaded, options.generatedAt);
 
   if (issues.some(({ severity }) => severity === "error")) {
