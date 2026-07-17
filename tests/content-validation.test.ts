@@ -74,6 +74,60 @@ describe("validateContent", () => {
     );
   });
 
+  it("requires every conflict to declare a valid conflict type", () => {
+    const issues = validateContent({
+      entities: [{ id: "source", kind: "source", title: "Source" }, {
+        id: "conflict", kind: "conflict", title: "Conflict", conflictSides: [
+          { label: "A", claim: "Claim A", conditions: "Condition", sourceIds: ["source"] },
+          { label: "B", claim: "Claim B", conditions: "Condition", sourceIds: ["source"] }
+        ]
+      }],
+      declaredEdges: [],
+      filesById: new Map()
+    } as never);
+
+    expect(issues.map((item) => item.code)).toContain("missing-conflict-type");
+
+    const invalidTypeIssues = validateContent({
+      entities: [{ id: "source", kind: "source", title: "Source" }, {
+        id: "invalid-conflict",
+        kind: "conflict",
+        title: "Invalid conflict",
+        conflictType: "unsupported",
+        conflictSides: [
+          { label: "A", claim: "Claim A", conditions: "Condition", sourceIds: ["source"] },
+          { label: "B", claim: "Claim B", conditions: "Condition", sourceIds: ["source"] }
+        ]
+      }],
+      declaredEdges: [],
+      filesById: new Map()
+    } as never);
+
+    expect(invalidTypeIssues.map((item) => item.code)).toContain("invalid-conflict-type");
+  });
+
+  it("blocks non-local media and unresolved media or citation sources", () => {
+    const issues = validateContent({
+      entities: [{
+        id: "concept",
+        kind: "concept",
+        title: "Concept",
+        media: [
+          { src: "https://example.com/image.png", sourceId: "source" },
+          { src: "data:image/png;base64,AAAA", sourceId: "source" },
+          { src: "sample.md", sourceId: "missing-source" }
+        ],
+        citations: [{ sourceId: "missing-source", locator: "Section 1" }]
+      }, { id: "source", kind: "source", title: "Source" }],
+      declaredEdges: [],
+      filesById: new Map([["concept", ["tests/fixtures/content/concepts/sample.md"]]])
+    } as never);
+
+    expect(issues.filter((item) => item.severity === "error").map((item) => item.code)).toEqual(
+      expect.arrayContaining(["nonlocal-media", "missing-media-source", "missing-citation-source"])
+    );
+  });
+
   it("warns about missing examples, isolated nodes, unverified external links, indirect sources, and term aliases", () => {
     const issues = validateContent({
       entities: [{
@@ -103,6 +157,22 @@ describe("validateContent", () => {
         "missing-alias"
       ])
     );
+  });
+
+  it("warns when a source has secondary URLs but no primary URLs", () => {
+    const issues = validateContent({
+      entities: [{
+        id: "source",
+        kind: "source",
+        title: "Secondary only",
+        bodyHtml: '<p><a href="https://secondary.example.com">Secondary</a></p>',
+        sourceMeta: { primaryUrls: [], secondaryUrls: ["https://secondary.example.com"] }
+      }],
+      declaredEdges: [],
+      filesById: new Map()
+    } as never);
+
+    expect(issues.map((item) => item.code)).toContain("source-no-primary-link");
   });
 
   it("adds reverse hierarchy and symmetric relations without duplicating declared reverse edges", () => {

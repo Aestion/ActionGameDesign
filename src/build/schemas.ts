@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { entityKinds, relationKinds } from "../model";
+import { conflictTypes, entityKinds, relationKinds } from "../model";
 
 const RelationSchema = z.object({
   kind: z.enum(relationKinds),
@@ -28,6 +28,11 @@ const ConflictSideSchema = z.object({
   conditions: z.string().min(1),
   sourceIds: z.array(z.string()).min(1)
 });
+const SourceMetaSchema = z.object({
+  rawPath: z.string().min(1).optional(),
+  primaryUrls: z.array(z.string().url()).default([]),
+  secondaryUrls: z.array(z.string().url()).default([])
+});
 
 export const EntityFileSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
@@ -44,8 +49,9 @@ export const EntityFileSchema = z.object({
   citations: z.array(CitationSchema).default([]),
   media: z.array(MediaSchema).default([]),
   examples: z.array(ExampleSchema).default([]),
-  conflictType: z.enum(["definition", "goal", "condition", "direct"]).optional(),
+  conflictType: z.enum(conflictTypes).optional(),
   conflictSides: z.array(ConflictSideSchema).optional(),
+  sourceMeta: SourceMetaSchema.optional(),
   editorialSynthesis: z.string().optional(),
   matrix: z.record(z.string(), z.string()).optional()
 });

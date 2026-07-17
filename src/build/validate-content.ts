@@ -1,6 +1,6 @@
 import { accessSync, constants } from "node:fs";
 import path from "node:path";
-import type { KnowledgeEdge, KnowledgeEntity, RelationKind, ValidationIssue } from "../model";
+import { conflictTypes, type ConflictType, type KnowledgeEdge, type KnowledgeEntity, type RelationKind, type ValidationIssue } from "../model";
 import type { LoadedContent } from "./load-content";
 
 const symmetricRelationKinds = new Set<RelationKind>([
@@ -50,10 +50,13 @@ function fileFor(content: LoadedContent, id: string): string {
   return content.filesById.get(id)?.join(", ") ?? id;
 }
 
+function isLocalMediaSource(src: string): boolean {
+  return !/^(https?:|data:)/i.test(src);
+}
+
 function hasReadableLocalMedia(entity: KnowledgeEntity, content: LoadedContent): boolean {
   const sourceFile = content.filesById.get(entity.id)?.[0];
-  return (entity.media ?? []).every((media) => {
-    if (/^(https?:|data:)/i.test(media.src)) return true;
+  return (entity.media ?? []).filter((media) => isLocalMediaSource(media.src)).every((media) => {
     const mediaPath = sourceFile ? path.resolve(path.dirname(sourceFile), media.src) : media.src;
     try {
       accessSync(mediaPath, constants.R_OK);
@@ -149,6 +152,11 @@ export function validateContent(content: LoadedContent): ValidationIssue[] {
 
     if (entity.kind === "conflict") {
       const sides = entity.conflictSides ?? [];
+      if (!entity.conflictType) {
+        issues.push(issue("error", "missing-conflict-type", entityFile, "Conflicts require a conflict type."));
+      } else if (!conflictTypes.includes(entity.conflictType as ConflictType)) {
+        issues.push(issue("error", "invalid-conflict-type", entityFile, "Conflicts require a supported conflict type."));
+      }
       if (sides.length < 2) {
         issues.push(issue("error", "one-sided-conflict", entityFile, "Conflicts require at least two sides."));
       }
@@ -159,6 +167,15 @@ export function validateContent(content: LoadedContent): ValidationIssue[] {
       }
     }
 
+    if ((entity.media ?? []).some((media) => !isLocalMediaSource(media.src))) {
+      issues.push(issue("error", "nonlocal-media", entityFile, "Published media must use a local file path."));
+    }
+    if ((entity.media ?? []).some((media) => entitiesById.get(media.sourceId)?.kind !== "source")) {
+      issues.push(issue("error", "missing-media-source", entityFile, "Every media reference requires a catalogued source."));
+    }
+    if ((entity.citations ?? []).some((citation) => entitiesById.get(citation.sourceId)?.kind !== "source")) {
+      issues.push(issue("error", "missing-citation-source", entityFile, "Every citation requires a catalogued source."));
+    }
     if (!hasReadableLocalMedia(entity, content)) {
       issues.push(issue("error", "unreadable-media", entityFile, "A referenced local media file is missing or unreadable."));
     }
@@ -172,7 +189,7 @@ export function validateContent(content: LoadedContent): ValidationIssue[] {
     if (containsExternalLink(entity)) {
       issues.push(issue("warning", "external-link-unverified", entityFile, "External links cannot be verified locally."));
     }
-    if (entity.kind === "source" && !containsExternalLink(entity)) {
+    if (entity.kind === "source" && !(entity.sourceMeta?.primaryUrls.length)) {
       issues.push(issue("warning", "source-no-primary-link", entityFile, "This source has no primary external link."));
     }
     if (entity.kind === "concept" && (entity.aliases ?? []).length === 0) {

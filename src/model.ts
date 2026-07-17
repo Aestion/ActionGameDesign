@@ -7,7 +7,8 @@ export const relationKinds = [
 ] as const;
 export type RelationKind = (typeof relationKinds)[number];
 export type ReviewStatus = "draft" | "reviewed";
-export type ConflictType = "definition" | "goal" | "condition" | "direct";
+export const conflictTypes = ["definition", "goal", "condition", "direct"] as const;
+export type ConflictType = (typeof conflictTypes)[number];
 
 export interface MediaRef {
   src: string;
@@ -18,6 +19,11 @@ export interface MediaRef {
 }
 
 export interface SourceCitation { sourceId: string; locator: string; }
+export interface SourceMeta {
+  rawPath?: string;
+  primaryUrls: string[];
+  secondaryUrls: string[];
+}
 export interface InlineExample {
   id: string;
   gameId: string;
@@ -44,6 +50,7 @@ export interface KnowledgeEntity {
   examples: InlineExample[];
   conflictType?: ConflictType;
   conflictSides?: Array<{ label: string; claim: string; conditions: string; sourceIds: string[] }>;
+  sourceMeta?: SourceMeta;
   editorialSynthesis?: string;
   matrix?: Record<string, string>;
 }

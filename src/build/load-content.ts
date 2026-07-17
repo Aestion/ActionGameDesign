@@ -11,6 +11,15 @@ export interface LoadedContent {
   filesById: Map<string, string[]>;
 }
 
+function parseWithFileContext<T>(file: string, parse: () => T): T {
+  try {
+    return parse();
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(`Invalid frontmatter in ${file}: ${detail}`);
+  }
+}
+
 async function collectMarkdownFiles(root: string): Promise<string[]> {
   const entries = await readdir(root, { withFileTypes: true });
   const nested = await Promise.all(entries.map(async (entry) => {
@@ -29,7 +38,7 @@ export async function loadContent(contentRoot: string): Promise<LoadedContent> {
   for (const file of await collectMarkdownFiles(contentRoot)) {
     const parsed = matter(await readFile(file, "utf8"));
     if (parsed.data.kind === "game-catalog") {
-      const catalog = GameCatalogSchema.parse(parsed.data);
+      const catalog = parseWithFileContext(file, () => GameCatalogSchema.parse(parsed.data));
       for (const game of catalog.games) {
         entities.push({
           ...game,
@@ -48,7 +57,7 @@ export async function loadContent(contentRoot: string): Promise<LoadedContent> {
       continue;
     }
 
-    const data = EntityFileSchema.parse(parsed.data);
+    const data = parseWithFileContext(file, () => EntityFileSchema.parse(parsed.data));
     entities.push({
       id: data.id,
       kind: data.kind,
@@ -66,6 +75,7 @@ export async function loadContent(contentRoot: string): Promise<LoadedContent> {
       examples: data.examples,
       conflictType: data.conflictType,
       conflictSides: data.conflictSides,
+      sourceMeta: data.sourceMeta,
       editorialSynthesis: data.editorialSynthesis,
       matrix: data.matrix
     });

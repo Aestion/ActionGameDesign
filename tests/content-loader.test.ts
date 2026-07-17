@@ -10,5 +10,16 @@ describe("loadContent", () => {
     expect(result.declaredEdges).toEqual([
       { source: "concept-sample", target: "concept-peer", kind: "related_to" }
     ]);
+    expect((result.entities.find((entity) => entity.id === "source-sample") as {
+      sourceMeta?: { primaryUrls: string[]; secondaryUrls: string[] };
+    }).sourceMeta).toEqual({
+      rawPath: "原始资料/sample.md",
+      primaryUrls: ["https://primary.example.com"],
+      secondaryUrls: ["https://secondary.example.com"]
+    });
+  });
+
+  it("includes the originating path when frontmatter schema validation fails", async () => {
+    await expect(loadContent("tests/fixtures/invalid-content")).rejects.toThrow(/broken\.md/);
   });
 });
