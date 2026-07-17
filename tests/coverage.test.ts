@@ -323,6 +323,10 @@ describe("system and presentation migration", () => {
     expect(difficultySides.map(({ conditions }) => conditions).join("\n"))
       .not.toMatch(/沉浸|资源规划|探索压力|耐久目标/u);
     expect(difficulty?.editorialSynthesis).toMatch(/编者归纳[\s\S]*并不互斥/u);
+    expect(difficulty?.examples.find(({ id }) => id === "conflict-difficulty-souls")?.outcome)
+      .not.toMatch(/沉浸/u);
+    expect(difficulty?.bodyHtml).not.toMatch(/沉浸/u);
+    expect(difficulty?.editorialSynthesis).toMatch(/沉浸[\s\S]*适用性推导/u);
 
     expect(readabilitySides[0]?.conditions).toMatch(/动作[\s\S]*功能|游戏[\s\S]*玩家/u);
     expect(readabilitySides[1]?.conditions).toMatch(/一部分可读性[\s\S]*练习/u);

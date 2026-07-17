@@ -17,7 +17,7 @@ citations:
   - { sourceId: source-action-design-difficulty, locator: 3.4.1 关于难度；小结 }
 media: []
 examples:
-  - { id: conflict-difficulty-souls, gameId: dark-souls, subject: 黑暗之魂 Boss, mechanism: 单次受击高伤、整体容错低，死亡后重试, outcome: 在动作频率和精度不极端时仍可产生高失败率与沉浸压力, sourceIds: [source-action-design-difficulty] }
+  - { id: conflict-difficulty-souls, gameId: dark-souls, subject: 黑暗之魂 Boss, mechanism: 单次受击高伤、整体容错低，死亡后重试, outcome: 在反应频率和操控精度不变时，低容错与高惩罚仍会降低达成率并要求重试, sourceIds: [source-action-design-difficulty] }
   - { id: conflict-difficulty-ng, gameId: ninja-gaiden, subject: 忍者龙剑传高频战斗, mechanism: 敌我出手快、威胁密集并要求连续精确回应, outcome: 失败更容易归因于反应和执行，掌握后能直接改变战斗表现, sourceIds: [source-action-design-difficulty] }
   - { id: conflict-difficulty-mh, gameId: monster-hunter, subject: 怪物猎人, mechanism: 低频动作配高空间精度、长目标与资源约束, outcome: 证明两类来源可在一款游戏中混合，不能严格二分, sourceIds: [source-action-design-difficulty] }
 conflictType: condition
@@ -39,7 +39,7 @@ editorialSynthesis: 编者归纳：两种机制并不互斥；实际遭遇可同
 
 ## 来源立场
 
-来源作者偏好前者，认为失败更容易进入“失败—学习—掌握—成功”；同时承认玩家精度耐受不同，合适失败点难以确定。作者认为单纯外部规则变难通常不自动更有趣，但《黑暗之魂》的高风险也服务沉浸，并通过篝火、捷径和成长调节更大尺度的惩罚。
+来源作者偏好前者，认为失败更容易进入“失败—学习—掌握—成功”；同时承认玩家精度耐受不同，合适失败点难以确定。作者认为单纯外部规则变难通常不自动更有趣；《黑暗之魂》的例子把 Boss 高伤视为高惩罚、低容错，并指出在完成全游戏的尺度上，篝火和捷径会降低小目标失败的惩罚。
 
 ## 混合条件
 
