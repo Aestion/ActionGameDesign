@@ -1,7 +1,15 @@
 import { readFile } from "node:fs/promises";
+import { createElement, type ComponentType } from "react";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach } from "vitest";
 import { describe, expect, it } from "vitest";
+import { App } from "../src/app/App";
+import { compileContent } from "../src/build/compile-content";
 import { parseCoverageLedger } from "../src/build/coverage-ledger";
 import { loadContent } from "../src/build/load-content";
+import { conflictTypes, createEmptyDataset } from "../src/model";
+
+afterEach(cleanup);
 
 const sourceIds = [
   "source-action-design-difficulty",
@@ -11,6 +19,63 @@ const sourceIds = [
   "source-low-poise-boss",
   "source-inaba-interviews"
 ] as const;
+
+describe("final release acceptance", () => {
+  it("contains exactly the approved domains, sources, media, coverage, and conflict types", async () => {
+    const [content, ledgerText] = await Promise.all([
+      loadContent("content"),
+      readFile("content/coverage.json", "utf8")
+    ]);
+    const dataset = compileContent(content, "2026-07-17T00:00:00.000Z");
+    const ledger = parseCoverageLedger(JSON.parse(ledgerText));
+    const domains = dataset.entities.filter(({ id }) => id.startsWith("domain-"));
+    const sources = dataset.entities.filter(({ kind }) => kind === "source");
+    const conflicts = dataset.entities.filter(({ kind }) => kind === "conflict");
+
+    expect(domains).toHaveLength(6);
+    expect(sources).toHaveLength(6);
+    expect(dataset.stats.sources).toBe(6);
+    expect(dataset.stats.media).toBe(31);
+    expect(dataset.entities.flatMap(({ media }) => media)).toHaveLength(31);
+    expect(ledger.items.filter(({ status }) => status === "unmapped")).toEqual([]);
+    expect(conflicts.length).toBeGreaterThan(0);
+    expect(conflicts.every(({ conflictType }) => conflictTypes.includes(conflictType!))).toBe(true);
+  });
+
+  it("exposes the small-screen tree and gives every icon-only control an accessible name", async () => {
+    const content = await loadContent("content");
+    const dataset = compileContent(content, "2026-07-17T00:00:00.000Z");
+    const { container } = render(createElement(App, { dataset }));
+
+    expect(screen.getByRole("region", { name: "分层知识树" })).toBeTruthy();
+    const iconOnlyButtons = [...container.querySelectorAll("button")].filter((button) =>
+      /^[+\-−×◇↗]+$/u.test(button.textContent?.trim() ?? "")
+    );
+    expect(iconOnlyButtons.length).toBeGreaterThan(0);
+    expect(iconOnlyButtons.filter((button) => !button.getAttribute("aria-label")?.trim())).toEqual([]);
+  });
+
+  it("shows explicit empty and failed-build pages instead of an unusable shell", () => {
+    const empty = createEmptyDataset("2026-07-17T00:00:00.000Z");
+    const FlexibleApp = App as unknown as ComponentType<Record<string, unknown>>;
+    const { rerender } = render(createElement(FlexibleApp, { dataset: empty }));
+
+    expect(screen.getByRole("status", { name: "知识库为空" }).textContent).toContain("没有可显示的知识节点");
+
+    rerender(createElement(FlexibleApp, {
+      dataset: empty,
+      buildReport: {
+        success: false,
+        generatedAt: "2026-07-17T00:00:00.000Z",
+        outputDir: "dist",
+        stats: empty.stats,
+        issues: [{ severity: "error", code: "invalid-frontmatter", file: "content/broken.md", message: "缺少 title 字段" }]
+      }
+    }));
+    expect(screen.getByRole("alert", { name: "知识库构建失败" }).textContent).toContain("content/broken.md");
+    expect(screen.getByRole("alert", { name: "知识库构建失败" }).textContent).toContain("缺少 title 字段");
+  });
+});
 
 const taskConceptIds = [
   "domain-type-boundary",

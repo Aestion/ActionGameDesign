@@ -19,6 +19,17 @@ async function writePackagedCandidate(outputDir: string, body: string): Promise<
 }
 
 describe("offline build output", () => {
+  it("uses the approved sub-800px tree/drawer breakpoint and accessibility fallbacks", async () => {
+    const css = await readFile("src/styles.css", "utf8");
+
+    expect(css).toMatch(/@media\s*\(max-width:\s*799px\)[\s\S]*?\.graph-explorer\s*\{\s*display:\s*none/u);
+    expect(css).toMatch(/@media\s*\(max-width:\s*799px\)[\s\S]*?\.mobile-tree\s*\{\s*display:\s*block/u);
+    expect(css).toMatch(/@media\s*\(max-width:\s*799px\)[\s\S]*?\.detail-panel[\s\S]*?width:\s*100%/u);
+    expect(css).toMatch(/:focus-visible/u);
+    expect(css).toMatch(/prefers-reduced-motion:\s*reduce/u);
+    expect(css).toMatch(/\.conflict[^\n{]*\{[^}]*border[^}]*dashed|\.conflict[^\n{]*::before/u);
+  });
+
   it("inlines application code and styles while keeping every remaining local reference file-compatible", async () => {
     const root = await createBuildFixture(roots);
 

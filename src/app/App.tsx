@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer } from "react";
-import type { KnowledgeDataset } from "../model";
+import type { BuildReport, KnowledgeDataset } from "../model";
 import { searchDataset } from "../search";
 import { atlasReducer, createInitialState, nodeHash, nodeIdFromHash } from "./app-state";
 import {
@@ -16,9 +16,45 @@ import { SearchPanel } from "./SearchPanel";
 
 export interface AppProps {
   dataset: KnowledgeDataset;
+  buildReport?: BuildReport;
 }
 
-export function App({ dataset }: AppProps) {
+function BuildStatePage({ report }: { report?: BuildReport }) {
+  if (report && !report.success) {
+    return (
+      <main className="atlas-message-page" role="alert" aria-label="知识库构建失败">
+        <p className="eyebrow">BUILD FAILED</p>
+        <h1>知识库构建失败</h1>
+        <p>请按下面的文件与错误信息修复内容，然后重新运行“更新知识库.cmd”。上一版可用网站不会被覆盖。</p>
+        <ul>
+          {report.issues.length ? report.issues.map((issue, index) => (
+            <li key={`${issue.code}-${issue.file}-${index}`}>
+              <strong>{issue.file}</strong>
+              <span>{issue.message}</span>
+              <small>错误代码：{issue.code}</small>
+            </li>
+          )) : <li><span>构建未提供具体错误；请在命令窗口中查看完整输出。</span></li>}
+        </ul>
+      </main>
+    );
+  }
+
+  return (
+    <main className="atlas-message-page" role="status" aria-label="知识库为空">
+      <p className="eyebrow">EMPTY DATASET</p>
+      <h1>知识库为空</h1>
+      <p>当前构建没有可显示的知识节点。请检查 <code>content/</code>，再运行“更新知识库.cmd”。</p>
+    </main>
+  );
+}
+
+export function App({ dataset, buildReport }: AppProps) {
+  if (!buildReport?.success && buildReport) return <BuildStatePage report={buildReport} />;
+  if (dataset.entities.length === 0) return <BuildStatePage />;
+  return <AtlasApplication dataset={dataset} />;
+}
+
+function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
   const [state, dispatch] = useReducer(
     atlasReducer,
     typeof window === "undefined" ? "" : window.location.hash,
