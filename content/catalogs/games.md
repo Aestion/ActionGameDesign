@@ -123,6 +123,8 @@ games:
   - { id: overwatch, title: 守望先锋, aliases: [Overwatch, 守望先锋双龙], summary: 以英雄技能与射击对抗为核心，并有鲜明角色动画与短片演出的系列。, tags: [动作射击, 动画] }
   - { id: the-king-of-fighters, title: 拳皇, aliases: [The King of Fighters, KOF, KOF XIII, 拳皇13], summary: SNK 的组队格斗游戏系列。, tags: [格斗] }
   - { id: stanley-parable, title: 史丹利的寓言, aliases: [The Stanley Parable, Stanley Parable], summary: 通过旁白、选择和预期颠覆形成体验的叙事游戏。, tags: [叙事, 反直觉] }
+  - { id: killing-floor-2, title: 杀戮空间 2, aliases: [Killing Floor 2, Killing Floor II], summary: 以合作射击、元素与物理控制覆盖关系组织敌群战斗的作品。, tags: [动作射击, 合作] }
+  - { id: final-fantasy-16, title: 最终幻想 XVI, aliases: [Final Fantasy XVI, FF16, ファイナルファンタジーXVI], summary: 将动作战斗与大型召唤兽演出结合的角色扮演游戏。, tags: [日式ARPG, 演出] }
 ---
 
 本目录只统一游戏与系列名称；分类判断、条件和出处保存在概念及冲突节点中。

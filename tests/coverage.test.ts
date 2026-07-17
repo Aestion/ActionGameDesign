@@ -1,5 +1,21 @@
+import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../src/build/load-content";
+
+interface CoverageItem {
+  id: string;
+  sourceId: string;
+  kind: "source-section" | "game-example" | "media";
+  locator: string;
+  status: "mapped" | "excluded" | "unmapped";
+  targets: string[];
+  disposition?: "duplicate" | "contact-info" | "search-method" | "non-design";
+}
+
+interface CoverageLedger {
+  version: 1;
+  items: CoverageItem[];
+}
 
 const sourceIds = [
   "source-action-design-difficulty",
@@ -50,6 +66,127 @@ const systemAndPresentationConceptIds = [
 ];
 
 const systemAndPresentationConflictIds = ["difficulty-sources", "readability-vs-spectacle"];
+
+const combatAndBossEntityIds = [
+  "domain-combat",
+  "neutral-and-openings",
+  "anti-armor-neutral",
+  "low-poise-neutral",
+  "interruption",
+  "suppression",
+  "continuous-hitstun-and-launch",
+  "wakeup-and-resource-suppression",
+  "invulnerable-suppression",
+  "instant-kill",
+  "setplay",
+  "fixed-sequence",
+  "domain-enemy-boss",
+  "boss-poise-taxonomy",
+  "round-based-humanoid",
+  "pseudo-equal-humanoid",
+  "souls-low-poise-exception",
+  "dmc4-dante",
+  "bayonetta-jeanne",
+  "ninja-gaiden-doppelganger",
+  "nioh2-saito-toshimitsu",
+  "high-ai-vs-learnability"
+];
+
+const combatAndBossScenarioIds: Array<[id: string, gameId: string]> = [
+  ["combat-substitute-sekiro", "sekiro"],
+  ["combat-substitute-dmc", "devil-may-cry"],
+  ["combat-substitute-nioh", "nioh"],
+  ["neutral-nioh-yoshitsune-nyotengu", "nioh"],
+  ["neutral-souls-blindspot", "souls-series"],
+  ["neutral-dmc-airborne", "devil-may-cry"],
+  ["neutral-bayonetta-kiting", "bayonetta"],
+  ["neutral-souls-stagger-execution", "souls-series"],
+  ["neutral-nioh-zero-ki-staking", "nioh"],
+  ["neutral-dmc3-vergil", "devil-may-cry"],
+  ["neutral-bayonetta2-balder", "bayonetta"],
+  ["neutral-ngs2-genshin", "ninja-gaiden"],
+  ["neutral-gow4-sigrun", "god-of-war"],
+  ["neutral-elden-malenia", "elden-ring"],
+  ["neutral-sekiro-isshin", "sekiro"],
+  ["neutral-nioh2-saito", "nioh"],
+  ["neutral-sifu-yang", "sifu"],
+  ["neutral-mgrr-sam", "metal-gear-rising"],
+  ["interruption-bloodborne-gun-parry", "bloodborne"],
+  ["interruption-nioh2-burst-counter", "nioh"],
+  ["interruption-souls-parry", "souls-series"],
+  ["interruption-dmc-royal-release", "devil-may-cry"],
+  ["interruption-nioh2-yokai", "nioh"],
+  ["interruption-gow4-runic", "god-of-war"],
+  ["interruption-nioh2-red-aura", "nioh"],
+  ["interruption-gow4-hidden-poise", "god-of-war"],
+  ["interruption-sifu-counters", "sifu"],
+  ["suppression-dmc3-dt", "devil-may-cry"],
+  ["suppression-sifu-enrage", "sifu"],
+  ["suppression-mgrr-khamsin", "metal-gear-rising"],
+  ["wakeup-dmc3-demon-armor", "devil-may-cry"],
+  ["wakeup-monster-hunter-overdamage", "monster-hunter"],
+  ["wakeup-bayonetta-dog", "bayonetta"],
+  ["wakeup-nioh1-backstab", "nioh"],
+  ["wakeup-nioh2-thunder", "nioh"],
+  ["resource-nioh-zero-ki", "nioh"],
+  ["invulnerable-bayonetta3-clock-tower", "bayonetta"],
+  ["invulnerable-scarlet-nexus-sas", "scarlet-nexus"],
+  ["instant-ninja-gaiden-ot", "ninja-gaiden"],
+  ["instant-mgrr-zandatsu", "metal-gear-rising"],
+  ["instant-gow4-wall-stun", "god-of-war"],
+  ["instant-shinobi-tate", "shinobi"],
+  ["instant-doom-eternal", "doom"],
+  ["instant-mgrr-routing", "metal-gear-rising"],
+  ["instant-gow4-early-encounters", "god-of-war"],
+  ["instant-doom-cacodemon", "doom"],
+  ["setplay-mh-kushala", "monster-hunter"],
+  ["setplay-dmc5-goliath", "devil-may-cry"],
+  ["setplay-dmc4-dante-grab", "devil-may-cry"],
+  ["setplay-nioh2-spear-loop", "nioh"],
+  ["setplay-sifu-wall", "sifu"],
+  ["setplay-doom-control", "doom"],
+  ["setplay-killing-floor-2", "killing-floor-2"],
+  ["setplay-dmc5-nero-urizen", "devil-may-cry"],
+  ["setplay-dmc5-dante-familiars", "devil-may-cry"],
+  ["setplay-dmc3-cerberus", "devil-may-cry"],
+  ["setplay-dmc3-geryon", "devil-may-cry"],
+  ["setplay-dmc1-nelo-angelo", "devil-may-cry"],
+  ["setplay-dmc3-beowulf", "devil-may-cry"],
+  ["setplay-dmc5-urizen-health", "devil-may-cry"],
+  ["setplay-nioh2-kashin-koji", "nioh"],
+  ["setplay-sifu-fajar", "sifu"],
+  ["setplay-nioh-nightmare-bringer", "nioh"],
+  ["setplay-dmc3-nevan", "devil-may-cry"],
+  ["setplay-sifu-yang", "sifu"],
+  ["setplay-dmc4-dante-gun-bait", "devil-may-cry"],
+  ["setplay-nioh2-ren-hayabusa", "nioh"],
+  ["setplay-ng2-blood-genshin", "ninja-gaiden"],
+  ["setplay-souls-build", "souls-series"],
+  ["setplay-nioh-build", "nioh"],
+  ["setplay-gow4-build", "god-of-war"],
+  ["setplay-dmc4-burst", "devil-may-cry"],
+  ["setplay-dmc5-m8-rocket-fist", "devil-may-cry"],
+  ["fixed-dmc", "devil-may-cry"],
+  ["fixed-gow3", "god-of-war"],
+  ["fixed-bayonetta1", "bayonetta"],
+  ["fixed-ng3", "ninja-gaiden"],
+  ["fixed-nioh", "nioh"],
+  ["fixed-mgrr", "metal-gear-rising"],
+  ["fixed-darksiders1", "darksiders"],
+  ["fixed-ff16", "final-fantasy-16"],
+  ["boss-god-hand-humanoids", "god-hand"],
+  ["boss-fear-kratos", "god-of-war"],
+  ["boss-bloodborne-maria", "bloodborne"],
+  ["boss-ds3-abyss-watchers", "dark-souls"],
+  ["boss-ds3-friede", "dark-souls"],
+  ["boss-elden-malenia", "elden-ring"],
+  ["boss-nioh-humanoids", "nioh"],
+  ["case-dmc4-dante-ai", "devil-may-cry"],
+  ["case-bayonetta-jeanne-ai", "bayonetta"],
+  ["case-ninja-gaiden-doppelganger-ai", "ninja-gaiden"],
+  ["case-nioh2-saito-ai", "nioh"],
+  ["souls-exception-malenia", "elden-ring"]
+];
 
 const actionDesignMediaFiles = [
   "103949bhlivcuahomevxlx.jpg",
@@ -127,7 +264,14 @@ describe("initial source, taxonomy, and philosophy migration", () => {
     expect(sourceIds.every((id) => ids.has(id))).toBe(true);
     expect(["domain-type-boundary", "domain-production-philosophy"].every((id) => ids.has(id))).toBe(true);
     expect(content.entities.filter(({ id }) => id.startsWith("domain-")).map(({ id }) => id).sort())
-      .toEqual(["domain-presentation", "domain-production-philosophy", "domain-system-depth", "domain-type-boundary"]);
+      .toEqual([
+        "domain-combat",
+        "domain-enemy-boss",
+        "domain-presentation",
+        "domain-production-philosophy",
+        "domain-system-depth",
+        "domain-type-boundary"
+      ]);
   });
 
   it("records local provenance, external links, language availability, and scoped source notes", async () => {
@@ -388,5 +532,150 @@ describe("system and presentation migration", () => {
 
     expect(animation?.bodyHtml).toMatch(/Mariel Cartwright[\s\S]*GDC/u);
     expect(spectacle?.bodyHtml).toMatch(/Squirrel Eiserloh[\s\S]*Jan Willem Nijman[\s\S]*(?:震屏|Screenshake)/u);
+  });
+});
+
+describe("combat, Boss, detailed-case, and ledger migration", () => {
+  it("has no unmapped source sections, examples, or media and only allowed exclusions", async () => {
+    const ledger = JSON.parse(await readFile("content/coverage.json", "utf8")) as CoverageLedger;
+    const allowedDispositions = new Set(["duplicate", "contact-info", "search-method", "non-design"]);
+
+    expect(ledger.version).toBe(1);
+    expect(ledger.items.length).toBeGreaterThan(0);
+    expect(new Set(ledger.items.map(({ id }) => id)).size).toBe(ledger.items.length);
+    expect(ledger.items.filter(({ status }) => status === "unmapped")).toEqual([]);
+    expect(ledger.items.filter(({ status, targets }) => status === "mapped" && targets.length === 0)).toEqual([]);
+    expect(ledger.items.filter(({ status, targets, disposition }) =>
+      status === "excluded" && (targets.length > 0 || !disposition || !allowedDispositions.has(disposition))
+    )).toEqual([]);
+    expect(ledger.items.filter(({ kind, status, targets }) =>
+      (kind === "game-example" || kind === "media") && status === "mapped" && targets.length === 0
+    )).toEqual([]);
+  });
+
+  it("keeps exactly the two remaining domains and every Task 6 entity", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const domainIds = content.entities.filter(({ id }) => id.startsWith("domain-")).map(({ id }) => id).sort();
+
+    expect(domainIds).toEqual([
+      "domain-combat",
+      "domain-enemy-boss",
+      "domain-presentation",
+      "domain-production-philosophy",
+      "domain-system-depth",
+      "domain-type-boundary"
+    ]);
+    expect(combatAndBossEntityIds.filter((id) => !entitiesById.has(id))).toEqual([]);
+    expect(entitiesById.get("domain-combat")?.depth).toBe(1);
+    expect(entitiesById.get("domain-enemy-boss")?.depth).toBe(1);
+    expect(entitiesById.get("high-ai-vs-learnability")?.conflictType).toBe("goal");
+  });
+
+  it("indexes every combat and low-poise source scenario by stable example ID", async () => {
+    const content = await loadContent("content");
+    const examples = content.entities.flatMap(({ examples }) => examples);
+    const examplesById = new Map(examples.map((example) => [example.id, example]));
+    const gameIds = new Set(content.entities.filter(({ kind }) => kind === "game").map(({ id }) => id));
+    const sourceIdSet = new Set(content.entities.filter(({ kind }) => kind === "source").map(({ id }) => id));
+
+    expect(new Set(examples.map(({ id }) => id)).size).toBe(examples.length);
+    for (const [id, gameId] of combatAndBossScenarioIds) {
+      expect(examplesById.get(id)?.gameId, id).toBe(gameId);
+    }
+    expect(examples.filter(({ gameId }) => !gameIds.has(gameId))).toEqual([]);
+    expect(examples.filter(({ sourceIds }) => sourceIds.some((sourceId) => !sourceIdSet.has(sourceId)))).toEqual([]);
+  });
+
+  it("makes every ledger target auditable against an entity, example, or media reference", async () => {
+    const [content, ledgerText] = await Promise.all([
+      loadContent("content"),
+      readFile("content/coverage.json", "utf8")
+    ]);
+    const ledger = JSON.parse(ledgerText) as CoverageLedger;
+    const entityIds = new Set(content.entities.map(({ id }) => id));
+    const exampleIds = new Set(content.entities.flatMap(({ examples }) => examples).map(({ id }) => id));
+    const mediaTargets = new Set(content.entities.flatMap(({ media }) => media).map(({ src }) => `media:${src}`));
+    const validTargets = new Set([
+      ...entityIds,
+      ...[...exampleIds].map((id) => `example:${id}`),
+      ...mediaTargets
+    ]);
+    const invalidTargets = ledger.items
+      .flatMap(({ id, targets }) => targets.map((target) => ({ id, target })))
+      .filter(({ target }) => !validTargets.has(target));
+    const sourceSections = ledger.items.filter(({ kind }) => kind === "source-section");
+    const ledgerSourceIds = new Set(sourceSections.map(({ sourceId }) => sourceId));
+    const gameExampleTargets = new Set(ledger.items
+      .filter(({ kind, status }) => kind === "game-example" && status === "mapped")
+      .flatMap(({ targets }) => targets.filter((target) => target.startsWith("example:"))));
+    const allExampleTargets = [...exampleIds].map((id) => `example:${id}`);
+
+    expect(invalidTargets).toEqual([]);
+    expect([...sourceIds].filter((sourceId) => !ledgerSourceIds.has(sourceId))).toEqual([]);
+    expect(combatAndBossScenarioIds
+      .map(([id]) => `example:${id}`)
+      .filter((target) => !gameExampleTargets.has(target))).toEqual([]);
+    expect(allExampleTargets.filter((target) => !gameExampleTargets.has(target))).toEqual([]);
+  });
+
+  it("audits all 31 media exactly once and against the content references", async () => {
+    const [content, ledgerText] = await Promise.all([
+      loadContent("content"),
+      readFile("content/coverage.json", "utf8")
+    ]);
+    const ledger = JSON.parse(ledgerText) as CoverageLedger;
+    const ledgerMedia = ledger.items.filter(({ kind, status }) => kind === "media" && status === "mapped");
+    const ledgerTargets = ledgerMedia.flatMap(({ targets }) => targets);
+    const contentTargets = content.entities.flatMap(({ media }) => media).map(({ src }) => `media:${src}`);
+
+    expect(ledgerMedia).toHaveLength(31);
+    expect(new Set(ledgerTargets).size).toBe(31);
+    expect([...ledgerTargets].sort()).toEqual([...contentTargets].sort());
+  });
+
+  it("preserves round-based constraints, pseudo-equal criticisms, ARPG limits, and the Souls exception", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const roundBased = entitiesById.get("round-based-humanoid");
+    const pseudoEqual = entitiesById.get("pseudo-equal-humanoid");
+    const soulsException = entitiesById.get("souls-low-poise-exception");
+    const antiArmor = entitiesById.get("anti-armor-neutral");
+
+    expect(roundBased?.bodyHtml).toMatch(/一直受击硬直[\s\S]*脱离[\s\S]*出招前[\s\S]*打断/u);
+    expect(roundBased?.bodyHtml).toMatch(/破绽[\s\S]*稳定[\s\S]*识别[\s\S]*脱离/u);
+    expect(pseudoEqual?.bodyHtml).toMatch(/自由态防硬直[\s\S]*出手时防硬直[\s\S]*基础破绽[\s\S]*脱离形式/u);
+    expect(pseudoEqual?.bodyHtml).toMatch(/随机性[\s\S]*不可反应[\s\S]*学习成本[\s\S]*漏洞/u);
+    expect(pseudoEqual?.bodyHtml).toMatch(/不适合[\s\S]*主流 ARPG[\s\S]*容错[\s\S]*仁王[\s\S]*中后期/u);
+    expect(soulsException?.bodyHtml).toMatch(/出手[\s\S]*没有[\s\S]*过快[\s\S]*没有取消机制/u);
+    expect(soulsException?.bodyHtml).toMatch(/玛莲妮亚[\s\S]*招式[\s\S]*机制/u);
+    expect(antiArmor?.bodyHtml).toMatch(/输出奖励[\s\S]*后跳[\s\S]*输出机会/u);
+  });
+
+  it("models four source-complete detailed cases and links both sides of the high-AI conflict", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+    const caseIds = ["dmc4-dante", "bayonetta-jeanne", "ninja-gaiden-doppelganger", "nioh2-saito-toshimitsu"];
+    const conflict = entitiesById.get("high-ai-vs-learnability");
+    const conflictTargets = new Set(content.declaredEdges
+      .filter(({ source }) => source === "high-ai-vs-learnability")
+      .map(({ target }) => target));
+
+    for (const id of caseIds) {
+      const entity = entitiesById.get(id);
+      expect(entity?.kind, id).toBe("case");
+      expect(entity?.examples).toHaveLength(1);
+      expect(entity?.citations.some(({ sourceId }) => sourceId === "source-low-poise-boss"), id).toBe(true);
+      expect(entity?.editorialSynthesis, id).toMatch(/^编者归纳/u);
+      expect(conflictTargets.has(id), id).toBe(true);
+    }
+    expect(entitiesById.get("dmc4-dante")?.bodyHtml).toMatch(/读指令[\s\S]*皇家护卫[\s\S]*强制[\s\S]*吹飞[\s\S]*AI 漏洞/u);
+    expect(entitiesById.get("bayonetta-jeanne")?.bodyHtml).toMatch(/蝙蝠闪[\s\S]*上挑编织[\s\S]*不可反应[\s\S]*offset/u);
+    expect(entitiesById.get("ninja-gaiden-doppelganger")?.bodyHtml).toMatch(/手里剑[\s\S]*断头摔[\s\S]*性能不对等[\s\S]*卖破绽/u);
+    expect(entitiesById.get("nioh2-saito-toshimitsu")?.bodyHtml).toMatch(/呼子鸟[\s\S]*随机[\s\S]*精力[\s\S]*低精力压制/u);
+    expect(conflict?.conflictSides).toHaveLength(2);
+    expect(conflict?.conflictSides?.[0]?.claim).toMatch(/交互[\s\S]*镜像|对等[\s\S]*能力/u);
+    expect(conflict?.conflictSides?.[1]?.claim).toMatch(/随机[\s\S]*读指令[\s\S]*不可反应[\s\S]*可学习/u);
+    expect(conflict?.editorialSynthesis).toMatch(/编者归纳[\s\S]*不做[\s\S]*排名/u);
   });
 });

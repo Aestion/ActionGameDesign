@@ -1,0 +1,6584 @@
+{
+  "version": 1,
+  "methodology": {
+    "unit": "source heading or substantive paragraph group, named game scenario, or original media file",
+    "targetSyntax": {
+      "entity": "bare entity id",
+      "example": "example:<InlineExample.id>",
+      "media": "media:<MediaRef.src>"
+    },
+    "excludedDispositions": [
+      "duplicate",
+      "contact-info",
+      "search-method",
+      "non-design"
+    ]
+  },
+  "items": [
+    {
+      "id": "section-ad-provenance",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "标题、作者、出处与原帖",
+      "status": "mapped",
+      "targets": [
+        "source-action-design-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-contact",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "前言／作者微信联系方式",
+      "status": "excluded",
+      "targets": [],
+      "disposition": "contact-info"
+    },
+    {
+      "id": "section-ad-preface-failure",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "1 前言／项目失败与写作目的",
+      "status": "mapped",
+      "targets": [
+        "source-action-design-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-preface-concepts",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "1 前言／概念梳理与阅读限制",
+      "status": "mapped",
+      "targets": [
+        "domain-system-depth",
+        "domain-presentation"
+      ]
+    },
+    {
+      "id": "section-ad-design-difficulties",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "2 动作游戏的设计难点",
+      "status": "mapped",
+      "targets": [
+        "domain-system-depth",
+        "domain-presentation"
+      ]
+    },
+    {
+      "id": "section-ad-compound-difficulty",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "2.1 先天的高度复合型决策设计",
+      "status": "mapped",
+      "targets": [
+        "compound-decisions"
+      ]
+    },
+    {
+      "id": "section-ad-intuitive-constraint",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "2.2 受到人的直观感觉的约束",
+      "status": "mapped",
+      "targets": [
+        "intuitive-experience"
+      ]
+    },
+    {
+      "id": "section-ad-engineering-scope",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "2 结尾／工程、市场问题不在本文范围",
+      "status": "mapped",
+      "targets": [
+        "source-action-design-difficulty",
+        "domain-system-depth"
+      ]
+    },
+    {
+      "id": "section-ad-composite-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3 动作游戏与复合型决策",
+      "status": "mapped",
+      "targets": [
+        "compound-decisions"
+      ]
+    },
+    {
+      "id": "section-ad-depth-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.1 深度",
+      "status": "mapped",
+      "targets": [
+        "depth-width-feedback-time"
+      ]
+    },
+    {
+      "id": "section-ad-depth-width",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.1.1 深度与宽度",
+      "status": "mapped",
+      "targets": [
+        "depth-width-feedback-time"
+      ]
+    },
+    {
+      "id": "section-ad-depth-formula",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.1.1 深度等于宽度除以反馈时间及例子",
+      "status": "mapped",
+      "targets": [
+        "depth-width-feedback-time"
+      ]
+    },
+    {
+      "id": "section-ad-depth-action",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.1.2 动作游戏中的深度",
+      "status": "mapped",
+      "targets": [
+        "depth-width-feedback-time"
+      ]
+    },
+    {
+      "id": "section-ad-depth-expanded-formula",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.1.2 信息处理拆解与三项定义",
+      "status": "mapped",
+      "targets": [
+        "depth-width-feedback-time"
+      ]
+    },
+    {
+      "id": "section-ad-reaction-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2 反应频率",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-active-passive",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2 主动与被动反应行为",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-passive-control",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.1 被动反应频率的控制",
+      "status": "mapped",
+      "targets": [
+        "enemy-attack-allocation"
+      ]
+    },
+    {
+      "id": "section-ad-allocation-bayonetta",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.1 a 猎天使魔女 2+1",
+      "status": "mapped",
+      "targets": [
+        "enemy-attack-allocation"
+      ]
+    },
+    {
+      "id": "section-ad-allocation-dmc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.1 b DmC 2+?",
+      "status": "mapped",
+      "targets": [
+        "enemy-attack-allocation"
+      ]
+    },
+    {
+      "id": "section-ad-allocation-mordor",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.1 c 暗影魔多 1+1",
+      "status": "mapped",
+      "targets": [
+        "enemy-attack-allocation"
+      ]
+    },
+    {
+      "id": "section-ad-active-control",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.2 主动反应频率的控制",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency",
+        "command-dimension"
+      ]
+    },
+    {
+      "id": "section-ad-frequency-distributions",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.3 主被动反应频率组合",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-frequency-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.3 a 双低 怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-frequency-ng",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.3 b 双高 忍者龙剑传",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-frequency-muramasa",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.3 c 低被动高主动 胧村正",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-frequency-titan",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.3 d 高被动低主动 泰坦之魂",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-frequency-summary",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.2.3 小结",
+      "status": "mapped",
+      "targets": [
+        "reaction-frequency"
+      ]
+    },
+    {
+      "id": "section-ad-precision-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3 操控精度与三维公式",
+      "status": "mapped",
+      "targets": [
+        "control-precision"
+      ]
+    },
+    {
+      "id": "section-ad-time-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.1 时间精度",
+      "status": "mapped",
+      "targets": [
+        "time-precision"
+      ]
+    },
+    {
+      "id": "section-ad-reaction-time",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.1 标准反应时间 0.3 秒",
+      "status": "mapped",
+      "targets": [
+        "time-precision"
+      ]
+    },
+    {
+      "id": "section-ad-hitstop",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.1 a 帧冻结时间",
+      "status": "mapped",
+      "targets": [
+        "time-precision"
+      ]
+    },
+    {
+      "id": "section-ad-startup",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.1 b 出手时间",
+      "status": "mapped",
+      "targets": [
+        "time-precision"
+      ]
+    },
+    {
+      "id": "section-ad-staging",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.1 c 舞台调度",
+      "status": "mapped",
+      "targets": [
+        "time-precision",
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-time-tiers",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.1 高中低时间精度分档",
+      "status": "mapped",
+      "targets": [
+        "time-precision"
+      ]
+    },
+    {
+      "id": "section-ad-space-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.2 空间精度",
+      "status": "mapped",
+      "targets": [
+        "space-precision"
+      ]
+    },
+    {
+      "id": "section-ad-space-low",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.2 低空间精度 地狱之刃",
+      "status": "mapped",
+      "targets": [
+        "space-precision"
+      ]
+    },
+    {
+      "id": "section-ad-space-medium",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.2 中空间精度 猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "space-precision"
+      ]
+    },
+    {
+      "id": "section-ad-space-comparison",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.2 老战神、鬼泣、血源、忍龙比较",
+      "status": "mapped",
+      "targets": [
+        "space-precision"
+      ]
+    },
+    {
+      "id": "section-ad-space-high",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.2 高空间精度 怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "space-precision"
+      ]
+    },
+    {
+      "id": "section-ad-space-summary",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.2 小结",
+      "status": "mapped",
+      "targets": [
+        "space-precision"
+      ]
+    },
+    {
+      "id": "section-ad-command-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.3 指令维度",
+      "status": "mapped",
+      "targets": [
+        "command-dimension"
+      ]
+    },
+    {
+      "id": "section-ad-command-incomplete",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.3 未完成说明与 Dodge Offset 提及",
+      "status": "mapped",
+      "targets": [
+        "command-dimension"
+      ]
+    },
+    {
+      "id": "section-ad-other-genres",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.3.4 其他类型游戏中的操控精度",
+      "status": "mapped",
+      "targets": [
+        "control-precision"
+      ]
+    },
+    {
+      "id": "section-ad-external-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4 外部规则空间",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-difficulty-definition",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 难度定义与达成率",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-difficulty-reaction-count",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 仅外部规则增加反应次数",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty",
+        "difficulty-sources"
+      ]
+    },
+    {
+      "id": "section-ad-boss-hp-damage",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 Boss 血量与伤害例子",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-tolerance-penalty",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 容错性与惩罚性",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-souls-punishment",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 黑魂惩罚、容错与篝火尺度",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty",
+        "difficulty-sources"
+      ]
+    },
+    {
+      "id": "section-ad-difficulty-curve",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 难度曲线与黑魂",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-difficulty-summary",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 小结与失败学习结构",
+      "status": "mapped",
+      "targets": [
+        "difficulty-sources"
+      ]
+    },
+    {
+      "id": "section-ad-depth-motivation",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.1 评价、速杀与自设目标",
+      "status": "mapped",
+      "targets": [
+        "external-rules-and-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-feedback-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2 反馈循环定义",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-positive-hitstun",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2.1 a 受击硬直",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-positive-resource",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2.1 b 积累与爆发",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-negative-protection",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2.2 a 受击保护",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-negative-resource",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2.2 b 消耗与恢复资源",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-feedback-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2.3 怪物猎人正负反馈结合",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-feedback-summary",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.2 小结与 PVE/PVP 条件",
+      "status": "mapped",
+      "targets": [
+        "feedback-loops"
+      ]
+    },
+    {
+      "id": "section-ad-clearing-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.3 关于清版",
+      "status": "mapped",
+      "targets": [
+        "clearing-and-non-clearing"
+      ]
+    },
+    {
+      "id": "section-ad-clearing",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.3.1 清版设计",
+      "status": "mapped",
+      "targets": [
+        "clearing-and-non-clearing"
+      ]
+    },
+    {
+      "id": "section-ad-nonclearing",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.3.2 非清版设计",
+      "status": "mapped",
+      "targets": [
+        "clearing-and-non-clearing"
+      ]
+    },
+    {
+      "id": "section-ad-dynasty-anomaly",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.3.2 真三国无双边界例",
+      "status": "mapped",
+      "targets": [
+        "clearing-and-non-clearing"
+      ]
+    },
+    {
+      "id": "section-ad-hybrid",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.3.3 混合型设计",
+      "status": "mapped",
+      "targets": [
+        "clearing-and-non-clearing"
+      ]
+    },
+    {
+      "id": "section-ad-interoperation-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.4 外部规则与动作互通",
+      "status": "mapped",
+      "targets": [
+        "action-external-interoperation"
+      ]
+    },
+    {
+      "id": "section-ad-external-compensates",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.4 外部设计补偿动作玩法",
+      "status": "mapped",
+      "targets": [
+        "action-external-interoperation"
+      ]
+    },
+    {
+      "id": "section-ad-mh-skill-effects",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.4 怪物猎人配装技能分组",
+      "status": "mapped",
+      "targets": [
+        "action-external-interoperation"
+      ]
+    },
+    {
+      "id": "section-ad-action-compensates",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.4 动作玩法补偿外部设计",
+      "status": "mapped",
+      "targets": [
+        "action-external-interoperation"
+      ]
+    },
+    {
+      "id": "section-ad-risk-reward",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.4 等待技表、精确反应与残心",
+      "status": "mapped",
+      "targets": [
+        "action-external-interoperation"
+      ]
+    },
+    {
+      "id": "section-ad-interop-summary",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "3.4.4 小结与付费转化边界",
+      "status": "mapped",
+      "targets": [
+        "action-external-interoperation"
+      ]
+    },
+    {
+      "id": "section-ad-intuition-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4 动作游戏与直观经验",
+      "status": "mapped",
+      "targets": [
+        "intuitive-experience"
+      ]
+    },
+    {
+      "id": "section-ad-intuition-language",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4 直观经验、物理经验与描述语言",
+      "status": "mapped",
+      "targets": [
+        "intuitive-experience"
+      ]
+    },
+    {
+      "id": "section-ad-readability-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1 可读性",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-camera-principles",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.1 相机与可读性原则",
+      "status": "mapped",
+      "targets": [
+        "camera-and-fov"
+      ]
+    },
+    {
+      "id": "section-ad-fov",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.1 FOV",
+      "status": "mapped",
+      "targets": [
+        "camera-and-fov"
+      ]
+    },
+    {
+      "id": "section-ad-camera-modes",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.1 相机运动模式",
+      "status": "mapped",
+      "targets": [
+        "camera-and-fov"
+      ]
+    },
+    {
+      "id": "section-ad-postprocessing",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.1 后处理与动态模糊",
+      "status": "mapped",
+      "targets": [
+        "camera-and-fov"
+      ]
+    },
+    {
+      "id": "section-ad-animation-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 动画设计",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-silhouette",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 a 剪影与特征帧",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-momentum",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 b 动势",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-roar-rathalos",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 雄火龙吼解析",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-roar-diablos",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 角龙吼解析",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-roar-teostra",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 炎王龙吼解析",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-reading-design",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 围绕读的设计",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-delay-feint",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 拖延攻击、假动作与 Panic Roll",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-bloodborne-low-readability",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.2 血源 DLC 低可读性反例",
+      "status": "mapped",
+      "targets": [
+        "animation-readability"
+      ]
+    },
+    {
+      "id": "section-ad-cues-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.3 辅助设计",
+      "status": "mapped",
+      "targets": [
+        "auxiliary-cues"
+      ]
+    },
+    {
+      "id": "section-ad-ui-cues",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.3 a UI 特效提示",
+      "status": "mapped",
+      "targets": [
+        "auxiliary-cues"
+      ]
+    },
+    {
+      "id": "section-ad-audio-cues",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.1.3 b 音效提示",
+      "status": "mapped",
+      "targets": [
+        "auxiliary-cues"
+      ]
+    },
+    {
+      "id": "section-ad-spectacle-intro",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2 观赏性",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-animation-principles",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.1 动作与动画十二原则",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-anticipation",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.1 a 预备动作",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-ease",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.1 b 缓进缓出",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-arc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.1 c 弧线",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-time-stretch",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 a 时间伸缩",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-slow-motion",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 慢镜",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-freeze",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 帧冻结与利器钝器节奏",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-asynchronous-time",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 时间异步",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-fast-forward",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 快进与抽帧",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-screenshake",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 b 震屏",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-closeup",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.2 c 特写演出与操作限制",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-spectacle-other",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.3 其他表现领域",
+      "status": "mapped",
+      "targets": [
+        "spectacle-techniques"
+      ]
+    },
+    {
+      "id": "section-ad-balance",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.4 观赏性与可读性平衡",
+      "status": "mapped",
+      "targets": [
+        "readability-spectacle-balance",
+        "readability-vs-spectacle"
+      ]
+    },
+    {
+      "id": "section-ad-balance-counterexamples",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.2.4 尼尔、战神升天、暗黑血统 2 反例",
+      "status": "mapped",
+      "targets": [
+        "readability-spectacle-balance"
+      ]
+    },
+    {
+      "id": "section-ad-training",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.3 直观与训练",
+      "status": "mapped",
+      "targets": [
+        "training-and-depth"
+      ]
+    },
+    {
+      "id": "section-ad-training-transfer",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.3 程序员黑魂案例与技能迁移边界",
+      "status": "mapped",
+      "targets": [
+        "training-and-depth"
+      ]
+    },
+    {
+      "id": "section-ad-training-depth",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.3 再看难度曲线与动作区分",
+      "status": "mapped",
+      "targets": [
+        "training-and-depth"
+      ]
+    },
+    {
+      "id": "section-ad-intuition-failure",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "4.3 直观失效、风格与公平风险",
+      "status": "mapped",
+      "targets": [
+        "training-and-depth"
+      ]
+    },
+    {
+      "id": "section-ad-postscript",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "后记／文章局限与理性拆解审美",
+      "status": "mapped",
+      "targets": [
+        "source-action-design-difficulty"
+      ]
+    },
+    {
+      "id": "section-ad-cancelled-game-link",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "source-section",
+      "locator": "后记／已叫停项目预约链接",
+      "status": "excluded",
+      "targets": [],
+      "disposition": "non-design"
+    },
+    {
+      "id": "section-c1-provenance",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "标题、作者与发布信息",
+      "status": "mapped",
+      "targets": [
+        "source-act-classification-1"
+      ]
+    },
+    {
+      "id": "section-c1-disclaimer",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "前言／个人胡诌免责声明",
+      "status": "excluded",
+      "targets": [],
+      "disposition": "non-design"
+    },
+    {
+      "id": "section-c1-classification-dispute",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "前言／分类争议与定义分歧",
+      "status": "mapped",
+      "targets": [
+        "act-definition-boundaries"
+      ]
+    },
+    {
+      "id": "section-c1-old-labels",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "前言／旧分类与玩法融合",
+      "status": "mapped",
+      "targets": [
+        "act-definition-boundaries"
+      ]
+    },
+    {
+      "id": "section-c1-no-standard",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "前言／厂商、自媒体与玩家无公共标准",
+      "status": "mapped",
+      "targets": [
+        "act-definition-boundaries"
+      ]
+    },
+    {
+      "id": "section-c1-three-levels",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "前言／广义、大众、狭义三层",
+      "status": "mapped",
+      "targets": [
+        "broad-act",
+        "common-act",
+        "traditional-act"
+      ]
+    },
+    {
+      "id": "section-c1-broad-definition",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／定义",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-early-types",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／早期平台与卷轴分类",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-stg",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／STG 交叉",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-platform",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／平台跳跃",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-rpg",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／RPG 与 ARPG",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-ftg",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／FTG 独立",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-brawler",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／清版闯关",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-broad-summary",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "一、广义 ACT／大筐局限",
+      "status": "mapped",
+      "targets": [
+        "broad-act"
+      ]
+    },
+    {
+      "id": "section-c1-common-definition",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／近战正面战斗印象",
+      "status": "mapped",
+      "targets": [
+        "common-act"
+      ]
+    },
+    {
+      "id": "section-c1-common-counterexamples",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／茶杯头、魔界村与魔女反例",
+      "status": "mapped",
+      "targets": [
+        "common-act"
+      ]
+    },
+    {
+      "id": "section-c1-combat-logic",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／战斗逻辑与设计框架",
+      "status": "mapped",
+      "targets": [
+        "common-act"
+      ]
+    },
+    {
+      "id": "section-c1-aavg-arpg",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／AAVG 与 ARPG 融合",
+      "status": "mapped",
+      "targets": [
+        "common-act",
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c1-elements-shared",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／冒险与成长要素普遍存在",
+      "status": "mapped",
+      "targets": [
+        "common-act"
+      ]
+    },
+    {
+      "id": "section-c1-proportions",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／要素占比",
+      "status": "mapped",
+      "targets": [
+        "common-act"
+      ]
+    },
+    {
+      "id": "section-c1-fusion-examples",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／老战神与偏 ACT/偏 RPG",
+      "status": "mapped",
+      "targets": [
+        "common-act",
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c1-debate-boundary",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "二、普遍认知 ACT／鬼泣、只狼、仁王、黑魂",
+      "status": "mapped",
+      "targets": [
+        "act-definition-boundaries"
+      ]
+    },
+    {
+      "id": "section-c1-traditional-definition",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "三、狭义 ACT／横版清版 3D 化",
+      "status": "mapped",
+      "targets": [
+        "traditional-act"
+      ]
+    },
+    {
+      "id": "section-c1-pure-act-problem",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "三、狭义 ACT／纯 ACT 称呼问题",
+      "status": "mapped",
+      "targets": [
+        "traditional-act"
+      ]
+    },
+    {
+      "id": "section-c1-why-traditional",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "三、狭义 ACT／复杂战斗与清版结构",
+      "status": "mapped",
+      "targets": [
+        "traditional-act"
+      ]
+    },
+    {
+      "id": "section-c1-content-tradeoffs",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "三、狭义 ACT／魂、老战神与传统 ACT 内容侧重",
+      "status": "mapped",
+      "targets": [
+        "action-depth-vs-content-breadth"
+      ]
+    },
+    {
+      "id": "section-c1-decline",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "三、狭义 ACT／传统 ACT 衰颓与受众",
+      "status": "mapped",
+      "targets": [
+        "action-depth-vs-content-breadth"
+      ]
+    },
+    {
+      "id": "section-c1-next-article",
+      "sourceId": "source-act-classification-1",
+      "kind": "source-section",
+      "locator": "文末 PS／下一期预告",
+      "status": "excluded",
+      "targets": [],
+      "disposition": "duplicate"
+    },
+    {
+      "id": "section-c2-provenance",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "标题、作者与发布信息",
+      "status": "mapped",
+      "targets": [
+        "source-act-classification-2"
+      ]
+    },
+    {
+      "id": "section-c2-preface-scope",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "前言／大众认知 ACT 与 2D 范围限制",
+      "status": "mapped",
+      "targets": [
+        "common-act"
+      ]
+    },
+    {
+      "id": "section-c2-traditional-intro",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、传统清版动作游戏／定义与共同结构",
+      "status": "mapped",
+      "targets": [
+        "traditional-act"
+      ]
+    },
+    {
+      "id": "section-c2-sandbag",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、① 打沙包",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-chaos",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、② 快节奏乱战",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-dodge",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、③ 闪避与风筝",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-counter",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、④ 防御反击",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-fighting",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、⑤ 类格斗",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-routing",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、⑥ 跑酷背板",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-art",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、⑦ 艺术特色",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-suda",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、⑧ 须田刚一",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-cinema",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、⑨ 演出播片",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-traditional-other",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "一、其他传统 ACT",
+      "status": "mapped",
+      "targets": [
+        "traditional-act-subtypes"
+      ]
+    },
+    {
+      "id": "section-c2-aavg-intro",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、剧情驱动的动作冒险游戏",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-aavg-history",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、3D 动作与波斯王子历史框架",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-gow-like",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、① 类战神",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-magnet",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、② 磁铁吸附式",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-simple",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、③ 简易化近战",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-power",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、④ 混合超能力",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-street",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、⑤ 街头肉搏与械斗",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-first-person",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、⑥ 第一人称动作",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-aavg-other",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "二、旺达与巨像及边界",
+      "status": "mapped",
+      "targets": [
+        "action-adventure"
+      ]
+    },
+    {
+      "id": "section-c2-souls-intro",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "三、魂式框架定义",
+      "status": "mapped",
+      "targets": [
+        "souls-framework"
+      ]
+    },
+    {
+      "id": "section-c2-souls-elements",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "三、魂式框架七项要素",
+      "status": "mapped",
+      "targets": [
+        "souls-framework"
+      ]
+    },
+    {
+      "id": "section-c2-souls-stamina",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "三、① 精力条回合制",
+      "status": "mapped",
+      "targets": [
+        "souls-framework"
+      ]
+    },
+    {
+      "id": "section-c2-souls-simple",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "三、② 简化攻防",
+      "status": "mapped",
+      "targets": [
+        "souls-framework"
+      ]
+    },
+    {
+      "id": "section-c2-souls-act",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "三、③ 传统 ACT 化",
+      "status": "mapped",
+      "targets": [
+        "souls-framework"
+      ]
+    },
+    {
+      "id": "section-c2-souls-difficulty",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "三、魂式沉浸难度与传统高难区别",
+      "status": "mapped",
+      "targets": [
+        "souls-framework"
+      ]
+    },
+    {
+      "id": "section-c2-coop",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "四、共斗类动作游戏",
+      "status": "mapped",
+      "targets": [
+        "coop-musou-action-shooter-jrpg"
+      ]
+    },
+    {
+      "id": "section-c2-musou",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "五、无双类动作游戏",
+      "status": "mapped",
+      "targets": [
+        "coop-musou-action-shooter-jrpg"
+      ]
+    },
+    {
+      "id": "section-c2-action-shooter",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "六、动作射击游戏",
+      "status": "mapped",
+      "targets": [
+        "coop-musou-action-shooter-jrpg"
+      ]
+    },
+    {
+      "id": "section-c2-action-fps",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "六、① 动作 FPS",
+      "status": "mapped",
+      "targets": [
+        "coop-musou-action-shooter-jrpg"
+      ]
+    },
+    {
+      "id": "section-c2-action-tps",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "六、② 动作 TPS",
+      "status": "mapped",
+      "targets": [
+        "coop-musou-action-shooter-jrpg"
+      ]
+    },
+    {
+      "id": "section-c2-jrpg",
+      "sourceId": "source-act-classification-2",
+      "kind": "source-section",
+      "locator": "七、动作向日式角色扮演",
+      "status": "mapped",
+      "targets": [
+        "coop-musou-action-shooter-jrpg"
+      ]
+    },
+    {
+      "id": "section-combat-provenance",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "标题、作者与发布信息",
+      "status": "mapped",
+      "targets": [
+        "source-combat-approaches"
+      ]
+    },
+    {
+      "id": "section-combat-intro",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "引言／代餐争议与战斗思路差异",
+      "status": "mapped",
+      "targets": [
+        "domain-combat"
+      ]
+    },
+    {
+      "id": "section-combat-neutral-definition",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、立回／定义",
+      "status": "mapped",
+      "targets": [
+        "neutral-and-openings"
+      ]
+    },
+    {
+      "id": "section-combat-armor-base",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、① 霸体敌人的后摇与散步",
+      "status": "mapped",
+      "targets": [
+        "anti-armor-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-armor-active",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、① 攻击过程中输出的六条路径",
+      "status": "mapped",
+      "targets": [
+        "anti-armor-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-output-reward",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、① 输出奖励机制",
+      "status": "mapped",
+      "targets": [
+        "anti-armor-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-backjump",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、① 后跳反例",
+      "status": "mapped",
+      "targets": [
+        "anti-armor-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-low-poise-design",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 无霸体敌人的限制设计",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-vergil",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 鬼泣 3 维吉尔",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-balder",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 猎天使魔女 2 巴尔德",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-genshin",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 忍龙 Sigma 2 幻心",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-sigrun",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 战神 4 希格露恩",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-malenia",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 法环玛莲妮亚",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-isshin",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 只狼一心",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-saito",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 仁王 2 斋藤利三",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral",
+        "nioh2-saito-toshimitsu"
+      ]
+    },
+    {
+      "id": "section-combat-yang",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 师父杨",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-sam",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② MGRR 山姆",
+      "status": "mapped",
+      "targets": [
+        "low-poise-neutral"
+      ]
+    },
+    {
+      "id": "section-combat-neutral-summary",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 案例比较与不可迁移性",
+      "status": "mapped",
+      "targets": [
+        "neutral-and-openings"
+      ]
+    },
+    {
+      "id": "section-combat-high-ai-supplement",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、② 补充／拟似对等与粪招",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid",
+        "dmc4-dante",
+        "bayonetta-jeanne",
+        "ninja-gaiden-doppelganger",
+        "high-ai-vs-learnability"
+      ]
+    },
+    {
+      "id": "section-combat-interruption-definition",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ 断招定义",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-passive-interruption",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ 被动断招",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-active-force",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ A 强制硬直与防滥用",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-active-value",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ B 数值积累",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-active-weakness",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ C 弱点硬直",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-active-counter",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ D 打康",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-interruption-balance",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "一、③ 断招丰富度与破坏立回风险",
+      "status": "mapped",
+      "targets": [
+        "interruption"
+      ]
+    },
+    {
+      "id": "section-combat-suppression-definition",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、压制／定义",
+      "status": "mapped",
+      "targets": [
+        "suppression"
+      ]
+    },
+    {
+      "id": "section-combat-hitstun",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、① 持续出硬直",
+      "status": "mapped",
+      "targets": [
+        "continuous-hitstun-and-launch"
+      ]
+    },
+    {
+      "id": "section-combat-hitstun-variation",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、① 合作、脱离与升级转化",
+      "status": "mapped",
+      "targets": [
+        "continuous-hitstun-and-launch"
+      ]
+    },
+    {
+      "id": "section-combat-launch",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、② 持续浮空",
+      "status": "mapped",
+      "targets": [
+        "continuous-hitstun-and-launch"
+      ]
+    },
+    {
+      "id": "section-combat-wakeup",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、③ 压起身",
+      "status": "mapped",
+      "targets": [
+        "wakeup-and-resource-suppression"
+      ]
+    },
+    {
+      "id": "section-combat-wakeup-value",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、③ 数值积累出倒地",
+      "status": "mapped",
+      "targets": [
+        "wakeup-and-resource-suppression"
+      ]
+    },
+    {
+      "id": "section-combat-wakeup-move",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、③ 特定招式重新打倒",
+      "status": "mapped",
+      "targets": [
+        "wakeup-and-resource-suppression"
+      ]
+    },
+    {
+      "id": "section-combat-resource",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、④ 行动资源条压制",
+      "status": "mapped",
+      "targets": [
+        "wakeup-and-resource-suppression"
+      ]
+    },
+    {
+      "id": "section-combat-invulnerable",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "二、⑤ 无敌或半无敌压制",
+      "status": "mapped",
+      "targets": [
+        "invulnerable-suppression"
+      ]
+    },
+    {
+      "id": "section-combat-instant-forms",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "三、秒杀／五种形式",
+      "status": "mapped",
+      "targets": [
+        "instant-kill"
+      ]
+    },
+    {
+      "id": "section-combat-instant-mob",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "三、为什么需要／混战型",
+      "status": "mapped",
+      "targets": [
+        "instant-kill"
+      ]
+    },
+    {
+      "id": "section-combat-instant-routing",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "三、为什么需要／背板型",
+      "status": "mapped",
+      "targets": [
+        "instant-kill"
+      ]
+    },
+    {
+      "id": "section-combat-instant-general",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "三、为什么需要／通用设计",
+      "status": "mapped",
+      "targets": [
+        "instant-kill"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-definition",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、定番／定义",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-control",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、① 循环触发控制效果",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-interrupt",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、② 打断特定行动",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-recovery",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、③ 硬直后规律行动",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-health",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、④ 控血控制行动",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-position",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、⑤ 位置型引招",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-command",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、⑤ 指令型引招",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-burst",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、⑥ 爆输出",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-environment",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、⑦ 环境地形",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-setplay-multi",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "四、多策略并行／M8 尤里森",
+      "status": "mapped",
+      "targets": [
+        "setplay"
+      ]
+    },
+    {
+      "id": "section-combat-fixed",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "五、固定流程",
+      "status": "mapped",
+      "targets": [
+        "fixed-sequence"
+      ]
+    },
+    {
+      "id": "section-combat-conclusion-combination",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "结语／多思路交织",
+      "status": "mapped",
+      "targets": [
+        "domain-combat"
+      ]
+    },
+    {
+      "id": "section-combat-conclusion-tendencies",
+      "sourceId": "source-combat-approaches",
+      "kind": "source-section",
+      "locator": "结语／作品倾向与素养差异",
+      "status": "mapped",
+      "targets": [
+        "domain-combat"
+      ]
+    },
+    {
+      "id": "section-boss-provenance",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "标题、作者与发布信息",
+      "status": "mapped",
+      "targets": [
+        "source-low-poise-boss"
+      ]
+    },
+    {
+      "id": "section-boss-overview",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "概述／低韧定义与文章范围",
+      "status": "mapped",
+      "targets": [
+        "domain-enemy-boss"
+      ]
+    },
+    {
+      "id": "section-boss-five-types",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "一、Boss 类别／五分法",
+      "status": "mapped",
+      "targets": [
+        "boss-poise-taxonomy"
+      ]
+    },
+    {
+      "id": "section-boss-category-relations",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "一、五类与韧性的关系",
+      "status": "mapped",
+      "targets": [
+        "boss-poise-taxonomy"
+      ]
+    },
+    {
+      "id": "section-boss-example-list",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "一、拟似对等案例列表与玩家镜像",
+      "status": "mapped",
+      "targets": [
+        "boss-poise-taxonomy"
+      ]
+    },
+    {
+      "id": "section-boss-round-intro",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "二、回合制人形／低韧特征",
+      "status": "mapped",
+      "targets": [
+        "round-based-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-round-fatal-hitstun",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "二、全程低韧问题／连续硬直到死",
+      "status": "mapped",
+      "targets": [
+        "round-based-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-round-fatal-startup",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "二、全程低韧问题／无法出手",
+      "status": "mapped",
+      "targets": [
+        "round-based-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-round-solutions",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "二、五种出手保护方案",
+      "status": "mapped",
+      "targets": [
+        "round-based-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-round-readability",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "二、稳定破绽与可识别脱离",
+      "status": "mapped",
+      "targets": [
+        "round-based-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-equal-goal",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、对等型人形／模拟玩家与 PVP",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-equal-free",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、自由态防硬直",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-equal-startup",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、出手时防硬直",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-equal-openings",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、基础破绽",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-equal-escape",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、脱离形式",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-case-dmc4",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、1 鬼泣 4 但丁／黑但丁",
+      "status": "mapped",
+      "targets": [
+        "dmc4-dante"
+      ]
+    },
+    {
+      "id": "section-boss-case-jeanne",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、2 猎天使魔女 1 贞德",
+      "status": "mapped",
+      "targets": [
+        "bayonetta-jeanne"
+      ]
+    },
+    {
+      "id": "section-boss-case-doppelganger",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、3 忍龙 Sigma 假龙",
+      "status": "mapped",
+      "targets": [
+        "ninja-gaiden-doppelganger"
+      ]
+    },
+    {
+      "id": "section-boss-case-saito",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "三、4 仁王 2 斋藤利三",
+      "status": "mapped",
+      "targets": [
+        "nioh2-saito-toshimitsu"
+      ]
+    },
+    {
+      "id": "section-boss-summary-patterns",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／四项共同规律",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-summary-randomness",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／A 随机性与不稳定",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid",
+        "high-ai-vs-learnability"
+      ]
+    },
+    {
+      "id": "section-boss-summary-reaction",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／B 拼反应与不可反应",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid",
+        "high-ai-vs-learnability"
+      ]
+    },
+    {
+      "id": "section-boss-summary-learning",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／C AI 学习成本",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid",
+        "high-ai-vs-learnability"
+      ]
+    },
+    {
+      "id": "section-boss-summary-loopholes",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／D AI 漏洞与沙包化",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid",
+        "high-ai-vs-learnability"
+      ]
+    },
+    {
+      "id": "section-boss-summary-audience",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／大众接受与掌控感",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid",
+        "high-ai-vs-learnability"
+      ]
+    },
+    {
+      "id": "section-boss-arpg-limit",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／主流 ARPG 适用限制",
+      "status": "mapped",
+      "targets": [
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-nioh-limit",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "四、小结／仁王中后期改善与新手限制",
+      "status": "mapped",
+      "targets": [
+        "wakeup-and-resource-suppression",
+        "pseudo-equal-humanoid"
+      ]
+    },
+    {
+      "id": "section-boss-souls-conditions",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "五、魂类例外／较慢出手与无取消",
+      "status": "mapped",
+      "targets": [
+        "souls-low-poise-exception"
+      ]
+    },
+    {
+      "id": "section-boss-souls-interruption",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "五、魂类例外／走位与提前打断",
+      "status": "mapped",
+      "targets": [
+        "souls-low-poise-exception"
+      ]
+    },
+    {
+      "id": "section-boss-souls-malenia",
+      "sourceId": "source-low-poise-boss",
+      "kind": "source-section",
+      "locator": "五、魂类例外／玛莲妮亚招式限制",
+      "status": "mapped",
+      "targets": [
+        "souls-low-poise-exception"
+      ]
+    },
+    {
+      "id": "section-inaba-metadata",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "标题、检索日期、范围与语言标注",
+      "status": "mapped",
+      "targets": [
+        "source-inaba-interviews"
+      ]
+    },
+    {
+      "id": "section-inaba-written-list",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "一、A 文字采访与文章清单",
+      "status": "mapped",
+      "targets": [
+        "source-inaba-interviews"
+      ]
+    },
+    {
+      "id": "section-inaba-video-list",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "一、B 视频采访与演讲清单",
+      "status": "mapped",
+      "targets": [
+        "source-inaba-interviews"
+      ]
+    },
+    {
+      "id": "section-inaba-motivation",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、1 入行动机与为什么做游戏",
+      "status": "mapped",
+      "targets": [
+        "talent-practice-preservation"
+      ]
+    },
+    {
+      "id": "section-inaba-producer-director",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、2 制作人与导演分工",
+      "status": "mapped",
+      "targets": [
+        "producer-director"
+      ]
+    },
+    {
+      "id": "section-inaba-pivot",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、3 概念不可行时果断转向",
+      "status": "mapped",
+      "targets": [
+        "vision-pivot-and-strengths"
+      ]
+    },
+    {
+      "id": "section-inaba-vision",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、4 不能一味迎合用户",
+      "status": "mapped",
+      "targets": [
+        "vision-pivot-and-strengths"
+      ]
+    },
+    {
+      "id": "section-inaba-talent",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、5 人才观",
+      "status": "mapped",
+      "targets": [
+        "talent-practice-preservation"
+      ]
+    },
+    {
+      "id": "section-inaba-mikami",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、6 继承自三上真司",
+      "status": "mapped",
+      "targets": [
+        "vision-pivot-and-strengths",
+        "talent-practice-preservation"
+      ]
+    },
+    {
+      "id": "section-inaba-knowhow",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、7 动作游戏 know-how 与出海",
+      "status": "mapped",
+      "targets": [
+        "producer-director"
+      ]
+    },
+    {
+      "id": "section-inaba-not-only-action",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、8 不愿被定型为动作游戏公司",
+      "status": "mapped",
+      "targets": [
+        "vision-pivot-and-strengths"
+      ]
+    },
+    {
+      "id": "section-inaba-preservation",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、9 游戏文化保存与传承",
+      "status": "mapped",
+      "targets": [
+        "talent-practice-preservation"
+      ]
+    },
+    {
+      "id": "section-inaba-china",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "二、10 对中国游戏行业观察",
+      "status": "mapped",
+      "targets": [
+        "talent-practice-preservation"
+      ]
+    },
+    {
+      "id": "section-inaba-links",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "三、关键出处链接",
+      "status": "mapped",
+      "targets": [
+        "source-inaba-interviews"
+      ]
+    },
+    {
+      "id": "section-inaba-language",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "四、语言可用性说明",
+      "status": "mapped",
+      "targets": [
+        "source-inaba-interviews"
+      ]
+    },
+    {
+      "id": "section-inaba-search-method",
+      "sourceId": "source-inaba-interviews",
+      "kind": "source-section",
+      "locator": "五、检索方法说明",
+      "status": "excluded",
+      "targets": [],
+      "disposition": "search-method"
+    },
+    {
+      "id": "game-interop-souls-poise",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂3韧性",
+      "status": "mapped",
+      "targets": [
+        "example:interop-souls-poise"
+      ]
+    },
+    {
+      "id": "game-interop-mh-skills",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人配装技能",
+      "status": "mapped",
+      "targets": [
+        "example:interop-mh-skills"
+      ]
+    },
+    {
+      "id": "game-interop-ac-origins",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "刺客信条起源技能树",
+      "status": "mapped",
+      "targets": [
+        "example:interop-ac-origins"
+      ]
+    },
+    {
+      "id": "game-interop-dnf-stats",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "DNF速度硬直浮空数值",
+      "status": "mapped",
+      "targets": [
+        "example:interop-dnf-stats"
+      ]
+    },
+    {
+      "id": "game-interop-nioh-pulse",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "仁王残心",
+      "status": "mapped",
+      "targets": [
+        "example:interop-nioh-pulse"
+      ]
+    },
+    {
+      "id": "game-interop-furi-parry",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "Furi成功防反",
+      "status": "mapped",
+      "targets": [
+        "example:interop-furi-parry"
+      ]
+    },
+    {
+      "id": "game-interop-bayo-dodge",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女精确闪避",
+      "status": "mapped",
+      "targets": [
+        "example:interop-bayo-dodge"
+      ]
+    },
+    {
+      "id": "game-interop-dnf-command",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "DNF手搓技能",
+      "status": "mapped",
+      "targets": [
+        "example:interop-dnf-command"
+      ]
+    },
+    {
+      "id": "game-interop-vindictus",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "洛奇英雄传与重氪动作游戏",
+      "status": "mapped",
+      "targets": [
+        "example:interop-vindictus"
+      ]
+    },
+    {
+      "id": "game-readable-rathalos",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "雄火龙龙吼",
+      "status": "mapped",
+      "targets": [
+        "example:readable-rathalos"
+      ]
+    },
+    {
+      "id": "game-readable-diablos",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "角龙龙吼",
+      "status": "mapped",
+      "targets": [
+        "example:readable-diablos"
+      ]
+    },
+    {
+      "id": "game-readable-teostra",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "炎王龙龙吼",
+      "status": "mapped",
+      "targets": [
+        "example:readable-teostra"
+      ]
+    },
+    {
+      "id": "game-readable-nameless",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂3无名王者",
+      "status": "mapped",
+      "targets": [
+        "example:readable-nameless"
+      ]
+    },
+    {
+      "id": "game-readable-dragonslayer",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂3猎龙铠甲",
+      "status": "mapped",
+      "targets": [
+        "example:readable-dragonslayer"
+      ]
+    },
+    {
+      "id": "game-readable-bloodborne-dlc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "老猎人研究所小怪与鲨鱼",
+      "status": "mapped",
+      "targets": [
+        "example:readable-bloodborne-dlc"
+      ]
+    },
+    {
+      "id": "game-cue-dead-cells",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "死亡细胞黄色感叹号",
+      "status": "mapped",
+      "targets": [
+        "example:cue-dead-cells"
+      ]
+    },
+    {
+      "id": "game-cue-gow",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "战神2018黄圈与腰间罗盘",
+      "status": "mapped",
+      "targets": [
+        "example:cue-gow"
+      ]
+    },
+    {
+      "id": "game-cue-bayo",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女白光与喇叭声",
+      "status": "mapped",
+      "targets": [
+        "example:cue-bayo"
+      ]
+    },
+    {
+      "id": "game-cue-mordor",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "暗影魔多招架与射击提示",
+      "status": "mapped",
+      "targets": [
+        "example:cue-mordor"
+      ]
+    },
+    {
+      "id": "game-cue-hellblade",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "地狱之刃脑内声音",
+      "status": "mapped",
+      "targets": [
+        "example:cue-hellblade"
+      ]
+    },
+    {
+      "id": "game-cue-furi",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "Furi近战出剑音效",
+      "status": "mapped",
+      "targets": [
+        "example:cue-furi"
+      ]
+    },
+    {
+      "id": "game-fov-dmc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": [
+        "example:fov-dmc"
+      ]
+    },
+    {
+      "id": "game-fov-bayo",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:fov-bayo"
+      ]
+    },
+    {
+      "id": "game-fov-ng",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传",
+      "status": "mapped",
+      "targets": [
+        "example:fov-ng"
+      ]
+    },
+    {
+      "id": "game-fov-for-honor",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "荣耀战魂",
+      "status": "mapped",
+      "targets": [
+        "example:fov-for-honor"
+      ]
+    },
+    {
+      "id": "game-fov-bloodborne",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "血源诅咒",
+      "status": "mapped",
+      "targets": [
+        "example:fov-bloodborne"
+      ]
+    },
+    {
+      "id": "game-fov-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:fov-mh"
+      ]
+    },
+    {
+      "id": "game-clearing-kov",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "三国战纪",
+      "status": "mapped",
+      "targets": [
+        "example:clearing-kov"
+      ]
+    },
+    {
+      "id": "game-clearing-double-dragon",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "双截龙",
+      "status": "mapped",
+      "targets": [
+        "example:clearing-double-dragon"
+      ]
+    },
+    {
+      "id": "game-clearing-dmc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": [
+        "example:clearing-dmc"
+      ]
+    },
+    {
+      "id": "game-clearing-bayo",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:clearing-bayo"
+      ]
+    },
+    {
+      "id": "game-clearing-gow",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "战神",
+      "status": "mapped",
+      "targets": [
+        "example:clearing-gow"
+      ]
+    },
+    {
+      "id": "game-nonclearing-souls",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂",
+      "status": "mapped",
+      "targets": [
+        "example:nonclearing-souls"
+      ]
+    },
+    {
+      "id": "game-nonclearing-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:nonclearing-mh"
+      ]
+    },
+    {
+      "id": "game-nonclearing-dw",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "真三国无双",
+      "status": "mapped",
+      "targets": [
+        "example:nonclearing-dw"
+      ]
+    },
+    {
+      "id": "game-nonclearing-dw-growth",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "真三国无双的角色养成",
+      "status": "mapped",
+      "targets": [
+        "example:nonclearing-dw-growth"
+      ]
+    },
+    {
+      "id": "game-hybrid-ac",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "刺客信条",
+      "status": "mapped",
+      "targets": [
+        "example:hybrid-ac"
+      ]
+    },
+    {
+      "id": "game-hybrid-mordor",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "暗影魔多",
+      "status": "mapped",
+      "targets": [
+        "example:hybrid-mordor"
+      ]
+    },
+    {
+      "id": "game-hybrid-dragons-dogma",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "龙之信条",
+      "status": "mapped",
+      "targets": [
+        "example:hybrid-dragons-dogma"
+      ]
+    },
+    {
+      "id": "game-command-osu-modes",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "osu!mania 与 osu! 点击模式",
+      "status": "mapped",
+      "targets": [
+        "example:command-osu-modes"
+      ]
+    },
+    {
+      "id": "game-compound-dmc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "鬼泣的单次攻击输入",
+      "status": "mapped",
+      "targets": [
+        "example:compound-dmc"
+      ]
+    },
+    {
+      "id": "game-compound-nioh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "仁王的攻击与残心",
+      "status": "mapped",
+      "targets": [
+        "example:compound-nioh"
+      ]
+    },
+    {
+      "id": "game-precision-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:precision-mh"
+      ]
+    },
+    {
+      "id": "game-precision-nier",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔机械纪元",
+      "status": "mapped",
+      "targets": [
+        "example:precision-nier"
+      ]
+    },
+    {
+      "id": "game-depth-osu",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "osu! 与 osu!mania",
+      "status": "mapped",
+      "targets": [
+        "example:depth-osu"
+      ]
+    },
+    {
+      "id": "game-depth-mh-slow",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人的慢速系统",
+      "status": "mapped",
+      "targets": [
+        "example:depth-mh-slow"
+      ]
+    },
+    {
+      "id": "game-presentation-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人世界龙吼",
+      "status": "mapped",
+      "targets": [
+        "example:presentation-mh"
+      ]
+    },
+    {
+      "id": "game-presentation-nier",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔机械纪元动作",
+      "status": "mapped",
+      "targets": [
+        "example:presentation-nier"
+      ]
+    },
+    {
+      "id": "game-system-depth-bayonetta",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:system-depth-bayonetta"
+      ]
+    },
+    {
+      "id": "game-system-depth-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:system-depth-mh"
+      ]
+    },
+    {
+      "id": "game-allocation-bayonetta",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女的 2+1",
+      "status": "mapped",
+      "targets": [
+        "example:allocation-bayonetta"
+      ]
+    },
+    {
+      "id": "game-allocation-dmc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "DmC Devil May Cry 的 2+?",
+      "status": "mapped",
+      "targets": [
+        "example:allocation-dmc"
+      ]
+    },
+    {
+      "id": "game-allocation-mordor",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "中土世界暗影魔多的 1+1",
+      "status": "mapped",
+      "targets": [
+        "example:allocation-mordor"
+      ]
+    },
+    {
+      "id": "game-allocation-batman-arkham",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "蝙蝠侠阿卡姆类的 1+1",
+      "status": "mapped",
+      "targets": [
+        "example:allocation-batman-arkham"
+      ]
+    },
+    {
+      "id": "game-difficulty-souls-boss",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂 Boss",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-souls-boss"
+      ]
+    },
+    {
+      "id": "game-difficulty-souls-curve",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂进程",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-souls-curve"
+      ]
+    },
+    {
+      "id": "game-difficulty-dmc-rank",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "鬼泣 SSS 评价",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-dmc-rank"
+      ]
+    },
+    {
+      "id": "game-difficulty-bayo-medal",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女白金奖章",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-bayo-medal"
+      ]
+    },
+    {
+      "id": "game-difficulty-ng-karma",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传 Karma",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-ng-karma"
+      ]
+    },
+    {
+      "id": "game-difficulty-mh-speedrun",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人速杀",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-mh-speedrun"
+      ]
+    },
+    {
+      "id": "game-difficulty-souls-no-hit",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂无伤通关",
+      "status": "mapped",
+      "targets": [
+        "example:difficulty-souls-no-hit"
+      ]
+    },
+    {
+      "id": "game-loop-honkai-armor",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "崩坏3怪物护甲",
+      "status": "mapped",
+      "targets": [
+        "example:loop-honkai-armor"
+      ]
+    },
+    {
+      "id": "game-loop-bayo-stun",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女击晕与魔晶",
+      "status": "mapped",
+      "targets": [
+        "example:loop-bayo-stun"
+      ]
+    },
+    {
+      "id": "game-loop-souls-poise",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂韧性与体力",
+      "status": "mapped",
+      "targets": [
+        "example:loop-souls-poise"
+      ]
+    },
+    {
+      "id": "game-loop-ng-limb",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传断肢处决",
+      "status": "mapped",
+      "targets": [
+        "example:loop-ng-limb"
+      ]
+    },
+    {
+      "id": "game-loop-dmc-dt",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "但丁 Devil Trigger",
+      "status": "mapped",
+      "targets": [
+        "example:loop-dmc-dt"
+      ]
+    },
+    {
+      "id": "game-loop-gow-rage",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "奎托斯斯巴达之怒",
+      "status": "mapped",
+      "targets": [
+        "example:loop-gow-rage"
+      ]
+    },
+    {
+      "id": "game-loop-dnf-protection",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "DNF 浮空保护",
+      "status": "mapped",
+      "targets": [
+        "example:loop-dnf-protection"
+      ]
+    },
+    {
+      "id": "game-loop-sf-scaling",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "街头霸王连段伤害修正",
+      "status": "mapped",
+      "targets": [
+        "example:loop-sf-scaling"
+      ]
+    },
+    {
+      "id": "game-loop-muramasa-durability",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "胧村正武器耐久",
+      "status": "mapped",
+      "targets": [
+        "example:loop-muramasa-durability"
+      ]
+    },
+    {
+      "id": "game-loop-mh-mixed",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人的混合循环",
+      "status": "mapped",
+      "targets": [
+        "example:loop-mh-mixed"
+      ]
+    },
+    {
+      "id": "game-intuition-darksiders",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "暗黑血统2怪物漂移攻击",
+      "status": "mapped",
+      "targets": [
+        "example:intuition-darksiders"
+      ]
+    },
+    {
+      "id": "game-intuition-stanley",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "史丹利的寓言",
+      "status": "mapped",
+      "targets": [
+        "example:intuition-stanley"
+      ]
+    },
+    {
+      "id": "game-reaction-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:reaction-mh"
+      ]
+    },
+    {
+      "id": "game-reaction-colossus",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "旺达与巨像",
+      "status": "mapped",
+      "targets": [
+        "example:reaction-colossus"
+      ]
+    },
+    {
+      "id": "game-reaction-ng",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传",
+      "status": "mapped",
+      "targets": [
+        "example:reaction-ng"
+      ]
+    },
+    {
+      "id": "game-reaction-muramasa",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "胧村正",
+      "status": "mapped",
+      "targets": [
+        "example:reaction-muramasa"
+      ]
+    },
+    {
+      "id": "game-reaction-odin",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "奥丁领域",
+      "status": "mapped",
+      "targets": [
+        "example:reaction-odin"
+      ]
+    },
+    {
+      "id": "game-reaction-titan",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "泰坦之魂",
+      "status": "mapped",
+      "targets": [
+        "example:reaction-titan"
+      ]
+    },
+    {
+      "id": "game-balance-nier-spear",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔长枪回避攻击",
+      "status": "mapped",
+      "targets": [
+        "example:balance-nier-spear"
+      ]
+    },
+    {
+      "id": "game-balance-gow-ascension",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "战神升天巨蛇场景",
+      "status": "mapped",
+      "targets": [
+        "example:balance-gow-ascension"
+      ]
+    },
+    {
+      "id": "game-balance-darksiders2",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "暗黑血统2漂移攻击",
+      "status": "mapped",
+      "targets": [
+        "example:balance-darksiders2"
+      ]
+    },
+    {
+      "id": "game-space-hellblade",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "地狱之刃",
+      "status": "mapped",
+      "targets": [
+        "example:space-hellblade"
+      ]
+    },
+    {
+      "id": "game-space-bayonetta",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:space-bayonetta"
+      ]
+    },
+    {
+      "id": "game-space-old-gow",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "老战神",
+      "status": "mapped",
+      "targets": [
+        "example:space-old-gow"
+      ]
+    },
+    {
+      "id": "game-space-dmc",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": [
+        "example:space-dmc"
+      ]
+    },
+    {
+      "id": "game-space-bloodborne",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "血源诅咒",
+      "status": "mapped",
+      "targets": [
+        "example:space-bloodborne"
+      ]
+    },
+    {
+      "id": "game-space-ng",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传",
+      "status": "mapped",
+      "targets": [
+        "example:space-ng"
+      ]
+    },
+    {
+      "id": "game-space-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:space-mh"
+      ]
+    },
+    {
+      "id": "game-spectacle-burial-blade",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "埋葬之刃蓄力",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-burial-blade"
+      ]
+    },
+    {
+      "id": "game-spectacle-nier-greatsword",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔机械纪元大剑长按",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-nier-greatsword"
+      ]
+    },
+    {
+      "id": "game-spectacle-overwatch-mei",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "守望先锋小美 Highlight",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-overwatch-mei"
+      ]
+    },
+    {
+      "id": "game-spectacle-souls-arcs",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "亚尔特留斯与法兰不死队",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-souls-arcs"
+      ]
+    },
+    {
+      "id": "game-spectacle-overwatch-dragons",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "守望先锋双龙短片",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-overwatch-dragons"
+      ]
+    },
+    {
+      "id": "game-spectacle-sfv-focus",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "街头霸王5隆心眼",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-sfv-focus"
+      ]
+    },
+    {
+      "id": "game-spectacle-hellblade-focus",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "地狱之刃集中",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-hellblade-focus"
+      ]
+    },
+    {
+      "id": "game-spectacle-kof-k",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "拳皇XIII K'必杀",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-kof-k"
+      ]
+    },
+    {
+      "id": "game-spectacle-ng3-izuna",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传3饭纲落",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-ng3-izuna"
+      ]
+    },
+    {
+      "id": "game-spectacle-storm-sakura",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "究极忍者风暴4春野樱必杀",
+      "status": "mapped",
+      "targets": [
+        "example:spectacle-storm-sakura"
+      ]
+    },
+    {
+      "id": "game-time-mhx-hitstop",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人X盾斧狩技",
+      "status": "mapped",
+      "targets": [
+        "example:time-mhx-hitstop"
+      ]
+    },
+    {
+      "id": "game-time-nier-startup",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔机械纪元小剑轻攻击",
+      "status": "mapped",
+      "targets": [
+        "example:time-nier-startup"
+      ]
+    },
+    {
+      "id": "game-time-sfv-jab",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "街头霸王5站轻拳",
+      "status": "mapped",
+      "targets": [
+        "example:time-sfv-jab"
+      ]
+    },
+    {
+      "id": "game-time-dmc4-exceed",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "鬼泣4尼禄红剑充能",
+      "status": "mapped",
+      "targets": [
+        "example:time-dmc4-exceed"
+      ]
+    },
+    {
+      "id": "game-time-dmc-precise-dodge",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "DMC 的精确闪避",
+      "status": "mapped",
+      "targets": [
+        "example:time-dmc-precise-dodge"
+      ]
+    },
+    {
+      "id": "game-time-mhx-bushido",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人X的武士道风格",
+      "status": "mapped",
+      "targets": [
+        "example:time-mhx-bushido"
+      ]
+    },
+    {
+      "id": "game-time-dead-cells-parry",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "死亡细胞盾反",
+      "status": "mapped",
+      "targets": [
+        "example:time-dead-cells-parry"
+      ]
+    },
+    {
+      "id": "game-time-mordor-parry",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "暗影魔多招架",
+      "status": "mapped",
+      "targets": [
+        "example:time-mordor-parry"
+      ]
+    },
+    {
+      "id": "game-time-nioh-pulse",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "仁王残心",
+      "status": "mapped",
+      "targets": [
+        "example:time-nioh-pulse"
+      ]
+    },
+    {
+      "id": "game-training-ds3-programmer",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂3古达与冰狗",
+      "status": "mapped",
+      "targets": [
+        "example:training-ds3-programmer"
+      ]
+    },
+    {
+      "id": "game-training-nier-seven",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔小型剑七连击",
+      "status": "mapped",
+      "targets": [
+        "example:training-nier-seven"
+      ]
+    },
+    {
+      "id": "game-training-dragonslayer-feint",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "猎龙铠甲假动作",
+      "status": "mapped",
+      "targets": [
+        "example:training-dragonslayer-feint"
+      ]
+    },
+    {
+      "id": "game-training-stanley-surprise",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "史丹利的寓言",
+      "status": "mapped",
+      "targets": [
+        "example:training-stanley-surprise"
+      ]
+    },
+    {
+      "id": "game-conflict-difficulty-souls",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "黑暗之魂 Boss",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-difficulty-souls"
+      ]
+    },
+    {
+      "id": "game-conflict-difficulty-ng",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "忍者龙剑传高频战斗",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-difficulty-ng"
+      ]
+    },
+    {
+      "id": "game-conflict-difficulty-mh",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-difficulty-mh"
+      ]
+    },
+    {
+      "id": "game-conflict-readability-nier",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "尼尔长枪回避攻击",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-readability-nier"
+      ]
+    },
+    {
+      "id": "game-conflict-readability-gow",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "战神升天巨蛇场景",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-readability-gow"
+      ]
+    },
+    {
+      "id": "game-conflict-readability-darksiders",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "game-example",
+      "locator": "暗黑血统2漂移攻击",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-readability-darksiders"
+      ]
+    },
+    {
+      "id": "game-broad-stg-ikaruga",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "斑鸠",
+      "status": "mapped",
+      "targets": [
+        "example:broad-stg-ikaruga"
+      ]
+    },
+    {
+      "id": "game-broad-stg-touhou",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "东方 Project",
+      "status": "mapped",
+      "targets": [
+        "example:broad-stg-touhou"
+      ]
+    },
+    {
+      "id": "game-broad-stg-dodonpachi",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "怒首领蜂",
+      "status": "mapped",
+      "targets": [
+        "example:broad-stg-dodonpachi"
+      ]
+    },
+    {
+      "id": "game-broad-run-gun-contra",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "魂斗罗",
+      "status": "mapped",
+      "targets": [
+        "example:broad-run-gun-contra"
+      ]
+    },
+    {
+      "id": "game-broad-run-gun-metal-slug",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "合金弹头",
+      "status": "mapped",
+      "targets": [
+        "example:broad-run-gun-metal-slug"
+      ]
+    },
+    {
+      "id": "game-broad-metroid",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "银河战士",
+      "status": "mapped",
+      "targets": [
+        "example:broad-metroid"
+      ]
+    },
+    {
+      "id": "game-broad-fps-wolfenstein",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "德军总部",
+      "status": "mapped",
+      "targets": [
+        "example:broad-fps-wolfenstein"
+      ]
+    },
+    {
+      "id": "game-broad-fps-doom",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "DOOM",
+      "status": "mapped",
+      "targets": [
+        "example:broad-fps-doom"
+      ]
+    },
+    {
+      "id": "game-broad-platform-mario",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "马里奥",
+      "status": "mapped",
+      "targets": [
+        "example:broad-platform-mario"
+      ]
+    },
+    {
+      "id": "game-broad-platform-celeste",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "蔚蓝",
+      "status": "mapped",
+      "targets": [
+        "example:broad-platform-celeste"
+      ]
+    },
+    {
+      "id": "game-broad-arpg-zelda",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "塞尔达传说",
+      "status": "mapped",
+      "targets": [
+        "example:broad-arpg-zelda"
+      ]
+    },
+    {
+      "id": "game-broad-brawler-cadillacs",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "恐龙快打",
+      "status": "mapped",
+      "targets": [
+        "example:broad-brawler-cadillacs"
+      ]
+    },
+    {
+      "id": "game-common-cuphead",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "茶杯头",
+      "status": "mapped",
+      "targets": [
+        "example:common-cuphead"
+      ]
+    },
+    {
+      "id": "game-common-ghosts",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "魔界村",
+      "status": "mapped",
+      "targets": [
+        "example:common-ghosts"
+      ]
+    },
+    {
+      "id": "game-common-bayonetta",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "猎天使魔女 1",
+      "status": "mapped",
+      "targets": [
+        "example:common-bayonetta"
+      ]
+    },
+    {
+      "id": "game-common-dmc",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": [
+        "example:common-dmc"
+      ]
+    },
+    {
+      "id": "game-common-sekiro",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "只狼",
+      "status": "mapped",
+      "targets": [
+        "example:common-sekiro"
+      ]
+    },
+    {
+      "id": "game-common-nioh",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "仁王",
+      "status": "mapped",
+      "targets": [
+        "example:common-nioh"
+      ]
+    },
+    {
+      "id": "game-common-dark-souls",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "黑暗之魂",
+      "status": "mapped",
+      "targets": [
+        "example:common-dark-souls"
+      ]
+    },
+    {
+      "id": "game-type-boundary-dmc",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": [
+        "example:type-boundary-dmc"
+      ]
+    },
+    {
+      "id": "game-type-boundary-souls",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "黑暗之魂",
+      "status": "mapped",
+      "targets": [
+        "example:type-boundary-souls"
+      ]
+    },
+    {
+      "id": "game-traditional-dmc",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": [
+        "example:traditional-dmc"
+      ]
+    },
+    {
+      "id": "game-conflict-definition-doom",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "DOOM",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-definition-doom"
+      ]
+    },
+    {
+      "id": "game-conflict-definition-bayonetta",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-definition-bayonetta"
+      ]
+    },
+    {
+      "id": "game-conflict-definition-souls",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "黑暗之魂",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-definition-souls"
+      ]
+    },
+    {
+      "id": "game-conflict-depth-dmc",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "传统 ACT（以鬼泣为例）",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-depth-dmc"
+      ]
+    },
+    {
+      "id": "game-conflict-breadth-souls",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "魂系列（广义谱系）",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-breadth-souls"
+      ]
+    },
+    {
+      "id": "game-conflict-breadth-old-gow",
+      "sourceId": "source-act-classification-1",
+      "kind": "game-example",
+      "locator": "老战神",
+      "status": "mapped",
+      "targets": [
+        "example:conflict-breadth-old-gow"
+      ]
+    },
+    {
+      "id": "game-aavg-history-wolfenstein",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "德军总部",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-history-wolfenstein"
+      ]
+    },
+    {
+      "id": "game-aavg-history-doom",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "DOOM",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-history-doom"
+      ]
+    },
+    {
+      "id": "game-aavg-history-mario64",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "马里奥 64",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-history-mario64"
+      ]
+    },
+    {
+      "id": "game-aavg-history-tomb-raider",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "古墓丽影",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-history-tomb-raider"
+      ]
+    },
+    {
+      "id": "game-aavg-history-zelda",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "塞尔达时之笛",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-history-zelda"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-prince",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "波斯王子：时之沙",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-prince"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-god",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "战神",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-god"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-darksiders",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "暗黑血统",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-darksiders"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-castlevania",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "恶魔城：暗影之王",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-castlevania"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-heavenly",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "天剑",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-heavenly"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-dante",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "但丁地狱",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-dante"
+      ]
+    },
+    {
+      "id": "game-aavg-gow-wolverine",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "金刚狼",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-gow-wolverine"
+      ]
+    },
+    {
+      "id": "game-aavg-magnet-batman",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "蝙蝠侠：阿卡姆",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-magnet-batman"
+      ]
+    },
+    {
+      "id": "game-aavg-magnet-spider",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "蜘蛛侠系列",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-magnet-spider"
+      ]
+    },
+    {
+      "id": "game-aavg-magnet-middle",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "中土世界",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-magnet-middle"
+      ]
+    },
+    {
+      "id": "game-aavg-magnet-remember",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "勿忘我",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-magnet-remember"
+      ]
+    },
+    {
+      "id": "game-aavg-simple-ac",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "早期刺客信条",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-simple-ac"
+      ]
+    },
+    {
+      "id": "game-aavg-simple-ryse",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "罗马之子",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-simple-ryse"
+      ]
+    },
+    {
+      "id": "game-aavg-simple-hellblade",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "地狱之刃",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-simple-hellblade"
+      ]
+    },
+    {
+      "id": "game-aavg-simple-tsushima",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "对马岛之魂",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-simple-tsushima"
+      ]
+    },
+    {
+      "id": "game-aavg-power-prototype",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "虐杀原形",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-power-prototype"
+      ]
+    },
+    {
+      "id": "game-aavg-power-infamous",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "声名狼藉",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-power-infamous"
+      ]
+    },
+    {
+      "id": "game-aavg-power-gravity",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "重力异想少女",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-power-gravity"
+      ]
+    },
+    {
+      "id": "game-aavg-power-saints",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "黑道圣徒",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-power-saints"
+      ]
+    },
+    {
+      "id": "game-aavg-street-yakuza",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "如龙",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-street-yakuza"
+      ]
+    },
+    {
+      "id": "game-aavg-street-shenmue",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "莎木",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-street-shenmue"
+      ]
+    },
+    {
+      "id": "game-aavg-street-judgment",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "审判系列",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-street-judgment"
+      ]
+    },
+    {
+      "id": "game-aavg-street-sleeping",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "热血无赖",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-street-sleeping"
+      ]
+    },
+    {
+      "id": "game-aavg-street-akiba",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "秋叶原之旅",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-street-akiba"
+      ]
+    },
+    {
+      "id": "game-aavg-fpa-dying",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "消逝的光芒",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-fpa-dying"
+      ]
+    },
+    {
+      "id": "game-aavg-fpa-dishonored",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "耻辱",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-fpa-dishonored"
+      ]
+    },
+    {
+      "id": "game-aavg-fpa-vermin",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "末世鼠疫",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-fpa-vermin"
+      ]
+    },
+    {
+      "id": "game-aavg-other-colossus",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "旺达与巨像",
+      "status": "mapped",
+      "targets": [
+        "example:aavg-other-colossus"
+      ]
+    },
+    {
+      "id": "game-coop-mh",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "怪物猎人",
+      "status": "mapped",
+      "targets": [
+        "example:coop-mh"
+      ]
+    },
+    {
+      "id": "game-coop-godeater",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "噬神者",
+      "status": "mapped",
+      "targets": [
+        "example:coop-godeater"
+      ]
+    },
+    {
+      "id": "game-coop-toukiden",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "讨鬼传",
+      "status": "mapped",
+      "targets": [
+        "example:coop-toukiden"
+      ]
+    },
+    {
+      "id": "game-musou-dw",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "真·三国无双",
+      "status": "mapped",
+      "targets": [
+        "example:musou-dw"
+      ]
+    },
+    {
+      "id": "game-musou-basara",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "战国 BASARA",
+      "status": "mapped",
+      "targets": [
+        "example:musou-basara"
+      ]
+    },
+    {
+      "id": "game-musou-yoshitsune",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "义经英雄传",
+      "status": "mapped",
+      "targets": [
+        "example:musou-yoshitsune"
+      ]
+    },
+    {
+      "id": "game-musou-onechanbara",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "御姐武戏",
+      "status": "mapped",
+      "targets": [
+        "example:musou-onechanbara"
+      ]
+    },
+    {
+      "id": "game-musou-chaos",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "混沌军团",
+      "status": "mapped",
+      "targets": [
+        "example:musou-chaos"
+      ]
+    },
+    {
+      "id": "game-musou-drakengard",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "龙背上的骑兵",
+      "status": "mapped",
+      "targets": [
+        "example:musou-drakengard"
+      ]
+    },
+    {
+      "id": "game-shooter-half-life",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "半条命",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-half-life"
+      ]
+    },
+    {
+      "id": "game-shooter-halo",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "光环",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-halo"
+      ]
+    },
+    {
+      "id": "game-shooter-cod",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "使命召唤",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-cod"
+      ]
+    },
+    {
+      "id": "game-shooter-doom",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "DOOM 与 DOOM 永恒",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-doom"
+      ]
+    },
+    {
+      "id": "game-shooter-shadow-warrior",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "影子武士",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-shadow-warrior"
+      ]
+    },
+    {
+      "id": "game-shooter-borderlands",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "无主之地",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-borderlands"
+      ]
+    },
+    {
+      "id": "game-shooter-vanquish",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "绝对征服",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-vanquish"
+      ]
+    },
+    {
+      "id": "game-shooter-gungrave",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "铳墓",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-gungrave"
+      ]
+    },
+    {
+      "id": "game-shooter-bionic",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "生化尖兵",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-bionic"
+      ]
+    },
+    {
+      "id": "game-shooter-nelo",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "Nelo",
+      "status": "mapped",
+      "targets": [
+        "example:shooter-nelo"
+      ]
+    },
+    {
+      "id": "game-jrpg-elder",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "上古卷轴",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-elder"
+      ]
+    },
+    {
+      "id": "game-jrpg-diablo",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "暗黑破坏神",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-diablo"
+      ]
+    },
+    {
+      "id": "game-jrpg-witcher",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "巫师",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-witcher"
+      ]
+    },
+    {
+      "id": "game-jrpg-ys",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "伊苏",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-ys"
+      ]
+    },
+    {
+      "id": "game-jrpg-scarlet",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "绯红结系",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-scarlet"
+      ]
+    },
+    {
+      "id": "game-jrpg-nier",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "尼尔：机械纪元",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-nier"
+      ]
+    },
+    {
+      "id": "game-jrpg-tales",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "传说系列",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-tales"
+      ]
+    },
+    {
+      "id": "game-jrpg-kh",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "王国之心",
+      "status": "mapped",
+      "targets": [
+        "example:jrpg-kh"
+      ]
+    },
+    {
+      "id": "game-souls-turn-dark",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "黑暗之魂",
+      "status": "mapped",
+      "targets": [
+        "example:souls-turn-dark"
+      ]
+    },
+    {
+      "id": "game-souls-turn-blood",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "血源诅咒",
+      "status": "mapped",
+      "targets": [
+        "example:souls-turn-blood"
+      ]
+    },
+    {
+      "id": "game-souls-turn-elden",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "艾尔登法环",
+      "status": "mapped",
+      "targets": [
+        "example:souls-turn-elden"
+      ]
+    },
+    {
+      "id": "game-souls-turn-surge",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "迸发",
+      "status": "mapped",
+      "targets": [
+        "example:souls-turn-surge"
+      ]
+    },
+    {
+      "id": "game-souls-turn-code",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "噬血代码",
+      "status": "mapped",
+      "targets": [
+        "example:souls-turn-code"
+      ]
+    },
+    {
+      "id": "game-souls-turn-salt",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "盐系列",
+      "status": "mapped",
+      "targets": [
+        "example:souls-turn-salt"
+      ]
+    },
+    {
+      "id": "game-souls-simple-sekiro",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "只狼",
+      "status": "mapped",
+      "targets": [
+        "example:souls-simple-sekiro"
+      ]
+    },
+    {
+      "id": "game-souls-simple-darksiders3",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "暗黑血统 3",
+      "status": "mapped",
+      "targets": [
+        "example:souls-simple-darksiders3"
+      ]
+    },
+    {
+      "id": "game-souls-simple-jedi",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "星战绝地",
+      "status": "mapped",
+      "targets": [
+        "example:souls-simple-jedi"
+      ]
+    },
+    {
+      "id": "game-souls-simple-thymesia",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "记忆边境",
+      "status": "mapped",
+      "targets": [
+        "example:souls-simple-thymesia"
+      ]
+    },
+    {
+      "id": "game-souls-act-nioh",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "仁王",
+      "status": "mapped",
+      "targets": [
+        "example:souls-act-nioh"
+      ]
+    },
+    {
+      "id": "game-souls-act-sop",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "FF 起源",
+      "status": "mapped",
+      "targets": [
+        "example:souls-act-sop"
+      ]
+    },
+    {
+      "id": "game-subtype-sandbag-dmc",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "鬼泣（除鬼泣 2）",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-sandbag-dmc"
+      ]
+    },
+    {
+      "id": "game-subtype-chaos-ng",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "忍者龙剑传",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-chaos-ng"
+      ]
+    },
+    {
+      "id": "game-subtype-dodge-bayonetta",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-dodge-bayonetta"
+      ]
+    },
+    {
+      "id": "game-subtype-counter-onimusha",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "鬼武者",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-counter-onimusha"
+      ]
+    },
+    {
+      "id": "game-subtype-counter-mgr",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "MGR",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-counter-mgr"
+      ]
+    },
+    {
+      "id": "game-subtype-fighting-godhand",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "神之手",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-fighting-godhand"
+      ]
+    },
+    {
+      "id": "game-subtype-fighting-urban",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "君临都市",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-fighting-urban"
+      ]
+    },
+    {
+      "id": "game-subtype-fighting-sifu",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "师父",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-fighting-sifu"
+      ]
+    },
+    {
+      "id": "game-subtype-fighting-absolver",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "赦免者",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-fighting-absolver"
+      ]
+    },
+    {
+      "id": "game-subtype-routing-shinobi",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "忍 Shinobi",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-routing-shinobi"
+      ]
+    },
+    {
+      "id": "game-subtype-routing-ghostrunner",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "幽灵行者",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-routing-ghostrunner"
+      ]
+    },
+    {
+      "id": "game-subtype-art-okami",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "大神",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-art-okami"
+      ]
+    },
+    {
+      "id": "game-subtype-art-w101",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "神奇 101",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-art-w101"
+      ]
+    },
+    {
+      "id": "game-subtype-suda-killer7",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "杀手 7",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-suda-killer7"
+      ]
+    },
+    {
+      "id": "game-subtype-suda-nmh",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "英雄不再",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-suda-nmh"
+      ]
+    },
+    {
+      "id": "game-subtype-suda-lollipop",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "电锯糖心",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-suda-lollipop"
+      ]
+    },
+    {
+      "id": "game-subtype-cinema-asura",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "阿修罗之怒",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-cinema-asura"
+      ]
+    },
+    {
+      "id": "game-subtype-cinema-detroit",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "底特律：变人",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-cinema-detroit"
+      ]
+    },
+    {
+      "id": "game-subtype-cinema-storm",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "究极忍者风暴",
+      "status": "mapped",
+      "targets": [
+        "example:subtype-cinema-storm"
+      ]
+    },
+    {
+      "id": "game-traditional-bayonetta",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "猎天使魔女",
+      "status": "mapped",
+      "targets": [
+        "example:traditional-bayonetta"
+      ]
+    },
+    {
+      "id": "game-traditional-ninja-gaiden",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "忍者龙剑传",
+      "status": "mapped",
+      "targets": [
+        "example:traditional-ninja-gaiden"
+      ]
+    },
+    {
+      "id": "game-case-bayonetta-jeanne-ai",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "猎天使魔女 1 贞德完整 AI 案例",
+      "status": "mapped",
+      "targets": [
+        "example:case-bayonetta-jeanne-ai"
+      ]
+    },
+    {
+      "id": "game-case-dmc4-dante-ai",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 4 但丁与黑但丁完整 AI 案例",
+      "status": "mapped",
+      "targets": [
+        "example:case-dmc4-dante-ai"
+      ]
+    },
+    {
+      "id": "game-case-ninja-gaiden-doppelganger-ai",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "忍者龙剑传 Sigma 假龙完整 AI 案例",
+      "status": "mapped",
+      "targets": [
+        "example:case-ninja-gaiden-doppelganger-ai"
+      ]
+    },
+    {
+      "id": "game-case-nioh2-saito-ai",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 斋藤利三完整 AI 案例",
+      "status": "mapped",
+      "targets": [
+        "example:case-nioh2-saito-ai"
+      ]
+    },
+    {
+      "id": "game-neutral-nioh-yoshitsune-nyotengu",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王的源义经与女天狗",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-nioh-yoshitsune-nyotengu"
+      ]
+    },
+    {
+      "id": "game-neutral-souls-blindspot",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "魂系列无锁绕背",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-souls-blindspot"
+      ]
+    },
+    {
+      "id": "game-neutral-dmc-airborne",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣持续浮空输出",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-dmc-airborne"
+      ]
+    },
+    {
+      "id": "game-neutral-bayonetta-kiting",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "猎天使魔女 1 远程风筝",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-bayonetta-kiting"
+      ]
+    },
+    {
+      "id": "game-neutral-souls-stagger-execution",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "魂系列削韧与爆头处决",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-souls-stagger-execution"
+      ]
+    },
+    {
+      "id": "game-neutral-nioh-zero-ki-staking",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王空精打桩",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-nioh-zero-ki-staking"
+      ]
+    },
+    {
+      "id": "game-boss-god-hand-humanoids",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "神之手大部分人形与魔之手",
+      "status": "mapped",
+      "targets": [
+        "example:boss-god-hand-humanoids"
+      ]
+    },
+    {
+      "id": "game-suppression-dmc3-dt",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 敌人魔化与恐惧值",
+      "status": "mapped",
+      "targets": [
+        "example:suppression-dmc3-dt"
+      ]
+    },
+    {
+      "id": "game-suppression-sifu-enrage",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "师父处决失败狂化",
+      "status": "mapped",
+      "targets": [
+        "example:suppression-sifu-enrage"
+      ]
+    },
+    {
+      "id": "game-suppression-mgrr-khamsin",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "MGRR 焚风",
+      "status": "mapped",
+      "targets": [
+        "example:suppression-mgrr-khamsin"
+      ]
+    },
+    {
+      "id": "game-combat-substitute-sekiro",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "只狼作为动作体验参照",
+      "status": "mapped",
+      "targets": [
+        "example:combat-substitute-sekiro"
+      ]
+    },
+    {
+      "id": "game-combat-substitute-dmc",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣作为动作体验参照",
+      "status": "mapped",
+      "targets": [
+        "example:combat-substitute-dmc"
+      ]
+    },
+    {
+      "id": "game-combat-substitute-nioh",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王作为动作体验参照",
+      "status": "mapped",
+      "targets": [
+        "example:combat-substitute-nioh"
+      ]
+    },
+    {
+      "id": "game-fixed-dmc",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "DmC 魅魔、鲍勃与蒙德斯",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-dmc"
+      ]
+    },
+    {
+      "id": "game-fixed-gow3",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 3 波塞冬、赫尔墨斯与克洛诺斯",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-gow3"
+      ]
+    },
+    {
+      "id": "game-fixed-bayonetta1",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "猎天使魔女 1 四元德与裘贝蕾丝",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-bayonetta1"
+      ]
+    },
+    {
+      "id": "game-fixed-ng3",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "忍龙 3 坦克、飞机、老妖婆与康娜",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-ng3"
+      ]
+    },
+    {
+      "id": "game-fixed-nioh",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王大骷髅、八岐大蛇、大太法师与长壁姬",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-nioh"
+      ]
+    },
+    {
+      "id": "game-fixed-mgrr",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "MGRR 雷龙",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-mgrr"
+      ]
+    },
+    {
+      "id": "game-fixed-darksiders1",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "暗黑血统 1 所有被选中者",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-darksiders1"
+      ]
+    },
+    {
+      "id": "game-fixed-ff16",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "FF16 迦楼罗与泰坦二至三阶段召唤兽大战",
+      "status": "mapped",
+      "targets": [
+        "example:fixed-ff16"
+      ]
+    },
+    {
+      "id": "game-instant-ninja-gaiden-ot",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "忍者龙剑传 2 断肢 OT",
+      "status": "mapped",
+      "targets": [
+        "example:instant-ninja-gaiden-ot"
+      ]
+    },
+    {
+      "id": "game-instant-mgrr-zandatsu",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "MGRR 破甲后斩切",
+      "status": "mapped",
+      "targets": [
+        "example:instant-mgrr-zandatsu"
+      ]
+    },
+    {
+      "id": "game-instant-gow4-wall-stun",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 4 钉墙、撞墙和打背眩晕处决",
+      "status": "mapped",
+      "targets": [
+        "example:instant-gow4-wall-stun"
+      ]
+    },
+    {
+      "id": "game-instant-shinobi-tate",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "S 忍杀阵",
+      "status": "mapped",
+      "targets": [
+        "example:instant-shinobi-tate"
+      ]
+    },
+    {
+      "id": "game-instant-doom-eternal",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "DOOM 永恒快速击杀",
+      "status": "mapped",
+      "targets": [
+        "example:instant-doom-eternal"
+      ]
+    },
+    {
+      "id": "game-instant-mgrr-routing",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "MGRR 杂兵战 S 评价路线",
+      "status": "mapped",
+      "targets": [
+        "example:instant-mgrr-routing"
+      ]
+    },
+    {
+      "id": "game-instant-gow4-early-encounters",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 4 前期多人恶战",
+      "status": "mapped",
+      "targets": [
+        "example:instant-gow4-early-encounters"
+      ]
+    },
+    {
+      "id": "game-instant-doom-cacodemon",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "DOOM 永恒巨脑魔吃炸弹",
+      "status": "mapped",
+      "targets": [
+        "example:instant-doom-cacodemon"
+      ]
+    },
+    {
+      "id": "game-interruption-bloodborne-gun-parry",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "血源枪反",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-bloodborne-gun-parry"
+      ]
+    },
+    {
+      "id": "game-interruption-nioh2-burst-counter",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 妖反",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-nioh2-burst-counter"
+      ]
+    },
+    {
+      "id": "game-interruption-souls-parry",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "魂系列弹反架开",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-souls-parry"
+      ]
+    },
+    {
+      "id": "game-interruption-dmc-royal-release",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣一闪类反击",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-dmc-royal-release"
+      ]
+    },
+    {
+      "id": "game-interruption-nioh2-yokai",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 部分妖怪技",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-nioh2-yokai"
+      ]
+    },
+    {
+      "id": "game-interruption-gow4-runic",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 4 卢恩攻击",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-gow4-runic"
+      ]
+    },
+    {
+      "id": "game-interruption-nioh2-red-aura",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 红光保护",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-nioh2-red-aura"
+      ]
+    },
+    {
+      "id": "game-interruption-gow4-hidden-poise",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 4 隐藏霸体积累",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-gow4-hidden-poise"
+      ]
+    },
+    {
+      "id": "game-interruption-sifu-counters",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "师父蓄力软掌、袭裆拳与上步重踢",
+      "status": "mapped",
+      "targets": [
+        "example:interruption-sifu-counters"
+      ]
+    },
+    {
+      "id": "game-invulnerable-bayonetta3-clock-tower",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "猎天使魔女 3 钟楼压制罗丹",
+      "status": "mapped",
+      "targets": [
+        "example:invulnerable-bayonetta3-clock-tower"
+      ]
+    },
+    {
+      "id": "game-invulnerable-scarlet-nexus-sas",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "绯红结系 SAS 循环",
+      "status": "mapped",
+      "targets": [
+        "example:invulnerable-scarlet-nexus-sas"
+      ]
+    },
+    {
+      "id": "game-neutral-dmc3-vergil",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 维吉尔",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-dmc3-vergil"
+      ]
+    },
+    {
+      "id": "game-neutral-bayonetta2-balder",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "猎天使魔女 2 巴尔德",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-bayonetta2-balder"
+      ]
+    },
+    {
+      "id": "game-neutral-ngs2-genshin",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "忍龙 Sigma 2 幻心",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-ngs2-genshin"
+      ]
+    },
+    {
+      "id": "game-neutral-gow4-sigrun",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 4 希格露恩",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-gow4-sigrun"
+      ]
+    },
+    {
+      "id": "game-neutral-elden-malenia",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "艾尔登法环玛莲妮亚",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-elden-malenia"
+      ]
+    },
+    {
+      "id": "game-neutral-sekiro-isshin",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "只狼一心",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-sekiro-isshin"
+      ]
+    },
+    {
+      "id": "game-neutral-nioh2-saito",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 斋藤利三的基础立回",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-nioh2-saito"
+      ]
+    },
+    {
+      "id": "game-neutral-sifu-yang",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "师父杨",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-sifu-yang"
+      ]
+    },
+    {
+      "id": "game-neutral-mgrr-sam",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "MGRR 山姆",
+      "status": "mapped",
+      "targets": [
+        "example:neutral-mgrr-sam"
+      ]
+    },
+    {
+      "id": "game-setplay-mh-kushala",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "怪物猎人钢龙头部硬直循环",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-mh-kushala"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc5-goliath",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 5 歌莉娅火箭拳",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc5-goliath"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc4-dante-grab",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 4 但丁抓取硬直",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc4-dante-grab"
+      ]
+    },
+    {
+      "id": "game-setplay-nioh2-spear-loop",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 长枪素质三连",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-nioh2-spear-loop"
+      ]
+    },
+    {
+      "id": "game-setplay-sifu-wall",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "师父墙边眩晕循环",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-sifu-wall"
+      ]
+    },
+    {
+      "id": "game-setplay-doom-control",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "DOOM 永恒控制覆盖",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-doom-control"
+      ]
+    },
+    {
+      "id": "game-setplay-killing-floor-2",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "杀戮空间 2 元素与物理控制",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-killing-floor-2"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc5-nero-urizen",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 5 尼禄 M8 站立尤里森",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc5-nero-urizen"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc5-dante-familiars",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 5 但丁 M18 三魔宠",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc5-dante-familiars"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc3-cerberus",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 冰狗驯狗腿",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc3-cerberus"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc3-geryon",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 时停马 DMD",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc3-geryon"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc1-nelo-angelo",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 1 黑骑士",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc1-nelo-angelo"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc3-beowulf",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 贝奥武夫控血",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc3-beowulf"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc5-urizen-health",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 5 拳皇尤里森控血",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc5-urizen-health"
+      ]
+    },
+    {
+      "id": "game-setplay-nioh2-kashin-koji",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 果心居士控血控精",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-nioh2-kashin-koji"
+      ]
+    },
+    {
+      "id": "game-setplay-sifu-fajar",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "师父大师法贾一阶段",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-sifu-fajar"
+      ]
+    },
+    {
+      "id": "game-setplay-nioh-nightmare-bringer",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王祸梦鬼",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-nioh-nightmare-bringer"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc3-nevan",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 奈文",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc3-nevan"
+      ]
+    },
+    {
+      "id": "game-setplay-sifu-yang",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "师父杨一阶段骤雨引招",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-sifu-yang"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc4-dante-gun-bait",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 4 但丁对枪引招",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc4-dante-gun-bait"
+      ]
+    },
+    {
+      "id": "game-setplay-nioh2-ren-hayabusa",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 隼涟反击读取",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-nioh2-ren-hayabusa"
+      ]
+    },
+    {
+      "id": "game-setplay-ng2-blood-genshin",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "忍龙 2 血神屈上",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-ng2-blood-genshin"
+      ]
+    },
+    {
+      "id": "game-setplay-souls-build",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "魂系配装爆发定番",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-souls-build"
+      ]
+    },
+    {
+      "id": "game-setplay-nioh-build",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王配装爆发定番",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-nioh-build"
+      ]
+    },
+    {
+      "id": "game-setplay-gow4-build",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "战神 4 配装爆发定番",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-gow4-build"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc4-burst",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 4 大型 Boss 爆发",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc4-burst"
+      ]
+    },
+    {
+      "id": "game-setplay-dmc5-m8-rocket-fist",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 5 M8 尤里森火箭手多策略定番",
+      "status": "mapped",
+      "targets": [
+        "example:setplay-dmc5-m8-rocket-fist"
+      ]
+    },
+    {
+      "id": "game-wakeup-dmc3-demon-armor",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "鬼泣 3 魔化怪破甲循环",
+      "status": "mapped",
+      "targets": [
+        "example:wakeup-dmc3-demon-armor"
+      ]
+    },
+    {
+      "id": "game-wakeup-monster-hunter-overdamage",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "怪物猎人部位硬直循环",
+      "status": "mapped",
+      "targets": [
+        "example:wakeup-monster-hunter-overdamage"
+      ]
+    },
+    {
+      "id": "game-wakeup-bayonetta-dog",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "猎天使魔女 1 妖刀 yyby 屈狗",
+      "status": "mapped",
+      "targets": [
+        "example:wakeup-bayonetta-dog"
+      ]
+    },
+    {
+      "id": "game-wakeup-nioh1-backstab",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 1 搓背",
+      "status": "mapped",
+      "targets": [
+        "example:wakeup-nioh1-backstab"
+      ]
+    },
+    {
+      "id": "game-wakeup-nioh2-thunder",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王 2 轰雷打年糕",
+      "status": "mapped",
+      "targets": [
+        "example:wakeup-nioh2-thunder"
+      ]
+    },
+    {
+      "id": "game-resource-nioh-zero-ki",
+      "sourceId": "source-combat-approaches",
+      "kind": "game-example",
+      "locator": "仁王空精压制",
+      "status": "mapped",
+      "targets": [
+        "example:resource-nioh-zero-ki"
+      ]
+    },
+    {
+      "id": "game-boss-fear-kratos",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "战神 3 惊惧奎托斯",
+      "status": "mapped",
+      "targets": [
+        "example:boss-fear-kratos"
+      ]
+    },
+    {
+      "id": "game-boss-bloodborne-maria",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "血源玛利亚",
+      "status": "mapped",
+      "targets": [
+        "example:boss-bloodborne-maria"
+      ]
+    },
+    {
+      "id": "game-boss-ds3-abyss-watchers",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "黑暗之魂 3 法兰不死队",
+      "status": "mapped",
+      "targets": [
+        "example:boss-ds3-abyss-watchers"
+      ]
+    },
+    {
+      "id": "game-boss-ds3-friede",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "黑暗之魂 3 芙莉德修女",
+      "status": "mapped",
+      "targets": [
+        "example:boss-ds3-friede"
+      ]
+    },
+    {
+      "id": "game-boss-elden-malenia",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "艾尔登法环女武神玛莲妮亚",
+      "status": "mapped",
+      "targets": [
+        "example:boss-elden-malenia"
+      ]
+    },
+    {
+      "id": "game-boss-nioh-humanoids",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "仁王多数非 99 或妖化人形",
+      "status": "mapped",
+      "targets": [
+        "example:boss-nioh-humanoids"
+      ]
+    },
+    {
+      "id": "game-souls-exception-malenia",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "艾尔登法环玛莲妮亚",
+      "status": "mapped",
+      "targets": [
+        "example:souls-exception-malenia"
+      ]
+    },
+    {
+      "id": "game-philosophy-okami",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "大神",
+      "status": "mapped",
+      "targets": [
+        "example:philosophy-okami"
+      ]
+    },
+    {
+      "id": "game-philosophy-sol",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "Sol Cresta",
+      "status": "mapped",
+      "targets": [
+        "example:philosophy-sol"
+      ]
+    },
+    {
+      "id": "game-producer-viewtiful",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "红侠乔伊",
+      "status": "mapped",
+      "targets": [
+        "example:producer-viewtiful"
+      ]
+    },
+    {
+      "id": "game-practice-scalebound",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "Scalebound",
+      "status": "mapped",
+      "targets": [
+        "example:practice-scalebound"
+      ]
+    },
+    {
+      "id": "game-preservation-sol",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "Sol Cresta",
+      "status": "mapped",
+      "targets": [
+        "example:preservation-sol"
+      ]
+    },
+    {
+      "id": "game-talent-bayonetta",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "猎天使魔女 3",
+      "status": "mapped",
+      "targets": [
+        "example:talent-bayonetta"
+      ]
+    },
+    {
+      "id": "game-talent-nier",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "尼尔",
+      "status": "mapped",
+      "targets": [
+        "example:talent-nier"
+      ]
+    },
+    {
+      "id": "game-vision-okami",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "大神",
+      "status": "mapped",
+      "targets": [
+        "example:vision-okami"
+      ]
+    },
+    {
+      "id": "game-vision-viewtiful",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "红侠乔伊",
+      "status": "mapped",
+      "targets": [
+        "example:vision-viewtiful"
+      ]
+    },
+    {
+      "id": "game-vision-scalebound",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "Scalebound",
+      "status": "mapped",
+      "targets": [
+        "example:vision-scalebound"
+      ]
+    },
+    {
+      "id": "game-vision-babylon",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "巴比伦陨落",
+      "status": "mapped",
+      "targets": [
+        "example:vision-babylon"
+      ]
+    },
+    {
+      "id": "game-vision-sol",
+      "sourceId": "source-inaba-interviews",
+      "kind": "game-example",
+      "locator": "Sol Cresta",
+      "status": "mapped",
+      "targets": [
+        "example:vision-sol"
+      ]
+    },
+    {
+      "id": "media-103958j1i1w8mm7m7nsi1o.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103958j1i1w8mm7m7nsi1o.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/103958j1i1w8mm7m7nsi1o.jpg"
+      ]
+    },
+    {
+      "id": "media-104005mmsd44qgp5qgqca4.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104005mmsd44qgp5qgqca4.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104005mmsd44qgp5qgqca4.gif"
+      ]
+    },
+    {
+      "id": "media-104016u9d46hnu9uuhnc3u.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104016u9d46hnu9uuhnc3u.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104016u9d46hnu9uuhnc3u.gif"
+      ]
+    },
+    {
+      "id": "media-104020sa0qkz9uzapir4au.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104020sa0qkz9uzapir4au.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104020sa0qkz9uzapir4au.gif"
+      ]
+    },
+    {
+      "id": "media-104029yxj1d1zq338l4mzd.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104029yxj1d1zq338l4mzd.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104029yxj1d1zq338l4mzd.gif"
+      ]
+    },
+    {
+      "id": "media-104031tr4dxulrx0bxcyuj.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104031tr4dxulrx0bxcyuj.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104031tr4dxulrx0bxcyuj.gif"
+      ]
+    },
+    {
+      "id": "media-104035u1nhfn4p32p0b184.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104035u1nhfn4p32p0b184.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104035u1nhfn4p32p0b184.gif"
+      ]
+    },
+    {
+      "id": "media-104038ydudihxjxvxxiddk.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104038ydudihxjxvxxiddk.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/104038ydudihxjxvxxiddk.jpg"
+      ]
+    },
+    {
+      "id": "media-103959jihtubqjbth59det.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103959jihtubqjbth59det.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/103959jihtubqjbth59det.jpg"
+      ]
+    },
+    {
+      "id": "media-104002gihz9rd995r44djc.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104002gihz9rd995r44djc.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104002gihz9rd995r44djc.gif"
+      ]
+    },
+    {
+      "id": "media-103949bhlivcuahomevxlx.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103949bhlivcuahomevxlx.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/103949bhlivcuahomevxlx.jpg"
+      ]
+    },
+    {
+      "id": "media-103949wxc368k8ce38lmxi.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103949wxc368k8ce38lmxi.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/103949wxc368k8ce38lmxi.jpg"
+      ]
+    },
+    {
+      "id": "media-103951bbizu5bbp5p6ppb5.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103951bbizu5bbp5p6ppb5.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/103951bbizu5bbp5p6ppb5.gif"
+      ]
+    },
+    {
+      "id": "media-104129zrymyzjzmj4l7l4e.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104129zrymyzjzmj4l7l4e.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104129zrymyzjzmj4l7l4e.gif"
+      ]
+    },
+    {
+      "id": "media-104139sr4qmojfjpfcp0y9.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104139sr4qmojfjpfcp0y9.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104139sr4qmojfjpfcp0y9.gif"
+      ]
+    },
+    {
+      "id": "media-104147nefrajq0fjxjjx9r.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104147nefrajq0fjxjjx9r.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104147nefrajq0fjxjjx9r.gif"
+      ]
+    },
+    {
+      "id": "media-103957fk51ektj9te2j42p.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103957fk51ektj9te2j42p.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/103957fk51ektj9te2j42p.gif"
+      ]
+    },
+    {
+      "id": "media-103958ug878jjngcv5d44c.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103958ug878jjngcv5d44c.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/103958ug878jjngcv5d44c.gif"
+      ]
+    },
+    {
+      "id": "media-104040ba6iy30ay1hy96i2.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104040ba6iy30ay1hy96i2.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104040ba6iy30ay1hy96i2.gif"
+      ]
+    },
+    {
+      "id": "media-104043k9g9y04csxk4se46.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104043k9g9y04csxk4se46.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104043k9g9y04csxk4se46.gif"
+      ]
+    },
+    {
+      "id": "media-104045igd3gcq43scc3qfg.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104045igd3gcq43scc3qfg.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104045igd3gcq43scc3qfg.gif"
+      ]
+    },
+    {
+      "id": "media-104049nqw8oqoyknyoywty.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104049nqw8oqoyknyoywty.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/104049nqw8oqoyknyoywty.jpg"
+      ]
+    },
+    {
+      "id": "media-104101x0qjqvrj62z8up5b.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104101x0qjqvrj62z8up5b.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104101x0qjqvrj62z8up5b.gif"
+      ]
+    },
+    {
+      "id": "media-104105h2kb279pwo7x3bkf.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104105h2kb279pwo7x3bkf.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104105h2kb279pwo7x3bkf.gif"
+      ]
+    },
+    {
+      "id": "media-104108bviiivxio0boir3b.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104108bviiivxio0boir3b.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104108bviiivxio0boir3b.gif"
+      ]
+    },
+    {
+      "id": "media-104113q4c11mb99cwblnl4.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104113q4c11mb99cwblnl4.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104113q4c11mb99cwblnl4.gif"
+      ]
+    },
+    {
+      "id": "media-104115sg7xzps8xkq8kh67.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104115sg7xzps8xkq8kh67.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104115sg7xzps8xkq8kh67.gif"
+      ]
+    },
+    {
+      "id": "media-104125vphmmjpj3whmm0wu.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/104125vphmmjpj3whmm0wu.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/104125vphmmjpj3whmm0wu.gif"
+      ]
+    },
+    {
+      "id": "media-103953agjvlaeyt5tze51v.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103953agjvlaeyt5tze51v.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/103953agjvlaeyt5tze51v.gif"
+      ]
+    },
+    {
+      "id": "media-103953ewp5o4sv6w6ccjwz.jpg",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103953ewp5o4sv6w6ccjwz.jpg",
+      "status": "mapped",
+      "targets": [
+        "media:media/103953ewp5o4sv6w6ccjwz.jpg"
+      ]
+    },
+    {
+      "id": "media-103955eetgdwpwby6ywyw3.gif",
+      "sourceId": "source-action-design-difficulty",
+      "kind": "media",
+      "locator": "media/103955eetgdwpwby6ywyw3.gif",
+      "status": "mapped",
+      "targets": [
+        "media:media/103955eetgdwpwby6ywyw3.gif"
+      ]
+    },
+    {
+      "id": "game-low-poise-case-bayonetta-jeanne-ai",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "猎天使魔女 1 贞德完整 AI 案例",
+      "status": "mapped",
+      "targets": ["example:case-bayonetta-jeanne-ai"]
+    },
+    {
+      "id": "game-low-poise-case-dmc4-dante-ai",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "鬼泣 4 但丁与黑但丁完整 AI 案例",
+      "status": "mapped",
+      "targets": ["example:case-dmc4-dante-ai"]
+    },
+    {
+      "id": "game-low-poise-case-ninja-gaiden-doppelganger-ai",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "忍者龙剑传 Sigma 假龙完整 AI 案例",
+      "status": "mapped",
+      "targets": ["example:case-ninja-gaiden-doppelganger-ai"]
+    },
+    {
+      "id": "game-low-poise-case-nioh2-saito-ai",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "仁王 2 斋藤利三完整 AI 案例",
+      "status": "mapped",
+      "targets": ["example:case-nioh2-saito-ai"]
+    },
+    {
+      "id": "game-low-poise-boss-god-hand-humanoids",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "神之手大部分人形与魔之手",
+      "status": "mapped",
+      "targets": ["example:boss-god-hand-humanoids"]
+    },
+    {
+      "id": "game-low-poise-resource-nioh-zero-ki",
+      "sourceId": "source-low-poise-boss",
+      "kind": "game-example",
+      "locator": "仁王空精压制",
+      "status": "mapped",
+      "targets": ["example:resource-nioh-zero-ki"]
+    },
+    {
+      "id": "game-classification-2-type-boundary-dmc",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": ["example:type-boundary-dmc"]
+    },
+    {
+      "id": "game-classification-2-type-boundary-souls",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "黑暗之魂",
+      "status": "mapped",
+      "targets": ["example:type-boundary-souls"]
+    },
+    {
+      "id": "game-classification-2-traditional-dmc",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "鬼泣",
+      "status": "mapped",
+      "targets": ["example:traditional-dmc"]
+    },
+    {
+      "id": "game-classification-2-conflict-depth-dmc",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "传统 ACT（以鬼泣为例）",
+      "status": "mapped",
+      "targets": ["example:conflict-depth-dmc"]
+    },
+    {
+      "id": "game-classification-2-conflict-breadth-souls",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "魂系列（广义谱系）",
+      "status": "mapped",
+      "targets": ["example:conflict-breadth-souls"]
+    },
+    {
+      "id": "game-classification-2-conflict-breadth-old-gow",
+      "sourceId": "source-act-classification-2",
+      "kind": "game-example",
+      "locator": "老战神",
+      "status": "mapped",
+      "targets": ["example:conflict-breadth-old-gow"]
+    }
+  ]
+}
