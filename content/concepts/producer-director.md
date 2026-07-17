@@ -17,7 +17,6 @@ citations:
 media: []
 examples:
   - { id: producer-viewtiful, gameId: viewtiful-joe, subject: 红侠乔伊, mechanism: 制作人刻意保持小团队，让神谷独立确定方案和世界手感, outcome: 以组织边界保护导演自由, sourceIds: [source-inaba-interviews] }
-  - { id: producer-w101, gameId: the-wonderful-101, subject: 神奇 101, mechanism: PlatinumGames 动作 know-how 与鲜明导演表达结合, outcome: 说明管理支撑与作者判断可同时存在, sourceIds: [source-inaba-interviews] }
 editorialSynthesis: 编者归纳：制作人介入程度应随导演是否能稳定作关键判断而变化，不是固定的“创意/行政”二分。
 ---
 

@@ -13,7 +13,7 @@ relations:
   - { kind: conflicts_with, target: traditional-act }
   - { kind: conflicts_with, target: action-adventure }
   - { kind: conflicts_with, target: souls-framework }
-  - { kind: conflicts_with, target: vision-pivot-and-strengths }
+  - { kind: related_to, target: vision-pivot-and-strengths, note: 稻叶材料仅为集中优势与公司方向提供边界语境，不作为冲突任一侧的分配证据。 }
 citations:
   - { sourceId: source-act-classification-1, locator: 三、狭义 ACT（内容量、开发能力与资金投入） }
   - { sourceId: source-act-classification-2, locator: 一、传统清版动作；二、剧情驱动动作冒险；三、魂式框架 }
@@ -21,18 +21,18 @@ citations:
 media: []
 examples:
   - { id: conflict-depth-dmc, gameId: devil-may-cry, subject: 传统 ACT（以鬼泣为例）, mechanism: 关卡、敌人、成长与评价集中服务复杂战斗系统, outcome: 动作表达上限高，但非战斗内容和受众面承压, sourceIds: [source-act-classification-1, source-act-classification-2] }
-  - { id: conflict-breadth-souls, gameId: dark-souls, subject: 魂系列, mechanism: 相对克制人物动作宽度，把投入放在 Boss、地图、场景与碎片叙事, outcome: 由探索和世界内容支撑产品体量与沉浸, sourceIds: [source-act-classification-1, source-act-classification-2] }
+  - { id: conflict-breadth-souls, gameId: souls-series, subject: 魂系列（广义谱系）, mechanism: 相对克制人物动作宽度，把投入放在 Boss、地图、场景与碎片叙事, outcome: 由探索和世界内容支撑产品体量与沉浸, sourceIds: [source-act-classification-1, source-act-classification-2] }
   - { id: conflict-breadth-old-gow, gameId: god-of-war, subject: 老战神, mechanism: 较简明动作系统配合解谜、攀爬、场景演出和 QTE 处决, outcome: 以宏大流程和身临其境感形成综合吸引力, sourceIds: [source-act-classification-1, source-act-classification-2] }
 conflictType: goal
 conflictSides:
   - label: 深挖动作系统与战斗专精
     claim: 将开发资源集中到人物动作、敌人设计、非对称 1vN、评价和可重复钻研，使战斗本身承担主要内容价值。
     conditions: 适合团队动作专长强、目标受众愿意学习和反复挑战、关卡叙事主要为战斗服务，且产品能承受较窄市场面的项目。
-    sourceIds: [source-act-classification-1, source-act-classification-2, source-inaba-interviews]
+    sourceIds: [source-act-classification-1, source-act-classification-2]
   - label: 扩展探索、叙事、地图、演出与成长
     claim: 动作系统不必追求传统 ACT 的繁杂上限，可用 Boss 数量、地图探索、场景气氛、剧情、解谜、攀爬、QTE 或 RPG 构筑共同支撑体量。
     conditions: 适合面向更广受众、强调一次流程新鲜感或世界沉浸、团队在地图/叙事/演出/成长上有优势，并愿意接受战斗表达较收敛的项目。
-    sourceIds: [source-act-classification-1, source-act-classification-2, source-inaba-interviews]
+    sourceIds: [source-act-classification-1, source-act-classification-2]
 editorialSynthesis: 编者归纳：这是有限资源下的目标与条件冲突，不是“深度”和“广度”谁更高级；动作向 JRPG 等作品也可能以更高成本或不同团队结构同时争取两者。
 ---
 

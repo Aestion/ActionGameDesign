@@ -22,11 +22,11 @@ sourceMeta:
     - https://gdcvault.com/play/1023581/Action-Games-Without-Borders-Making
     - https://nordic.ign.com/atsushi-inaba/3119/feature/the-future-of-platinumgames-ign-first
     - https://www.videogameschronicle.com/features/interviews/platinumgames-2022/
+    - https://www.bilibili.com/video/BV1TU4y1F7Cu
+    - https://www.youtube.com/watch?v=sgkPw0BPL1s
   secondaryUrls:
     - https://sourcegaming.info/2018/05/15/straight-from-the-source-hideki-kamiya-and-atsushi-inaba-platinumgames/
     - https://www.bilibili.com/video/BV1Ep411Z7ms
-    - https://www.bilibili.com/video/BV1TU4y1F7Cu
-    - https://www.youtube.com/watch?v=sgkPw0BPL1s
 ---
 
 - **作者：**本地资料编者（对稻叶敦志、神谷英树及相关媒体材料的检索整理；具体观点作者在正文逐项标注）。

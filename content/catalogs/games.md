@@ -23,7 +23,8 @@ games:
   - { id: metal-gear-rising, title: 合金装备崛起：复仇, aliases: [Metal Gear Rising Revengeance, MGR, MGRR, メタルギア ライジング リベンジェンス], summary: 以防御反击、斩切和高速战斗为核心的传统 ACT。, tags: [传统ACT] }
   - { id: sekiro, title: 只狼：影逝二度, aliases: [Sekiro Shadows Die Twice, SEKIRO, 隻狼], summary: 以主动进攻和架势化解为核心的简化攻防型魂式动作游戏。, tags: [魂式框架] }
   - { id: nioh, title: 仁王, aliases: [Nioh, 仁王2, Nioh 2], summary: 将精力调度、削精压制和刷装成长结合的传统 ACT 化魂式系列。, tags: [魂式框架, ARPG] }
-  - { id: dark-souls, title: 黑暗之魂, aliases: [Dark Souls, ダークソウル, 黑魂, 魂系列], summary: 精力条回合制与魂式地图框架的代表系列。, tags: [魂式框架, ARPG] }
+  - { id: dark-souls, title: 黑暗之魂, aliases: [Dark Souls, ダークソウル, 黑魂], summary: 精力条回合制与魂式地图框架的代表系列。, tags: [魂式框架, ARPG] }
+  - { id: souls-series, title: 魂系列（广义谱系）, aliases: [魂系列, Souls series, Soulsborne, 魂系游戏], summary: 跨《黑暗之魂》《血源诅咒》《艾尔登法环》等作品的设计谱系总称，不等同于《黑暗之魂》单一系列。, tags: [魂式框架, ARPG, 谱系] }
   - { id: onimusha, title: 鬼武者, aliases: [Onimusha, 鬼武者シリーズ], summary: 以防御、一闪和反击为重要核心的传统 ACT 系列。, tags: [传统ACT] }
   - { id: god-hand, title: 神之手, aliases: [God Hand, ゴッドハンド], summary: 采用类格斗高速攻防逻辑的传统 ACT。, tags: [传统ACT, 类格斗] }
   - { id: urban-reign, title: 君临都市, aliases: [Urban Reign, アーバンレイン], summary: 强调近身格斗攻防的动作游戏。, tags: [传统ACT, 类格斗] }
@@ -33,7 +34,7 @@ games:
   - { id: ghostrunner, title: 幽灵行者, aliases: [Ghostrunner], summary: 强调高速跑酷与一击致命的第一人称动作游戏。, tags: [跑酷, 第一人称动作] }
   - { id: okami, title: 大神, aliases: [Okami, Ōkami, 大神 絶景版], summary: 以水墨美术与画笔机制结合探索战斗的动作冒险游戏。, tags: [艺术特色, 动作冒险] }
   - { id: the-wonderful-101, title: 神奇 101, aliases: [The Wonderful 101, ザ・ワンダフル ワン・オー・ワン, Wonderful101], summary: 以绘图变形和群体英雄操作构成动作系统的作品。, tags: [传统ACT, 艺术特色] }
-  - { id: killer7, title: 杀手 7, aliases: [killer7, Killer7], summary: 须田刚一风格鲜明的叙事动作作品。, tags: [须田刚一] }
+  - { id: killer7, title: 杀手 7, aliases: [killer7], summary: 须田刚一风格鲜明的叙事动作作品。, tags: [须田刚一] }
   - { id: no-more-heroes, title: 英雄不再, aliases: [No More Heroes, ノーモア★ヒーローズ], summary: 以恶搞、设定和 B 级片气质见长的动作系列。, tags: [须田刚一] }
   - { id: lollipop-chainsaw, title: 电锯糖心, aliases: [Lollipop Chainsaw, ロリポップチェーンソー], summary: 须田刚一参与的夸张风格动作游戏。, tags: [须田刚一] }
   - { id: asuras-wrath, title: 阿修罗之怒, aliases: [Asura's Wrath, アスラズ ラース], summary: 将史诗演出、QTE 与动作互动推到极端的作品。, tags: [演出, 互动电影] }
@@ -54,14 +55,14 @@ games:
   - { id: hellblade, title: 地狱之刃, aliases: [Hellblade, Hellblade Senua's Sacrifice], summary: 以叙事、沉浸和简易化近战为主的动作冒险系列。, tags: [动作冒险] }
   - { id: ghost-of-tsushima, title: 对马岛之魂, aliases: [Ghost of Tsushima], summary: 以开放世界、架势和机制丰富化近战的动作冒险游戏。, tags: [动作冒险] }
   - { id: prototype, title: 虐杀原形, aliases: [Prototype], summary: 以开放世界移动和混合超能力战斗为核心的系列。, tags: [动作冒险, 超能力] }
-  - { id: infamous, title: 声名狼藉, aliases: [inFAMOUS, Infamous], summary: 以开放世界和超能力战斗为核心的系列。, tags: [动作冒险, 超能力] }
+  - { id: infamous, title: 声名狼藉, aliases: [inFAMOUS], summary: 以开放世界和超能力战斗为核心的系列。, tags: [动作冒险, 超能力] }
   - { id: gravity-rush, title: 重力异想世界, aliases: [Gravity Rush, 重力异想少女, GRAVITY DAZE], summary: 以重力操控混合动作与探索的系列。, tags: [动作冒险, 超能力] }
   - { id: saints-row, title: 黑道圣徒, aliases: [Saints Row], summary: 后期作品包含夸张超能力与开放世界机制的系列。, tags: [动作冒险, 开放世界] }
   - { id: yakuza, title: 如龙, aliases: [Yakuza, Like a Dragon, 龍が如く, 如龙7], summary: 以街头肉搏、剧情和城市内容构成的系列，后续分出回合制路线。, tags: [动作冒险, 街头械斗] }
   - { id: shenmue, title: 莎木, aliases: [Shenmue, シェンムー], summary: 结合城市探索、叙事和格斗的开放环境先驱系列。, tags: [动作冒险] }
   - { id: judgment, title: 审判系列, aliases: [Judgment, Judge Eyes, 审判之眼, LOST JUDGMENT], summary: 在如龙框架上深化动作战斗的侦探题材系列。, tags: [动作冒险, 街头械斗] }
   - { id: sleeping-dogs, title: 热血无赖, aliases: [Sleeping Dogs], summary: 以开放城市、街头肉搏与环境处决为主的动作冒险游戏。, tags: [动作冒险, 街头械斗] }
-  - { id: akibas-trip, title: 秋叶原之旅, aliases: [Akiba's Trip, AKIBA'S TRIP], summary: 以街头群战和夸张设定结合城市探索的系列。, tags: [动作冒险, 街头械斗] }
+  - { id: akibas-trip, title: 秋叶原之旅, aliases: [AKIBA'S TRIP], summary: 以街头群战和夸张设定结合城市探索的系列。, tags: [动作冒险, 街头械斗] }
   - { id: dying-light, title: 消逝的光芒, aliases: [Dying Light], summary: 将第一人称近战、跑酷与生存探索结合的系列。, tags: [第一人称动作] }
   - { id: dishonored, title: 耻辱, aliases: [Dishonored], summary: 将第一人称动作、潜行和超能力组合的系列。, tags: [第一人称动作] }
   - { id: vermintide, title: 战锤：末世鼠疫, aliases: [Warhammer Vermintide, Vermintide, 末世鼠疫], summary: 强调合作、第一人称近战与职业机制的系列。, tags: [第一人称动作, 共斗] }
@@ -69,7 +70,7 @@ games:
   - { id: bloodborne, title: 血源诅咒, aliases: [Bloodborne, ブラッドボーン, 血源], summary: 强调主动进攻、部位破坏、变形武器和枪反的魂式作品。, tags: [魂式框架, ARPG] }
   - { id: elden-ring, title: 艾尔登法环, aliases: [Elden Ring, エルデンリング, 法环], summary: 以开放世界、战技、骨灰和高频敌人行动扩展魂式框架的作品。, tags: [魂式框架, ARPG] }
   - { id: the-surge, title: 迸发, aliases: [The Surge], summary: 采用精力条回合制和部位装备系统的魂式系列。, tags: [魂式框架, ARPG] }
-  - { id: code-vein, title: 噬血代码, aliases: [Code Vein, CODE VEIN], summary: 采用魂式框架并强调角色成长搭配的动作角色扮演游戏。, tags: [魂式框架, ARPG] }
+  - { id: code-vein, title: 噬血代码, aliases: [CODE VEIN], summary: 采用魂式框架并强调角色成长搭配的动作角色扮演游戏。, tags: [魂式框架, ARPG] }
   - { id: salt-and-sanctuary, title: 盐与避难所系列, aliases: [Salt and Sanctuary, Salt and Sacrifice, 盐系列], summary: 以 2D 形式采用魂式框架的动作角色扮演系列。, tags: [魂式框架, ARPG] }
   - { id: star-wars-jedi, title: 星球大战绝地系列, aliases: [Star Wars Jedi, Star Wars Jedi Fallen Order, 星战绝地], summary: 采用简化攻防魂式结构的动作冒险系列。, tags: [魂式框架, 动作冒险] }
   - { id: thymesia, title: 记忆边境, aliases: [Thymesia], summary: 采用快速简化攻防的魂式动作角色扮演游戏。, tags: [魂式框架, ARPG] }
@@ -91,18 +92,18 @@ games:
   - { id: vanquish, title: 绝对征服, aliases: [Vanquish, ヴァンキッシュ], summary: 以滑行、子弹时间和掩体运动战为核心的动作 TPS。, tags: [动作射击, TPS] }
   - { id: gungrave, title: 铳墓, aliases: [Gungrave, ガングレイヴ], summary: 强调第三人称火力与角色动作感的系列。, tags: [动作射击, TPS] }
   - { id: bionic-commando, title: 生化尖兵, aliases: [Bionic Commando, バイオニックコマンドー], summary: 以机械臂摆荡和射击结合的第三人称动作游戏。, tags: [动作射击, TPS] }
-  - { id: nelo, title: Nelo, aliases: [NELO], summary: 以高速移动和第三人称射击结合的独立动作作品。, tags: [动作射击, TPS] }
+  - { id: nelo, title: Nelo, aliases: [], summary: 以高速移动和第三人称射击结合的独立动作作品。, tags: [动作射击, TPS] }
   - { id: the-elder-scrolls, title: 上古卷轴, aliases: [The Elder Scrolls], summary: 以角色扮演、探索和即时战斗为主的系列。, tags: [RPG] }
   - { id: diablo, title: 暗黑破坏神, aliases: [Diablo], summary: 以数值构筑、刷装和即时战斗为主的动作角色扮演系列。, tags: [ARPG] }
   - { id: the-witcher, title: 巫师, aliases: [The Witcher, Wiedźmin], summary: 以叙事、角色扮演和即时战斗为主的系列。, tags: [RPG] }
   - { id: ys, title: 伊苏, aliases: [Ys, イース], summary: 以高速即时战斗与日式角色扮演结合的系列。, tags: [日式ARPG] }
-  - { id: scarlet-nexus, title: 绯红结系, aliases: [Scarlet Nexus, SCARLET NEXUS], summary: 以念力、SAS 与高速连击结合的动作向日式 RPG。, tags: [日式ARPG] }
+  - { id: scarlet-nexus, title: 绯红结系, aliases: [SCARLET NEXUS], summary: 以念力、SAS 与高速连击结合的动作向日式 RPG。, tags: [日式ARPG] }
   - { id: nier, title: NieR 系列, aliases: [尼尔, NieR, ニーア, NieR Automata, 尼尔机械纪元], summary: 以日式角色扮演、叙事与白金式动作结合的系列。, tags: [日式ARPG] }
   - { id: tales, title: 传说系列, aliases: [Tales series, テイルズ オブ, Tales of], summary: 以即时组队战斗为核心的日式角色扮演系列。, tags: [日式ARPG] }
   - { id: kingdom-hearts, title: 王国之心, aliases: [Kingdom Hearts, キングダム ハーツ], summary: 将日式角色扮演成长与空中连击等动作系统结合的系列。, tags: [日式ARPG] }
   - { id: viewtiful-joe, title: 红侠乔伊, aliases: [Viewtiful Joe, ビューティフル ジョー], summary: 由小团队和鲜明导演愿景塑造的风格化动作系列。, tags: [传统ACT, 制作案例] }
   - { id: scalebound, title: Scalebound, aliases: [龙鳞化身, スケイルバウンド], summary: PlatinumGames 被取消但形成开发经验的项目。, tags: [制作案例] }
-  - { id: babylons-fall, title: 巴比伦陨落, aliases: [Babylon's Fall, BABYLON'S FALL], summary: PlatinumGames 尝试常驻运营方向但商业失败的作品。, tags: [制作案例, 常驻运营] }
+  - { id: babylons-fall, title: 巴比伦陨落, aliases: [BABYLON'S FALL], summary: PlatinumGames 尝试常驻运营方向但商业失败的作品。, tags: [制作案例, 常驻运营] }
   - { id: sol-cresta, title: Sol Cresta, aliases: [ソルクレスタ], summary: Neo Classic Arcade 计划中强调纯 gameplay 乐趣和经典传承的射击作品。, tags: [STG, 文化保存] }
   - { id: project-gg, title: Project G.G., aliases: [Project GG, プロジェクトG.G.], summary: PlatinumGames 对外讨论过的原创项目代号。, tags: [制作案例] }
 ---

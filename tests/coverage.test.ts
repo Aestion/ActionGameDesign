@@ -30,7 +30,7 @@ const classificationAndInabaGameIds = [
   "wolfenstein", "doom", "super-mario", "celeste", "the-legend-of-zelda",
   "cadillacs-and-dinosaurs", "cuphead", "ghosts-n-goblins", "bayonetta",
   "castlevania", "devil-may-cry", "ninja-gaiden", "god-of-war", "metal-gear-rising",
-  "sekiro", "nioh", "dark-souls", "onimusha", "god-hand", "urban-reign", "absolver",
+  "sekiro", "nioh", "dark-souls", "souls-series", "onimusha", "god-hand", "urban-reign", "absolver",
   "sifu", "shinobi", "ghostrunner", "okami", "the-wonderful-101", "killer7",
   "no-more-heroes", "lollipop-chainsaw", "asuras-wrath", "detroit-become-human",
   "naruto-ultimate-ninja-storm",
@@ -100,11 +100,37 @@ describe("initial source, taxonomy, and philosophy migration", () => {
     expect(entitiesById.get("vision-pivot-and-strengths")?.editorialSynthesis).toMatch(/编者归纳/u);
   });
 
+  it("does not turn interview topic listings into source-backed production examples", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+
+    expect(entitiesById.get("producer-director")?.examples.map(({ id }) => id)).not.toContain("producer-w101");
+    expect(entitiesById.get("vision-pivot-and-strengths")?.examples.map(({ id }) => id)).not.toContain("vision-project-gg");
+  });
+
+  it("preserves the source author's qualified action-adventure framing", async () => {
+    const content = await loadContent("content");
+    const actionAdventure = content.entities.find(({ id }) => id === "action-adventure");
+
+    expect(actionAdventure?.examples.find(({ id }) => id === "aavg-gow-prince")?.outcome).toMatch(/来源作者/u);
+    expect(actionAdventure?.examples.find(({ id }) => id === "aavg-gow-god")?.outcome).toMatch(/来源作者/u);
+    expect(actionAdventure?.bodyHtml).toContain("来源作者把《波斯王子：时之沙》视为可能的始祖");
+    expect(actionAdventure?.bodyHtml).toMatch(/通常不会把动作系统继续推到传统 ACT 的深度/u);
+  });
+
   it("catalogues every game or series named by the classification sources and Inaba summary", async () => {
     const content = await loadContent("content");
-    const gameIds = new Set(content.entities.filter(({ kind }) => kind === "game").map(({ id }) => id));
+    const games = content.entities.filter(({ kind }) => kind === "game");
+    const gamesById = new Map(games.map((game) => [game.id, game]));
+    const gameIds = new Set(gamesById.keys());
 
     expect(classificationAndInabaGameIds.filter((id) => !gameIds.has(id))).toEqual([]);
+    expect(gamesById.get("souls-series")?.aliases).toEqual(expect.arrayContaining(["魂系列", "Souls series"]));
+    expect(gamesById.get("dark-souls")?.aliases).not.toContain("魂系列");
+    for (const game of games) {
+      const normalizedNames = [game.title, ...game.aliases].map((name) => name.toLocaleLowerCase());
+      expect(new Set(normalizedNames).size, game.id).toBe(normalizedNames.length);
+    }
   });
 
   it("models both conflicts with complete sourced sides and explicit conditions", async () => {
@@ -119,5 +145,22 @@ describe("initial source, taxonomy, and philosophy migration", () => {
       side.conditions.length > 0 && side.sourceIds.length > 0
     ))).toBe(true);
     expect(conflicts[1]?.bodyHtml).toMatch(/传统 ACT[\s\S]*魂[\s\S]*老战神/u);
+    expect(conflicts[1]?.examples.find(({ id }) => id === "conflict-breadth-souls")?.gameId)
+      .toBe("souls-series");
+    expect(conflicts[1]?.conflictSides?.every(({ sourceIds }) =>
+      !sourceIds.includes("source-inaba-interviews")
+    )).toBe(true);
+  });
+
+  it("classifies official direct recordings as primary source URLs", async () => {
+    const content = await loadContent("content");
+    const inaba = content.entities.find(({ id }) => id === "source-inaba-interviews");
+    const directUrls = [
+      "https://www.bilibili.com/video/BV1TU4y1F7Cu",
+      "https://www.youtube.com/watch?v=sgkPw0BPL1s"
+    ];
+
+    expect(inaba?.sourceMeta?.primaryUrls).toEqual(expect.arrayContaining(directUrls));
+    expect(inaba?.sourceMeta?.secondaryUrls).not.toEqual(expect.arrayContaining(directUrls));
   });
 });

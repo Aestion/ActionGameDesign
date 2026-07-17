@@ -23,8 +23,8 @@ examples:
   - { id: aavg-history-mario64, gameId: super-mario, subject: 马里奥 64, mechanism: 3D 平台跳跃, outcome: 代表不同于 AAVG 战斗的 3D 动作路径, sourceIds: [source-act-classification-2] }
   - { id: aavg-history-tomb-raider, gameId: tomb-raider, subject: 古墓丽影, mechanism: 3D 探索、解谜和射击, outcome: 奠定美式冒险框架, sourceIds: [source-act-classification-2] }
   - { id: aavg-history-zelda, gameId: the-legend-of-zelda, subject: 塞尔达时之笛, mechanism: 3D 即时战斗、探索和成长, outcome: 代表早期 ARPG 路径, sourceIds: [source-act-classification-2] }
-  - { id: aavg-gow-prince, gameId: prince-of-persia, subject: 波斯王子：时之沙, mechanism: 动作战斗与大量攀爬、解谜、探索结合, outcome: 构成类战神 AAVG 的始祖框架, sourceIds: [source-act-classification-2] }
-  - { id: aavg-gow-god, gameId: god-of-war, subject: 战神, mechanism: 派生出招、魔法资源与强流程演出, outcome: 集大成并引来大量模仿, sourceIds: [source-act-classification-2] }
+  - { id: aavg-gow-prince, gameId: prince-of-persia, subject: 波斯王子：时之沙, mechanism: 动作战斗与大量攀爬、解谜、探索结合, outcome: 来源作者认为它可能构成类战神 AAVG 的始祖框架, sourceIds: [source-act-classification-2] }
+  - { id: aavg-gow-god, gameId: god-of-war, subject: 战神, mechanism: 派生出招、魔法资源与强流程演出, outcome: 来源作者将其视为集大成者，并认为它引来大量模仿, sourceIds: [source-act-classification-2] }
   - { id: aavg-gow-darksiders, gameId: darksiders, subject: 暗黑血统, mechanism: 类战神战斗配合探索解谜, outcome: 复用成熟 AAVG 风险较低, sourceIds: [source-act-classification-2] }
   - { id: aavg-gow-castlevania, gameId: castlevania, subject: 恶魔城：暗影之王, mechanism: 类战神派生和线性流程, outcome: 以既有框架承载系列题材, sourceIds: [source-act-classification-2] }
   - { id: aavg-gow-heavenly, gameId: heavenly-sword, subject: 天剑, mechanism: 线性类战神战斗与演出, outcome: 动作深度让位于流程整体, sourceIds: [source-act-classification-2] }
@@ -62,11 +62,11 @@ editorialSynthesis: 编者归纳：六类描述战斗实现惯性，不是地图
 
 ## 历史框架
 
-《德军总部》《DOOM》《马里奥 64》《古墓丽影》《塞尔达时之笛》分别展示早期 3D FPS、平台、探索射击和 ARPG 路径。《波斯王子：时之沙》继承类似《古墓丽影》的探索框架，再将动作战斗与攀爬解谜结合，为动作型 AAVG 建立基础。
+《德军总部》《DOOM》《马里奥 64》《古墓丽影》《塞尔达时之笛》分别展示早期 3D FPS、平台、探索射击和 ARPG 路径。来源作者认为，《波斯王子：时之沙》在 3D 化中继承类似《古墓丽影》的探索框架，再将动作战斗与攀爬解谜结合，可能构成后续动作型 AAVG 的基本框架。
 
 ## ① 类战神
 
-派生出招加魔法等资源管理，但不把动作系统继续推到传统 ACT 的深度，而把投入放在地图、解谜、攀爬和剧情演出。《波斯王子：时之沙》是始祖参照，《战神》集大成；《暗黑血统》《恶魔城：暗影之王》《天剑》《但丁地狱》《金刚狼》等沿用。新《战神》改为越肩视角、取消跳跃并强化 RPG，但基本战斗/流程思路与老作连续。
+来源作者把“类战神”概括为派生出招加魔法等资源管理；这类作品通常不会把动作系统继续推到传统 ACT 的深度，而更着重地图、解谜、攀爬和剧情演出。来源作者把《波斯王子：时之沙》视为可能的始祖，把《战神》视为集大成者，并认为《暗黑血统》《恶魔城：暗影之王》《天剑》《但丁地狱》《金刚狼》等随后采用了相近模式。对于新《战神》，作者认为它虽然改为越肩视角、取消跳跃并强化 RPG，但基本设计框架与战斗思路仍与老作连续。
 
 ## ② 磁铁吸附式
 

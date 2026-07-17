@@ -22,7 +22,6 @@ examples:
   - { id: vision-scalebound, gameId: scalebound, subject: Scalebound, mechanism: 项目取消后提取经验并转向下一项目, outcome: 失败结果不等于过程经验归零, sourceIds: [source-inaba-interviews] }
   - { id: vision-babylon, gameId: babylons-fall, subject: 巴比伦陨落, mechanism: 常驻运营尝试遭遇重大失败, outcome: 稻叶仍表示不会因此放弃继续探索该方向, sourceIds: [source-inaba-interviews] }
   - { id: vision-sol, gameId: sol-cresta, subject: Sol Cresta, mechanism: 推开电影化大预算倾向，聚焦 gameplay 本身, outcome: 作为公司不只做既有动作标签的另一种探索, sourceIds: [source-inaba-interviews] }
-  - { id: vision-project-gg, gameId: project-gg, subject: Project G.G., mechanism: 原创高风险方向的公开项目语境, outcome: 展示稳定续作以外的未知领地追求, sourceIds: [source-inaba-interviews] }
 editorialSynthesis: 编者归纳：转向的是不可行的实现假设，不必放弃核心愿景；而“放大优点”也不等于忽视会阻断交付或信任的缺陷。
 ---
 
