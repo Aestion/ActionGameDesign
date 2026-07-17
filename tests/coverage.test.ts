@@ -25,6 +25,75 @@ const taskConceptIds = [
   "talent-practice-preservation"
 ];
 
+const systemAndPresentationConceptIds = [
+  "domain-system-depth",
+  "compound-decisions",
+  "depth-width-feedback-time",
+  "reaction-frequency",
+  "enemy-attack-allocation",
+  "control-precision",
+  "time-precision",
+  "space-precision",
+  "command-dimension",
+  "external-rules-and-difficulty",
+  "feedback-loops",
+  "clearing-and-non-clearing",
+  "action-external-interoperation",
+  "domain-presentation",
+  "intuitive-experience",
+  "camera-and-fov",
+  "animation-readability",
+  "auxiliary-cues",
+  "spectacle-techniques",
+  "readability-spectacle-balance",
+  "training-and-depth"
+];
+
+const systemAndPresentationConflictIds = ["difficulty-sources", "readability-vs-spectacle"];
+
+const actionDesignMediaFiles = [
+  "103949bhlivcuahomevxlx.jpg",
+  "103949wxc368k8ce38lmxi.jpg",
+  "103951bbizu5bbp5p6ppb5.gif",
+  "103953agjvlaeyt5tze51v.gif",
+  "103953ewp5o4sv6w6ccjwz.jpg",
+  "103955eetgdwpwby6ywyw3.gif",
+  "103957fk51ektj9te2j42p.gif",
+  "103958j1i1w8mm7m7nsi1o.jpg",
+  "103958ug878jjngcv5d44c.gif",
+  "103959jihtubqjbth59det.jpg",
+  "104002gihz9rd995r44djc.gif",
+  "104005mmsd44qgp5qgqca4.gif",
+  "104016u9d46hnu9uuhnc3u.gif",
+  "104020sa0qkz9uzapir4au.gif",
+  "104029yxj1d1zq338l4mzd.gif",
+  "104031tr4dxulrx0bxcyuj.gif",
+  "104035u1nhfn4p32p0b184.gif",
+  "104038ydudihxjxvxxiddk.jpg",
+  "104040ba6iy30ay1hy96i2.gif",
+  "104043k9g9y04csxk4se46.gif",
+  "104045igd3gcq43scc3qfg.gif",
+  "104049nqw8oqoyknyoywty.jpg",
+  "104101x0qjqvrj62z8up5b.gif",
+  "104105h2kb279pwo7x3bkf.gif",
+  "104108bviiivxio0boir3b.gif",
+  "104113q4c11mb99cwblnl4.gif",
+  "104115sg7xzps8xkq8kh67.gif",
+  "104125vphmmjpj3whmm0wu.gif",
+  "104129zrymyzjzmj4l7l4e.gif",
+  "104139sr4qmojfjpfcp0y9.gif",
+  "104147nefrajq0fjxjjx9r.gif"
+];
+
+const systemAndPresentationGameIds = [
+  "assassins-creed", "bayonetta", "bloodborne", "dark-souls", "darksiders", "dead-cells",
+  "devil-may-cry", "dnf", "double-dragon", "dragons-dogma", "dynasty-warriors", "for-honor",
+  "furi", "god-of-war", "hellblade", "honkai-impact-3rd", "knights-of-valour", "middle-earth-shadow",
+  "monster-hunter", "muramasa", "naruto-ultimate-ninja-storm", "nier", "ninja-gaiden", "nioh",
+  "odin-sphere", "osu", "overwatch", "shadow-of-the-colossus", "stanley-parable", "street-fighter",
+  "the-king-of-fighters", "titan-souls", "vindictus"
+];
+
 const classificationAndInabaGameIds = [
   "ikaruga", "touhou-project", "dodonpachi", "contra", "metal-slug", "metroid",
   "wolfenstein", "doom", "super-mario", "celeste", "the-legend-of-zelda",
@@ -57,7 +126,7 @@ describe("initial source, taxonomy, and philosophy migration", () => {
     expect(sourceIds.every((id) => ids.has(id))).toBe(true);
     expect(["domain-type-boundary", "domain-production-philosophy"].every((id) => ids.has(id))).toBe(true);
     expect(content.entities.filter(({ id }) => id.startsWith("domain-")).map(({ id }) => id).sort())
-      .toEqual(["domain-production-philosophy", "domain-type-boundary"]);
+      .toEqual(["domain-presentation", "domain-production-philosophy", "domain-system-depth", "domain-type-boundary"]);
   });
 
   it("records local provenance, external links, language availability, and scoped source notes", async () => {
@@ -162,5 +231,59 @@ describe("initial source, taxonomy, and philosophy migration", () => {
 
     expect(inaba?.sourceMeta?.primaryUrls).toEqual(expect.arrayContaining(directUrls));
     expect(inaba?.sourceMeta?.secondaryUrls).not.toEqual(expect.arrayContaining(directUrls));
+  });
+});
+
+describe("system and presentation migration", () => {
+  it("loads both complete branches and two sourced multi-sided conflicts", async () => {
+    const content = await loadContent("content");
+    const entitiesById = new Map(content.entities.map((entity) => [entity.id, entity]));
+
+    for (const id of [...systemAndPresentationConceptIds, ...systemAndPresentationConflictIds]) {
+      expect(entitiesById.get(id), `missing Task 5 entity ${id}`).toBeDefined();
+    }
+    expect(["domain-system-depth", "domain-presentation"].every((id) =>
+      entitiesById.get(id)?.kind === "concept" && entitiesById.get(id)?.depth === 1
+    )).toBe(true);
+    for (const id of systemAndPresentationConflictIds) {
+      const conflict = entitiesById.get(id);
+      expect(conflict?.kind).toBe("conflict");
+      expect(conflict?.conflictSides?.length).toBeGreaterThanOrEqual(2);
+      expect(conflict?.conflictSides?.every((side) => side.sourceIds.length > 0)).toBe(true);
+    }
+  });
+
+  it("binds every original media file exactly once with complete local provenance", async () => {
+    const content = await loadContent("content");
+    const taskIds = new Set([...systemAndPresentationConceptIds, ...systemAndPresentationConflictIds]);
+    const media = content.entities.filter(({ id }) => taskIds.has(id)).flatMap((entity) => entity.media);
+
+    expect(media).toHaveLength(31);
+    expect(media.map(({ sourcePath }) => sourcePath.split(/[\\/]/u).at(-1)).sort())
+      .toEqual([...actionDesignMediaFiles].sort());
+    expect(new Set(media.map(({ src }) => src)).size).toBe(31);
+    expect(media.every(({ sourceId }) => sourceId === "source-action-design-difficulty")).toBe(true);
+    expect(media.every(({ sourcePath, src, alt, caption, kind }) =>
+      sourcePath.startsWith("../../动作游戏设计之难_assets/")
+      && src.startsWith("media/")
+      && alt.trim().length > 0
+      && caption.trim().length > 0
+      && ((kind === "gif") === sourcePath.endsWith(".gif"))
+    )).toBe(true);
+  });
+
+  it("catalogues every game named by the system and presentation source examples", async () => {
+    const content = await loadContent("content");
+    const games = new Set(content.entities.filter(({ kind }) => kind === "game").map(({ id }) => id));
+    const taskIds = new Set([...systemAndPresentationConceptIds, ...systemAndPresentationConflictIds]);
+    const taskExampleGameIds = content.entities
+      .filter(({ id }) => taskIds.has(id))
+      .flatMap(({ examples }) => examples)
+      .map(({ gameId }) => gameId);
+    const unresolvedExampleGames = taskExampleGameIds.filter((gameId) => !games.has(gameId));
+
+    expect(systemAndPresentationGameIds.filter((id) => !games.has(id))).toEqual([]);
+    expect(systemAndPresentationGameIds.filter((id) => !taskExampleGameIds.includes(id))).toEqual([]);
+    expect(unresolvedExampleGames).toEqual([]);
   });
 });
