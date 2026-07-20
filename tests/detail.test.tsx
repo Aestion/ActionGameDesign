@@ -92,6 +92,13 @@ describe("atlas state", () => {
     expect(selected.selectedId).toBe("domain-combat");
     expect(atlasReducer(selected, { type: "set-detail-depth", depth: 3 }).detailDepth).toBe(3);
   });
+
+  it("preserves the current detail depth when navigating between nodes", () => {
+    const researching = atlasReducer(createInitialState(""), { type: "set-detail-depth", depth: 3 });
+    const next = atlasReducer(researching, { type: "select-node", id: "domain-combat" });
+    expect(next.selectedId).toBe("domain-combat");
+    expect(next.detailDepth).toBe(3);
+  });
 });
 
 describe("App", () => {
@@ -111,6 +118,19 @@ describe("App", () => {
 
     expect(window.location.hash).toBe("#node=domain-combat");
     expect(screen.getByRole("heading", { name: "战斗思路" })).toBeTruthy();
+  });
+
+  it("pushes each node selection onto the history stack so back retraces steps", async () => {
+    const pushSpy = vi.spyOn(window.history, "pushState");
+    const replaceSpy = vi.spyOn(window.history, "replaceState");
+    const user = userEvent.setup();
+    render(<App dataset={fixtureDataset} />);
+
+    await user.click(screen.getByRole("button", { name: "战斗思路" }));
+    await user.click(screen.getByRole("button", { name: /^压制/ }));
+
+    expect(pushSpy).toHaveBeenCalled();
+    expect(replaceSpy).not.toHaveBeenCalled();
   });
 });
 
@@ -183,5 +203,23 @@ describe("NodeDetail", () => {
     expect(screen.getByRole("dialog", { name: "压制循环演示" })).toBeTruthy();
     fireEvent.error(image);
     expect(screen.getByText("媒体加载失败：压制循环演示")).toBeTruthy();
+  });
+
+  it("closes the media dialog on Escape via the cancel event", async () => {
+    const user = userEvent.setup();
+    const mediaEntity = entity({
+      id: "media-node", title: "动作媒体", media: [{
+        sourcePath: "clip.gif", src: "media/clip.gif", alt: "压制循环演示", caption: "起身窗口中的重新击倒",
+        kind: "gif", sourceId: "source-combat"
+      }]
+    });
+    render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} depth={3} />);
+    await user.click(screen.getByRole("button", { name: "放大：压制循环演示" }));
+    const dialog = screen.getByRole("dialog", { name: "压制循环演示" }) as HTMLDialogElement;
+    expect(dialog).toBeTruthy();
+
+    fireEvent(dialog, new Event("cancel", { cancelable: true }));
+
+    expect(screen.queryByRole("dialog", { name: "压制循环演示" })).toBeNull();
   });
 });

@@ -101,7 +101,7 @@ function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
     dispatch({ type: "select-node", id });
     const nextHash = nodeHash(id);
     const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
-    window.history.replaceState(window.history.state, "", nextUrl);
+    window.history.pushState(window.history.state, "", nextUrl);
   };
   const openInGraph = (id: string) => {
     dispatch({ type: "set-view", view: "graph" });

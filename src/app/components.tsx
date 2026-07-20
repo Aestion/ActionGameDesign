@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type {
   InlineExample,
   KnowledgeDataset,
@@ -199,7 +199,21 @@ function ExampleCard({ example, dataset }: { example: InlineExample; dataset?: K
 function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDataset }) {
   const [failed, setFailed] = useState(false);
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
   const source = dataset?.entities.find(({ id }) => id === media.sourceId);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (open && typeof dialog.showModal === "function") {
+      if (!dialog.open) dialog.showModal();
+    } else if (!open && dialog.open && typeof dialog.close === "function") {
+      dialog.close();
+    }
+  }, [open]);
+
+  const close = () => setOpen(false);
+
   return (
     <>
       <figure className="media-card">
@@ -210,8 +224,16 @@ function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDat
         )}
         <figcaption><span>{media.caption || media.alt}</span><small>来源：{source?.title ?? media.sourceId}</small></figcaption>
       </figure>
-      {open && !failed && <dialog className="media-dialog" open aria-label={media.alt} onClick={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-        <div><button type="button" className="dialog-close" onClick={() => setOpen(false)} aria-label="关闭媒体">×</button><img src={media.src} alt={media.alt} /><p>{media.caption || media.alt}</p><small>来源：{source?.title ?? media.sourceId}</small></div>
+      {open && !failed && <dialog
+        ref={dialogRef}
+        className="media-dialog"
+        open={typeof HTMLDialogElement === "undefined" || !HTMLDialogElement.prototype?.showModal ? true : undefined}
+        aria-label={media.alt}
+        onCancel={close}
+        onClose={close}
+        onClick={(event) => { if (event.target === event.currentTarget) close(); }}
+      >
+        <div><button type="button" className="dialog-close" onClick={close} aria-label="关闭媒体">×</button><img src={media.src} alt={media.alt} /><p>{media.caption || media.alt}</p><small>来源：{source?.title ?? media.sourceId}</small></div>
       </dialog>}
     </>
   );

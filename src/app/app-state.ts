@@ -53,10 +53,10 @@ export function createInitialState(hash = ""): AtlasState {
 export function atlasReducer(state: AtlasState, action: AtlasAction): AtlasState {
   switch (action.type) {
     case "select-node":
-      return { ...state, selectedId: action.id, detailDepth: 1 };
+      return { ...state, selectedId: action.id };
     case "hydrate-hash":
       return action.id && action.id !== state.selectedId
-        ? { ...state, selectedId: action.id, detailDepth: 1 }
+        ? { ...state, selectedId: action.id }
         : state;
     case "set-view":
       return { ...state, view: action.view };
