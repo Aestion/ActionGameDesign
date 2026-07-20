@@ -174,7 +174,7 @@ describe("coverage ledger exact provenance", () => {
     const [content, ledger, rawSource] = await Promise.all([
       loadContent("content"),
       readLedgerInput().then(parseCoverageLedger),
-      readFile("动作游戏设计之难.md", "utf8")
+      readFile("原始资料/动作游戏设计之难.md", "utf8")
     ]);
     assertMediaProvenance(content, ledger, rawSource);
 
@@ -184,7 +184,7 @@ describe("coverage ledger exact provenance", () => {
     expect(() => assertMediaProvenance(content, wrongSource, rawSource)).toThrow();
 
     const wrongPath = clone(ledger);
-    wrongPath.items[mediaIndex].sourcePath = "../../动作游戏设计之难_assets/not-the-source-file.jpg";
+    wrongPath.items[mediaIndex].sourcePath = "../../原始资料/动作游戏设计之难_assets/not-the-source-file.jpg";
     expect(() => assertMediaProvenance(content, wrongPath, rawSource)).toThrow();
   });
 });
