@@ -34,6 +34,7 @@ const dataset: KnowledgeDataset = {
   ],
   edges: [
     { source: "domain-combat", target: "neutral", kind: "parent_of" },
+    { source: "neutral", target: "domain-combat", kind: "child_of" },
     { source: "domain-combat", target: "pressure", kind: "parent_of" },
     { source: "domain-production-philosophy", target: "deep-child", kind: "parent_of" },
     { source: "domain-combat", target: "combat-conflict", kind: "conflicts_with" }
@@ -53,6 +54,13 @@ describe("GraphExplorer", () => {
     expect(screen.getByRole("button", { name: /立回/ })).toBeTruthy();
     expect(screen.getByRole("button", { name: /主动与被动之争/ }).getAttribute("data-kind")).toBe("conflict");
     expect(screen.queryByText("制作人与导演")).toBeNull();
+  });
+
+  it("never duplicates a node when parent_of and child_of both exist for the same pair", () => {
+    render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={vi.fn()} />);
+    // neutral 与 domain-combat 同时有 parent_of 和 child_of，但立回节点只应出现一次
+    const neutralButtons = screen.getAllByTestId(/^graph-node-/).filter((node) => node.textContent?.includes("立回"));
+    expect(neutralButtons).toHaveLength(1);
   });
 
   it("supports arrow movement, Enter selection, Escape parent navigation, breadcrumbs and tooltips", () => {

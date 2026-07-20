@@ -46,10 +46,10 @@ function parentIdFor(id: string, dataset: KnowledgeDataset): string | undefined 
 
 function childIdsFor(id: string, dataset: KnowledgeDataset): string[] {
   if (id === GRAPH_ROOT_ID) return domainsOf(dataset).map(({ id: domainId }) => domainId);
-  return dataset.edges.filter((edge) =>
+  return [...new Set(dataset.edges.filter((edge) =>
     (edge.kind === "parent_of" && edge.source === id) ||
     (edge.kind === "child_of" && edge.target === id)
-  ).map((edge) => otherId(edge, id));
+  ).map((edge) => otherId(edge, id)))];
 }
 
 function visibleData(dataset: KnowledgeDataset, selectedId: string) {
@@ -94,9 +94,14 @@ function graphPosition(entity: KnowledgeEntity, entities: KnowledgeEntity[], sel
 }
 
 function countMetrics(entity: KnowledgeEntity, dataset: KnowledgeDataset) {
-  const relations = dataset.edges.filter(({ source, target }) => source === entity.id || target === entity.id);
-  const conflicts = relations.filter(({ kind }) => kind === "conflicts_with").length + (entity.kind === "conflict" ? 1 : 0);
-  return { relations: relations.length, cases: entity.examples.length, conflicts };
+  const neighborIds = new Set<string>();
+  for (const edge of dataset.edges) {
+    if (edge.source === entity.id) neighborIds.add(edge.target);
+    else if (edge.target === entity.id) neighborIds.add(edge.source);
+  }
+  const conflicts = dataset.edges.filter(({ source, target, kind }) =>
+    kind === "conflicts_with" && (source === entity.id || target === entity.id)).length + (entity.kind === "conflict" ? 1 : 0);
+  return { relations: neighborIds.size, cases: entity.examples.length, conflicts };
 }
 
 const graphStyles: StylesheetJson = [
