@@ -14,7 +14,7 @@ citations: []
 media: []
 examples: []
 sourceMeta:
-  rawPath: 动作游戏设计之难.md
+  rawPath: 原始资料/动作游戏设计之难.md
   primaryUrls:
     - https://bbs.gameres.com/thread_828113_1_1.html
   secondaryUrls:

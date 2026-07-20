@@ -14,7 +14,7 @@ citations: []
 media: []
 examples: []
 sourceMeta:
-  rawPath: 低韧性boss设计总结.md
+  rawPath: 原始资料/低韧性boss设计总结.md
   primaryUrls:
     - https://www.bilibili.com/opus/1049635100290973714
   secondaryUrls: []

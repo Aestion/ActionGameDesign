@@ -14,7 +14,7 @@ citations: []
 media: []
 examples: []
 sourceMeta:
-  rawPath: 稻叶敦志_游戏设计采访与观点汇总.md
+  rawPath: 原始资料/稻叶敦志_游戏设计采访与观点汇总.md
   primaryUrls:
     - https://www.platinumgames.com/official-blog/article/7050
     - https://www.platinumgames.com/official-blog/article/7064

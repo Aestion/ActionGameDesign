@@ -14,7 +14,7 @@ citations: []
 media: []
 examples: []
 sourceMeta:
-  rawPath: 关于ACT游戏的认知与分类（二）.md
+  rawPath: 原始资料/关于ACT游戏的认知与分类（二）.md
   primaryUrls:
     - https://www.bilibili.com/opus/708401396200767509
   secondaryUrls: []

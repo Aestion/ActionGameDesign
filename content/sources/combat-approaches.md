@@ -14,7 +14,7 @@ citations: []
 media: []
 examples: []
 sourceMeta:
-  rawPath: 论动作游戏间战斗思路差异.md
+  rawPath: 原始资料/论动作游戏间战斗思路差异.md
   primaryUrls:
     - https://www.bilibili.com/opus/853904004580638727
   secondaryUrls: []

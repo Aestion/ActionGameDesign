@@ -137,7 +137,7 @@ editorialSynthesis: 编者归纳：跨章节推导的适用条件放在这里，
 
 ```yaml
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/104029yxj1d1zq338l4mzd.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104029yxj1d1zq338l4mzd.gif
     src: media/104029yxj1d1zq338l4mzd.gif
     alt: 无名王者延迟攻击命中提前翻滚的玩家
     caption: 原文用该片段说明延迟攻击对慌乱翻滚的惩罚。
@@ -156,7 +156,7 @@ media:
 
 ```yaml
 sourceMeta:
-  rawPath: 本地原文.md
+  rawPath: 原始资料/本地原文.md
   primaryUrls: [https://官方或作者原始页面]
   secondaryUrls: [https://转载、翻译或整理页]
 ```
