@@ -17,37 +17,37 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 4.1.2 动画设计；怪物猎人世界龙吼；围绕读的设计 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/104005mmsd44qgp5qgqca4.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104005mmsd44qgp5qgqca4.gif
     src: media/104005mmsd44qgp5qgqca4.gif
     alt: 怪物猎人世界雄火龙收缩头颈翅膀后全身舒张吼叫
     caption: 原说明：《怪物猎人：世界》雄火龙龙吼；素材源自 KCGemini 的 MHW Roar Dodging Compilation。原文用它展示清楚的全身动势与特征帧。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104016u9d46hnu9uuhnc3u.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104016u9d46hnu9uuhnc3u.gif
     src: media/104016u9d46hnu9uuhnc3u.gif
     alt: 怪物猎人世界角龙主要收缩头颈后吼叫
     caption: 原说明：《怪物猎人：世界》角龙吼；运动集中在头颈且收缩位置停留较久，原文据此解释特征帧较模糊。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104020sa0qkz9uzapir4au.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104020sa0qkz9uzapir4au.gif
     src: media/104020sa0qkz9uzapir4au.gif
     alt: 怪物猎人世界炎王龙躯干和翅膀运动与吼叫错开
     caption: 原说明：《怪物猎人：世界》炎王龙吼；准备较短，头部缺乏预期，躯干翅膀节律与吼声错开。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104029yxj1d1zq338l4mzd.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104029yxj1d1zq338l4mzd.gif
     src: media/104029yxj1d1zq338l4mzd.gif
     alt: 黑暗之魂3无名王者收紧长枪后延迟刺击
     caption: 原说明：《黑暗之魂3》无名王者的拖延攻击；素材源自 RabbitRetrospectGames 的全 Boss 战录像，展示延迟约 11/30 帧针对 Panic Roll。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104031tr4dxulrx0bxcyuj.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104031tr4dxulrx0bxcyuj.gif
     src: media/104031tr4dxulrx0bxcyuj.gif
     alt: 黑暗之魂3猎龙铠甲先做假动势再追加远距离攻击
     caption: 原说明：《黑暗之魂3》猎龙铠甲的假动作；素材来源同无名王者图，先骗出闪避再追加攻击。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104035u1nhfn4p32p0b184.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104035u1nhfn4p32p0b184.gif
     src: media/104035u1nhfn4p32p0b184.gif
     alt: 血源诅咒老猎人研究所小怪以缺少预兆的连续攻击压迫玩家
     caption: 原说明：《血源诅咒：老猎人》小怪连击；素材源自 FightingCowboy 攻略，原文批评其低可读、高惩罚并针对 Panic Roll。

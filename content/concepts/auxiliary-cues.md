@@ -17,7 +17,7 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 4.1.3 辅助设计 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/104038ydudihxjxvxxiddk.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104038ydudihxjxvxxiddk.jpg
     src: media/104038ydudihxjxvxxiddk.jpg
     alt: 死亡细胞中敌人攻击前头顶出现黄色感叹号
     caption: 原说明：《死亡细胞》中怪物攻击前的感叹号提示；大视野令单位较小，UI 同时提高可读性并降低独立动画成本。

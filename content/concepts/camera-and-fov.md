@@ -17,13 +17,13 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 4.1.1 相机；Field of View；相机运动模式；后处理 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/103959jihtubqjbth59det.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103959jihtubqjbth59det.jpg
     src: media/103959jihtubqjbth59det.jpg
     alt: 大FOV与小FOV动作游戏画面对照图
     caption: 原文 FOV 对照图：大 FOV 一侧列《鬼泣》《猎天使魔女》《忍者龙剑传》，小 FOV 一侧列《荣耀战魂》《血源诅咒》《怪物猎人》，展示视野范围与对象大小的取舍。
     kind: image
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104002gihz9rd995r44djc.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104002gihz9rd995r44djc.gif
     src: media/104002gihz9rd995r44djc.gif
     alt: 四分之一速度下血源诅咒孤儿Boss快速动作带动态模糊
     caption: 原说明：1/4 速度下《血源诅咒》，动态模糊帮助捕捉 Boss 最快动作，锁定相机强化 1v1；素材源自 Kamies 的 Orphan of Kos 指南。

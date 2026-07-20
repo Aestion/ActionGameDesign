@@ -16,13 +16,13 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 3.2.1 被动反应频率的控制 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/103949wxc368k8ce38lmxi.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103949wxc368k8ce38lmxi.jpg
     src: media/103949wxc368k8ce38lmxi.jpg
     alt: 中土世界暗影魔多中主角被大量兽人包围的战斗画面
     caption: 《中土：暗影魔多》的大规模包围场面；原文用它说明“1+1”出手分配看似人多、实际一次仅少数敌人进攻。
     kind: image
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/103951bbizu5bbp5p6ppb5.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103951bbizu5bbp5p6ppb5.gif
     src: media/103951bbizu5bbp5p6ppb5.gif
     alt: 中土世界暗影魔多战斗中敌人轮流出手并伴随自动摇镜
     caption: 原说明：《中土：暗影魔多》中的怪物出手机制和微妙的自动摇镜；画面展示包围敌群轮流进入攻击。

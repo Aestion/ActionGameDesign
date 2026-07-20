@@ -16,13 +16,13 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 3.3.2 空间精度 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/103957fk51ektj9te2j42p.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103957fk51ektj9te2j42p.gif
     src: media/103957fk51ektj9te2j42p.gif
     alt: 猎天使魔女的编织攻击和冲刺攻击自动追上远处目标
     caption: 原说明：《猎天使魔女》的编织攻击与冲刺攻击可从很远处命中；素材源自 yoshesque 的 Bayonetta Pure Platinum Explained。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/103958ug878jjngcv5d44c.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103958ug878jjngcv5d44c.gif
     src: media/103958ug878jjngcv5d44c.gif
     alt: 怪物猎人X重弩手动瞄准岚龙头部射击
     caption: 原说明：《怪物猎人X》重弩锁头要求很高的操作精度；素材源自 TGBUS 电玩巴士的岚龙狩猎演示。

@@ -17,7 +17,7 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 3.4.4 外部规则与动作的互通 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/103958j1i1w8mm7m7nsi1o.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103958j1i1w8mm7m7nsi1o.jpg
     src: media/103958j1i1w8mm7m7nsi1o.jpg
     alt: 刺客信条起源的猎人战士先知三分支技能树界面
     caption: 原说明：《刺客信条：起源》的技能树中，多数节点让玩家已经能做的事情更容易完成，用外部成长改善动作效能。

@@ -17,61 +17,61 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 4.2 观赏性；4.2.1 动作；4.2.2 辅助演出；4.2.3 其他 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/104040ba6iy30ay1hy96i2.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104040ba6iy30ay1hy96i2.gif
     src: media/104040ba6iy30ay1hy96i2.gif
     alt: 半速血源诅咒埋葬之刃双手蓄力攻击逐步拉开姿态
     caption: 原说明：1/2 速度下《血源诅咒》埋葬之刃双手蓄力；素材源自 Seraphim17 的全武器展示，原文用它说明夸张姿势建立力量预期。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104043k9g9y04csxk4se46.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104043k9g9y04csxk4se46.gif
     src: media/104043k9g9y04csxk4se46.gif
     alt: 尼尔机械纪元2B大剑轻攻击长按后动作缓慢收势
     caption: 原说明：《尼尔：机械纪元》大剑轻攻击长按；素材源自 Ora Tashiro 的 2B 全武器动作展示，长 Ease Out 与弧线形成动静对比。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104045igd3gcq43scc3qfg.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104045igd3gcq43scc3qfg.gif
     src: media/104045igd3gcq43scc3qfg.gif
     alt: 守望先锋小美亮相动画沿曲线快速滑入画面
     caption: 原说明：《守望先锋》小美 Highlight 展示动画；运动镜头与角色轨迹用弧线增强动感。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104049nqw8oqoyknyoywty.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104049nqw8oqoyknyoywty.jpg
     src: media/104049nqw8oqoyknyoywty.jpg
     alt: 守望先锋角色以夸张弧线和姿态构成的四格动画画面
     caption: 原文紧接“橡皮管动画以物理上不可能的形态突出弧线”插入的《守望先锋》四格图，原文未另附文字说明。
     kind: image
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104101x0qjqvrj62z8up5b.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104101x0qjqvrj62z8up5b.gif
     src: media/104101x0qjqvrj62z8up5b.gif
     alt: 守望先锋双龙短片中源氏动作以慢镜和弧线特写呈现
     caption: 原说明：《守望先锋：双龙》；慢镜放大正常速度难以感知的动作细节，并以特写和弧线制造安静节奏。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104105h2kb279pwo7x3bkf.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104105h2kb279pwo7x3bkf.gif
     src: media/104105h2kb279pwo7x3bkf.gif
     alt: 四分之一速度下街头霸王5隆心眼命中时冻结并轻微拉近
     caption: 原说明：1/4 速度《街头霸王5》隆的心眼，冻结约 15/60 帧并轻微 Zoom In；素材源自官方角色指南。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104108bviiivxio0boir3b.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104108bviiivxio0boir3b.gif
     src: media/104108bviiivxio0boir3b.gif
     alt: 地狱之刃集中能力令环境特效减速而Boss仍持续动作
     caption: 原说明：《地狱之刃》的集中玩法；环境时间与特效明显减慢，素材源自 Boss Fight Database 的 Surt Boss 战。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104113q4c11mb99cwblnl4.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104113q4c11mb99cwblnl4.gif
     src: media/104113q4c11mb99cwblnl4.gif
     alt: 拳皇13中K撇号必杀以抽帧和快速节奏表现连续打击
     caption: 原说明：《拳皇 XIII》K' 的必杀技；素材源自 Don'tDropThatCombo 的 K' combo tutorial，用作快进、抽帧式时间伸缩例子。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104115sg7xzps8xkq8kh67.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104115sg7xzps8xkq8kh67.gif
     src: media/104115sg7xzps8xkq8kh67.gif
     alt: 忍者龙剑传3饭纲落以慢镜和运动相机完成坠地演出
     caption: 原说明：《忍者龙剑传3》饭纲落，以慢镜和相机运动组成演出；原文补充若落地震屏会更强。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104125vphmmjpj3whmm0wu.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104125vphmmjpj3whmm0wu.gif
     src: media/104125vphmmjpj3whmm0wu.gif
     alt: 究极忍者风暴4春野樱必杀结合相机运动慢镜震屏与爆炸
     caption: 原说明：《火影忍者疾风传：究极忍者风暴4》春野樱必杀，综合相机运动、慢镜、震屏和爆炸特效。
