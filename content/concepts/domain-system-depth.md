@@ -18,11 +18,12 @@ relations:
   - { kind: parent_of, target: feedback-loops }
   - { kind: parent_of, target: clearing-and-non-clearing }
   - { kind: parent_of, target: action-external-interoperation }
+  - { kind: parent_of, target: training-and-depth }
   - { kind: conflicts_with, target: difficulty-sources }
 citations:
   - { sourceId: source-action-design-difficulty, locator: 2.1 先天的高度复合型决策设计；3 动作游戏与复合型决策 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/103949bhlivcuahomevxlx.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103949bhlivcuahomevxlx.jpg
     src: media/103949bhlivcuahomevxlx.jpg
     alt: 猎天使魔女角色与敌人构成的红蓝对照宣传图
     caption: 原文开篇配图，原文未另附说明；画面以《猎天使魔女》的角色、武器与敌人作为动作游戏主题视觉。

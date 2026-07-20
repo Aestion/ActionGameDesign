@@ -15,8 +15,9 @@ relations:
   - { kind: parent_of, target: animation-readability }
   - { kind: parent_of, target: auxiliary-cues }
   - { kind: parent_of, target: spectacle-techniques }
-  - { kind: parent_of, target: readability-spectacle-balance }
+  - { kind: parent_of, target: readability-priority-principles }
   - { kind: parent_of, target: training-and-depth }
+  - { kind: parent_of, target: time-precision }
   - { kind: conflicts_with, target: readability-vs-spectacle }
 citations:
   - { sourceId: source-action-design-difficulty, locator: 2.2 受到人的直观感觉的约束；4 动作游戏与直观经验；4.1 至 4.3 }

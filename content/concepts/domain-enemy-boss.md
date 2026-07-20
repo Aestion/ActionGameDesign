@@ -14,6 +14,10 @@ relations:
   - { kind: parent_of, target: round-based-humanoid }
   - { kind: parent_of, target: pseudo-equal-humanoid }
   - { kind: parent_of, target: souls-low-poise-exception }
+  - { kind: parent_of, target: fixed-sequence }
+  - { kind: parent_of, target: anti-armor-neutral }
+  - { kind: parent_of, target: low-poise-neutral }
+  - { kind: parent_of, target: wakeup-and-resource-suppression }
   - { kind: related_to, target: enemy-attack-allocation }
   - { kind: related_to, target: domain-combat }
   - { kind: conflicts_with, target: high-ai-vs-learnability }

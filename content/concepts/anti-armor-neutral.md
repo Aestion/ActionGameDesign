@@ -11,6 +11,7 @@ reviewStatus: reviewed
 updated: 2026-07-17
 relations:
   - { kind: child_of, target: neutral-and-openings }
+  - { kind: child_of, target: domain-enemy-boss }
   - { kind: related_to, target: boss-poise-taxonomy }
 citations:
   - { sourceId: source-combat-approaches, locator: 一、立回／① 对霸体敌人蹭刀 }

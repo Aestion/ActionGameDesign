@@ -11,6 +11,7 @@ reviewStatus: reviewed
 updated: 2026-07-17
 relations:
   - { kind: child_of, target: neutral-and-openings }
+  - { kind: child_of, target: domain-enemy-boss }
   - { kind: related_to, target: round-based-humanoid }
   - { kind: related_to, target: pseudo-equal-humanoid }
   - { kind: exemplified_by, target: nioh2-saito-toshimitsu }

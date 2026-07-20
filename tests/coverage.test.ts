@@ -112,7 +112,7 @@ const systemAndPresentationConceptIds = [
   "animation-readability",
   "auxiliary-cues",
   "spectacle-techniques",
-  "readability-spectacle-balance",
+  "readability-priority-principles",
   "training-and-depth"
 ];
 
@@ -461,7 +461,7 @@ describe("system and presentation migration", () => {
     expect(new Set(media.map(({ src }) => src)).size).toBe(31);
     expect(media.every(({ sourceId }) => sourceId === "source-action-design-difficulty")).toBe(true);
     expect(media.every(({ sourcePath, src, alt, caption, kind }) =>
-      sourcePath.startsWith("../../动作游戏设计之难_assets/")
+      sourcePath.startsWith("../../原始资料/动作游戏设计之难_assets/")
       && src.startsWith("media/")
       && alt.trim().length > 0
       && caption.trim().length > 0

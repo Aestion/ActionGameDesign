@@ -11,6 +11,7 @@ reviewStatus: reviewed
 updated: 2026-07-17
 relations:
   - { kind: child_of, target: suppression }
+  - { kind: child_of, target: domain-enemy-boss }
   - { kind: related_to, target: low-poise-neutral }
   - { kind: related_to, target: pseudo-equal-humanoid }
 citations:

@@ -11,24 +11,25 @@ reviewStatus: reviewed
 updated: 2026-07-17
 relations:
   - { kind: child_of, target: control-precision }
+  - { kind: child_of, target: domain-presentation }
   - { kind: related_to, target: animation-readability }
   - { kind: related_to, target: spectacle-techniques }
 citations:
   - { sourceId: source-action-design-difficulty, locator: 3.3.1 时间精度；标准反应时间；时间精度的应用 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/103953agjvlaeyt5tze51v.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103953agjvlaeyt5tze51v.gif
     src: media/103953agjvlaeyt5tze51v.gif
     alt: 怪物猎人X盾斧光剑命中怪物时出现长时间帧冻结
     caption: 原说明：《怪物猎人X》盾斧光剑命中低肉质部位时约 8/30 秒帧冻结；素材源自 Arekkz Gaming 的 Monster Hunter Generations Blade Tutorial。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/103953ewp5o4sv6w6ccjwz.jpg
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103953ewp5o4sv6w6ccjwz.jpg
     src: media/103953ewp5o4sv6w6ccjwz.jpg
     alt: GDC 幻灯片展示尼尔机械纪元输入后十帧约零点一六秒出手
     caption: 原说明：田浦贵久在 GDC 分享《尼尔：机械纪元》动作输入响应，图示小剑轻攻击约 10/60 帧；素材源自 GDC 演讲录像。
     kind: image
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/103955eetgdwpwby6ywyw3.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/103955eetgdwpwby6ywyw3.gif
     src: media/103955eetgdwpwby6ywyw3.gif
     alt: 鬼泣4尼禄在攻击中精确充能使红皇后剑身变红
     caption: 原说明：《鬼泣4》尼禄在攻击动作的精确时机充能可获得三倍效果；素材源自 ChaserTech 的 Nero Advanced Combat Tutorial。

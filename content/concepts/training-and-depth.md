@@ -11,6 +11,7 @@ reviewStatus: reviewed
 updated: 2026-07-17
 relations:
   - { kind: child_of, target: domain-presentation }
+  - { kind: child_of, target: domain-system-depth }
   - { kind: related_to, target: intuitive-experience }
   - { kind: related_to, target: depth-width-feedback-time }
   - { kind: related_to, target: external-rules-and-difficulty }

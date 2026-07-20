@@ -1,8 +1,8 @@
 ---
-id: readability-spectacle-balance
+id: readability-priority-principles
 kind: concept
-title: 可读性与观赏性的优先级
-aliases: [好看与好读, 视觉趣味与功能传达]
+title: 可读性优先的原则与条件
+aliases: [好看与好读, 视觉趣味与功能传达, 可读性优先原则]
 summary: 来源作者通常把可读性置于观赏性之前，但承认可通过训练掌握部分低读设计，并允许条件性取舍。
 domainIds: [domain-presentation]
 depth: 2
@@ -17,19 +17,19 @@ relations:
 citations:
   - { sourceId: source-action-design-difficulty, locator: 4.2.4 观赏性与可读性的平衡；小结 }
 media:
-  - sourcePath: ../../动作游戏设计之难_assets/104129zrymyzjzmj4l7l4e.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104129zrymyzjzmj4l7l4e.gif
     src: media/104129zrymyzjzmj4l7l4e.gif
     alt: 尼尔机械纪元长枪回避攻击中角色高速旋转并短暂难以辨认
     caption: 原说明：《尼尔》长枪回避攻击“好看是很好看的，只是闪避的时候我人哪去了”，展示轮廓消失造成的读性代价。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104139sr4qmojfjpfcp0y9.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104139sr4qmojfjpfcp0y9.gif
     src: media/104139sr4qmojfjpfcp0y9.gif
     alt: 战神升天巨蛇宏大场面中玩家角色与战斗信息被景物遮蔽
     caption: 原说明：《战神：升天》巨蛇盘山场景；素材源自 MKIceAndFire 攻略，若不看连击数几乎难以判断战斗正在发生。
     kind: gif
     sourceId: source-action-design-difficulty
-  - sourcePath: ../../动作游戏设计之难_assets/104147nefrajq0fjxjjx9r.gif
+  - sourcePath: ../../原始资料/动作游戏设计之难_assets/104147nefrajq0fjxjjx9r.gif
     src: media/104147nefrajq0fjxjjx9r.gif
     alt: 暗黑血统2怪物从准备姿态突然横向漂移攻击玩家
     caption: 原说明：《暗黑血统2》怪物漂移攻击；素材源自 TurboButtons，准备动作没有显示即将发生的位移。

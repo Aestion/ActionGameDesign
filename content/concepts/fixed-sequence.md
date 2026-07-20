@@ -11,6 +11,7 @@ reviewStatus: reviewed
 updated: 2026-07-17
 relations:
   - { kind: child_of, target: domain-combat }
+  - { kind: child_of, target: domain-enemy-boss }
   - { kind: related_to, target: boss-poise-taxonomy }
   - { kind: related_to, target: spectacle-techniques }
 citations:

@@ -10,7 +10,7 @@ tags: [冲突卡, 目标冲突, 可读性, 观赏性]
 reviewStatus: reviewed
 updated: 2026-07-17
 relations:
-  - { kind: conflicts_with, target: readability-spectacle-balance }
+  - { kind: conflicts_with, target: readability-priority-principles }
   - { kind: conflicts_with, target: spectacle-techniques }
   - { kind: related_to, target: training-and-depth }
 citations:
