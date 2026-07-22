@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { useLayoutEffect, useState } from "react";
 import { buildHierarchyView, GRAPH_ROOT_ID, GraphExplorer } from "../src/app/GraphExplorer";
 import { MobileTree } from "../src/app/MobileTree";
 import type { KnowledgeDataset, KnowledgeEntity } from "../src/model";
@@ -83,6 +84,18 @@ describe("buildHierarchyView", () => {
     expect(combatView.relations.find(({ id }) => id === "conflict")?.entities.map(({ id }) => id))
       .toEqual(["combat-conflict"]);
   });
+
+  it("does not infer structural parents from domain metadata alone", () => {
+    const orphanDataset: KnowledgeDataset = {
+      ...dataset,
+      entities: [...dataset.entities, entity("domainless-orphan", "Orphan", ["domain-combat"])]
+    };
+
+    const view = buildHierarchyView(orphanDataset, "domainless-orphan");
+
+    expect(view.parentIds).toEqual([]);
+    expect(view.edges).toEqual([]);
+  });
 });
 
 describe("GraphExplorer", () => {
@@ -131,6 +144,69 @@ describe("GraphExplorer", () => {
 
     expect(onSelect).toHaveBeenCalledWith("combat-conflict");
     expect(screen.queryByRole("group", { name: "冲突" })).toBeNull();
+  });
+
+  it("keeps a newly selected node's relation disclosure collapsed during render", () => {
+    const observedOpenState = vi.fn();
+
+    function ControlledGraphHarness() {
+      const [selectedId, setSelectedId] = useState("domain-combat");
+      useLayoutEffect(() => {
+        if (selectedId === "combat-conflict") {
+          observedOpenState(Boolean(screen.queryByRole("group")));
+        }
+      }, [selectedId]);
+      return <>
+        <button type="button" onClick={() => setSelectedId("combat-conflict")}>change selection</button>
+        <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={[]} onSelect={setSelectedId} />
+      </>;
+    }
+
+    render(<ControlledGraphHarness />);
+    fireEvent.click(document.querySelector('button[aria-expanded="false"]') as HTMLButtonElement);
+    fireEvent.click(screen.getByRole("button", { name: "change selection" }));
+
+    expect(observedOpenState).toHaveBeenCalledWith(false);
+  });
+
+  it("does not reopen a relation disclosure after returning to a previous node", () => {
+    const observedOpenState = vi.fn();
+
+    function ControlledGraphHarness() {
+      const [selectedId, setSelectedId] = useState("domain-combat");
+      useLayoutEffect(() => {
+        if (selectedId !== "domain-combat" || observedOpenState.mock.calls.length > 0) {
+          observedOpenState(Boolean(screen.queryByRole("group")));
+        }
+      }, [selectedId]);
+      return <>
+        <button type="button" onClick={() => setSelectedId("combat-conflict")}>change selection</button>
+        <button type="button" onClick={() => setSelectedId("domain-combat")}>change back</button>
+        <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={[]} onSelect={setSelectedId} />
+      </>;
+    }
+
+    render(<ControlledGraphHarness />);
+    fireEvent.click(document.querySelector('button[aria-expanded="false"]') as HTMLButtonElement);
+    fireEvent.click(screen.getByRole("button", { name: "change selection" }));
+    fireEvent.click(screen.getByRole("button", { name: "change back" }));
+
+    expect(observedOpenState).toHaveBeenNthCalledWith(1, false);
+    expect(observedOpenState).toHaveBeenNthCalledWith(2, false);
+  });
+
+  it("moves focus to the new graph node after selecting a relation", () => {
+    function ControlledGraphHarness() {
+      const [selectedId, setSelectedId] = useState("domain-combat");
+      return <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={[]} onSelect={setSelectedId} />;
+    }
+
+    render(<ControlledGraphHarness />);
+    fireEvent.click(document.querySelector('button[aria-expanded="false"]') as HTMLButtonElement);
+    const relationButton = screen.getByRole("group").querySelector("button") as HTMLButtonElement;
+    fireEvent.click(relationButton);
+
+    expect(document.activeElement).toBe(screen.getByTestId("graph-node-combat-conflict").querySelector("button"));
   });
 
   it("never duplicates a node when parent_of and child_of both exist for the same pair", () => {

@@ -1,5 +1,5 @@
 import cytoscape, { type Core, type ElementDefinition, type StylesheetJson } from "cytoscape";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { KnowledgeDataset, KnowledgeEdge, KnowledgeEntity, RelationKind } from "../model";
 
 export const GRAPH_ROOT_ID = "root-action-design";
@@ -121,8 +121,7 @@ export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string
   }
 
   const structuralParentIds = pairs.filter(({ child }) => child === selected.id).map(({ parent }) => parent);
-  const fallbackParentIds = selected.domainIds.filter((id) => entityMap.has(id));
-  const parentIds = [...new Set([...structuralParentIds, ...fallbackParentIds])]
+  const parentIds = [...new Set(structuralParentIds)]
     .filter((id) => entityMap.has(id))
     .slice(0, 2);
   const childIds = sortEntities(pairs
@@ -182,16 +181,45 @@ export interface GraphExplorerProps {
   onSelect: (id: string) => void;
 }
 
+interface GraphRelationsProps {
+  relations: HierarchyRelationGroup[];
+  onSelect: (id: string) => void;
+}
+
+function GraphRelations({ relations, onSelect }: GraphRelationsProps) {
+  const [relationsOpen, setRelationsOpen] = useState(false);
+  const relationCount = relations.reduce((total, group) => total + group.entities.length, 0);
+  const selectRelation = (id: string) => {
+    setRelationsOpen(false);
+    onSelect(id);
+  };
+
+  if (relationCount === 0) return null;
+
+  return <section className="graph-relations" aria-label="关联节点">
+    <div className="graph-relations-heading">
+      <div><span>关联节点</span><strong>{relationCount} 项</strong></div>
+      <button type="button" aria-expanded={relationsOpen} onClick={() => setRelationsOpen((open) => !open)}>
+        {relationsOpen ? "收起关联节点" : "展开关联节点"}
+      </button>
+    </div>
+    {relationsOpen && <div className="graph-relation-groups">
+      {relations.map((group) => <section key={group.id} className="graph-relation-group" role="group" aria-label={group.label}>
+        <h3>{group.label}</h3>
+        <div>{group.entities.map((entity) => <button type="button" key={entity.id} onClick={() => selectRelation(entity.id)}>{entity.title}</button>)}</div>
+      </section>)}
+    </div>}
+  </section>;
+}
+
 export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }: GraphExplorerProps) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<Core | null>(null);
   const selectRef = useRef(onSelect);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const [relationsOpen, setRelationsOpen] = useState(false);
+  const pendingFocusIdRef = useRef<string | null>(null);
   const view = useMemo(() => buildHierarchyView(dataset, selectedId), [dataset, selectedId]);
   selectRef.current = onSelect;
-
-  useEffect(() => setRelationsOpen(false), [selectedId]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -234,6 +262,14 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
     cy.layout({ name: "preset", fit: true, padding: 44, animate: false }).run();
   }, [view, selectedId, highlightedIds]);
 
+  useLayoutEffect(() => {
+    if (pendingFocusIdRef.current !== selectedId) return;
+    const target = buttonRefs.current[view.entities.findIndex(({ id }) => id === selectedId)];
+    if (!target) return;
+    target.focus();
+    pendingFocusIdRef.current = null;
+  }, [selectedId, view]);
+
   const entityById = (id: string) => id === GRAPH_ROOT_ID ? rootEntity : dataset.entities.find((entity) => entity.id === id);
   const highlightedSet = new Set(highlightedIds);
   const selectedParentId = view.parentIds[0];
@@ -258,13 +294,12 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
     }
   };
 
-  const relationCount = view.relations.reduce((total, group) => total + group.entities.length, 0);
   const levelFor = (id: string) => id === selectedId
     ? "current"
     : view.parentIds.includes(id) ? "parent" : "child";
   const levelLabel = { parent: "父级", current: "当前节点", child: "直接子节点" } as const;
   const selectRelation = (id: string) => {
-    setRelationsOpen(false);
+    pendingFocusIdRef.current = id;
     onSelect(id);
   };
 
@@ -283,20 +318,7 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
           return <span role="listitem" key={entity.id} data-testid={`graph-node-${entity.id}`} data-level={level} data-highlighted={highlightedSet.has(entity.id) ? "true" : "false"}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} data-highlighted={highlightedSet.has(entity.id) ? "true" : undefined} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={`${entity.title}，${levelLabel[level]}`}><span aria-hidden="true">{entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>;
         })}
       </div>
-      {relationCount > 0 && <section className="graph-relations" aria-label="关联节点">
-        <div className="graph-relations-heading">
-          <div><span>关联节点</span><strong>{relationCount} 项</strong></div>
-          <button type="button" aria-expanded={relationsOpen} onClick={() => setRelationsOpen((open) => !open)}>
-            {relationsOpen ? "收起关联节点" : "展开关联节点"}
-          </button>
-        </div>
-        {relationsOpen && <div className="graph-relation-groups">
-          {view.relations.map((group) => <section key={group.id} className="graph-relation-group" role="group" aria-label={group.label}>
-            <h3>{group.label}</h3>
-            <div>{group.entities.map((entity) => <button type="button" key={entity.id} onClick={() => selectRelation(entity.id)}>{entity.title}</button>)}</div>
-          </section>)}
-        </div>}
-      </section>}
+      <GraphRelations key={selectedId} relations={view.relations} onSelect={selectRelation} />
     </section>
   );
 }
