@@ -101,6 +101,16 @@ describe("GraphExplorer", () => {
     expect(screen.queryByText("制作人与导演")).toBeNull();
   });
 
+  it("exposes hierarchy levels without the old graph legend or tooltip", () => {
+    render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={vi.fn()} />);
+
+    expect(screen.queryByLabelText("关系图例")).toBeNull();
+    expect(screen.queryByRole("tooltip")).toBeNull();
+    expect(screen.getByTestId("graph-node-root-action-design").getAttribute("data-level")).toBe("parent");
+    expect(screen.getByTestId("graph-node-domain-combat").getAttribute("data-level")).toBe("current");
+    expect(screen.getByTestId("graph-node-neutral").getAttribute("data-level")).toBe("child");
+  });
+
   it("reveals grouped cross-relations on demand", () => {
     render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={vi.fn()} />);
 

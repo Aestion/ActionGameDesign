@@ -126,7 +126,7 @@ function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
           <main className="atlas-workspace" id="atlas-workspace">
             <div className="workspace-heading">
               <div><p className="eyebrow">概念星图</p><h1>动作游戏设计</h1></div>
-              <p className="workspace-instruction">拖动、缩放图谱；选择节点展开直接关系。键盘可用方向键、Enter 与 Escape 导航。</p>
+              <p className="workspace-instruction">沿父级、当前节点和直接子节点逐层阅读；其他关联可在图下按需展开。</p>
             </div>
             <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={highlightedIds} onSelect={selectEntity} />
             <MobileTree dataset={dataset} selectedId={selectedId} onSelect={selectEntity} />

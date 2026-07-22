@@ -79,6 +79,26 @@ function positionRow(positions: Map<string, { x: number; y: number }>, ids: stri
   }));
 }
 
+function positionGrid(
+  positions: Map<string, { x: number; y: number }>,
+  ids: string[],
+  startY: number,
+  columns: number,
+  horizontalSpacing: number,
+  verticalSpacing: number
+) {
+  ids.forEach((id, index) => {
+    const row = Math.floor(index / columns);
+    const rowStart = row * columns;
+    const rowSize = Math.min(columns, ids.length - rowStart);
+    const column = index % columns;
+    positions.set(id, {
+      x: (column - (rowSize - 1) / 2) * horizontalSpacing,
+      y: startY + row * verticalSpacing
+    });
+  });
+}
+
 export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string): HierarchyView {
   const domains = domainsOf(dataset);
   const entityMap = new Map([rootEntity, ...dataset.entities].map((entity) => [entity.id, entity]));
@@ -89,7 +109,7 @@ export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string
   if (selected.id === GRAPH_ROOT_ID) {
     const entities = [rootEntity, ...domains];
     positions.set(GRAPH_ROOT_ID, { x: 0, y: 90 });
-    positionRow(positions, domains.map(({ id }) => id), 360, 220);
+    positionGrid(positions, domains.map(({ id }) => id), 330, 3, 230, 120);
     return {
       entities,
       edges: domains.map(({ id }) => ({ source: GRAPH_ROOT_ID, target: id, kind: "parent_of" })),
@@ -117,9 +137,9 @@ export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string
     ...childIds.map((child) => ({ source: selected.id, target: child, kind: "parent_of" as const }))
   ];
 
-  positionRow(positions, parentIds, 90, 260);
-  positions.set(selected.id, { x: 0, y: 300 });
-  positionRow(positions, childIds, 520, 190);
+  positionRow(positions, parentIds, 80, 260);
+  positions.set(selected.id, { x: 0, y: 270 });
+  positionGrid(positions, childIds, 480, 4, 190, 110);
 
   const relations = relationGroups.map((group) => {
     const seen = new Set<string>();
@@ -146,19 +166,13 @@ export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string
 }
 
 const graphStyles: StylesheetJson = [
-  { selector: "node", style: { "background-color": "#142633", "border-color": "#61e4c9", "border-width": 2, color: "#e7f0f2", label: "data(label)", "font-size": "12px", "text-wrap": "wrap", "text-max-width": "110px", "text-valign": "center", "text-halign": "center", width: 112, height: 54, shape: "ellipse" } },
-  { selector: "node.domain", style: { shape: "round-rectangle", width: 142, height: 64 } },
-  { selector: "node.root", style: { shape: "diamond", width: 126, height: 126, "background-color": "#0f1b25", "font-weight": "bold" } },
-  { selector: "node[kind = 'case']", style: { shape: "round-rectangle", "border-style": "double" } },
-  { selector: "node[kind = 'conflict']", style: { shape: "diamond", "border-color": "#ff7a52", "border-width": 4 } },
-  { selector: "node[kind = 'source']", style: { shape: "rectangle", "border-style": "dashed" } },
-  { selector: "node[kind = 'game']", style: { shape: "hexagon" } },
-  { selector: "node.selected", style: { "background-color": "#244653", "border-width": 4, "overlay-opacity": 0 } },
+  { selector: "node", style: { "background-color": "#142633", "border-color": "#4c7d82", "border-width": 2, color: "#e7f0f2", label: "data(label)", "font-size": "14px", "font-weight": 600, "text-wrap": "wrap", "text-max-width": "142px", "text-valign": "center", "text-halign": "center", width: 168, height: 64, shape: "round-rectangle" } },
+  { selector: "node.parent", style: { "background-color": "#101f2a", "border-color": "#55707a", color: "#aabdc3" } },
+  { selector: "node.child", style: { "background-color": "#132a32", "border-color": "#4c948c" } },
+  { selector: "node.root", style: { width: 186, height: 70, "background-color": "#0f1b25", "font-weight": 700 } },
+  { selector: "node.selected", style: { width: 196, height: 74, "background-color": "#244653", "border-color": "#61e4c9", "border-width": 4, "font-weight": 700, "overlay-opacity": 0 } },
   { selector: "node.highlighted", style: { "background-color": "#365e65", "border-color": "#ffffff" } },
-  { selector: "edge", style: { width: 1.5, "line-color": "#4b6974", "target-arrow-color": "#4b6974", "target-arrow-shape": "triangle", "curve-style": "bezier" } },
-  { selector: "edge[kind = 'conflicts_with']", style: { width: 3, "line-color": "#ff7a52", "target-arrow-color": "#ff7a52", "line-style": "dashed" } },
-  { selector: "edge[kind = 'contrasts_with']", style: { width: 2, "line-color": "#ffb36b", "target-arrow-color": "#ffb36b", "line-style": "dotted" } },
-  { selector: "edge[kind = 'related_to']", style: { "line-style": "dashed", "target-arrow-shape": "none" } }
+  { selector: "edge", style: { width: 1.5, "line-color": "#3f5e68", "target-arrow-shape": "none", "curve-style": "straight" } }
 ];
 
 export interface GraphExplorerProps {
@@ -182,7 +196,14 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
   useEffect(() => {
     if (!canvasRef.current) return;
     const headless = typeof navigator !== "undefined" && /jsdom/i.test(navigator.userAgent);
-    const cy = cytoscape({ container: headless ? undefined : canvasRef.current, headless, style: graphStyles, elements: [] });
+    const cy = cytoscape({
+      container: headless ? undefined : canvasRef.current,
+      headless,
+      style: graphStyles,
+      elements: [],
+      minZoom: 0.65,
+      maxZoom: 1.5
+    });
     cy.on("tap", "node", (event) => selectRef.current(event.target.id()));
     cyRef.current = cy;
     return () => { cy.destroy(); cyRef.current = null; };
@@ -238,6 +259,10 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
   };
 
   const relationCount = view.relations.reduce((total, group) => total + group.entities.length, 0);
+  const levelFor = (id: string) => id === selectedId
+    ? "current"
+    : view.parentIds.includes(id) ? "parent" : "child";
+  const levelLabel = { parent: "父级", current: "当前节点", child: "直接子节点" } as const;
   const selectRelation = (id: string) => {
     setRelationsOpen(false);
     onSelect(id);
@@ -253,7 +278,10 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
         <div ref={canvasRef} className="graph-canvas" aria-hidden="true" />
       </div>
       <div className="graph-node-access" role="list" aria-label="可键盘浏览的图谱节点">
-        {view.entities.map((entity, index) => <span role="listitem" key={entity.id} data-testid={`graph-node-${entity.id}`} data-highlighted={highlightedSet.has(entity.id) ? "true" : "false"}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} data-highlighted={highlightedSet.has(entity.id) ? "true" : undefined} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={entity.title}><span aria-hidden="true">{entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>)}
+        {view.entities.map((entity, index) => {
+          const level = levelFor(entity.id);
+          return <span role="listitem" key={entity.id} data-testid={`graph-node-${entity.id}`} data-level={level} data-highlighted={highlightedSet.has(entity.id) ? "true" : "false"}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} data-highlighted={highlightedSet.has(entity.id) ? "true" : undefined} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={`${entity.title}，${levelLabel[level]}`}><span aria-hidden="true">{entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>;
+        })}
       </div>
       {relationCount > 0 && <section className="graph-relations" aria-label="关联节点">
         <div className="graph-relations-heading">
