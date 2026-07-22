@@ -52,6 +52,123 @@ function childIdsFor(id: string, dataset: KnowledgeDataset): string[] {
   ).map((edge) => otherId(edge, id)))];
 }
 
+export type RelationGroupId = "conflict" | "contrast" | "related" | "application";
+
+export interface HierarchyRelationGroup {
+  id: RelationGroupId;
+  label: string;
+  entities: KnowledgeEntity[];
+}
+
+export interface HierarchyView {
+  entities: KnowledgeEntity[];
+  edges: KnowledgeEdge[];
+  parentIds: string[];
+  childIds: string[];
+  positions: Map<string, { x: number; y: number }>;
+  relations: HierarchyRelationGroup[];
+}
+
+const relationGroups: Array<{ id: RelationGroupId; label: string; kinds: RelationKind[] }> = [
+  { id: "conflict", label: "冲突", kinds: ["conflicts_with"] },
+  { id: "contrast", label: "对照", kinds: ["contrasts_with"] },
+  { id: "related", label: "相关", kinds: ["related_to"] },
+  { id: "application", label: "案例与应用", kinds: ["exemplified_by", "applies_to", "supports"] }
+];
+
+function structuralPairs(dataset: KnowledgeDataset) {
+  const pairs: Array<{ parent: string; child: string }> = domainsOf(dataset)
+    .map(({ id }) => ({ parent: GRAPH_ROOT_ID, child: id }));
+  for (const edge of dataset.edges) {
+    if (edge.kind === "parent_of") pairs.push({ parent: edge.source, child: edge.target });
+    if (edge.kind === "child_of") pairs.push({ parent: edge.target, child: edge.source });
+  }
+  const seen = new Set<string>();
+  return pairs.filter(({ parent, child }) => {
+    const key = `${parent}\u0000${child}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sortEntities(entities: KnowledgeEntity[]) {
+  return [...entities].sort((a, b) => a.title.localeCompare(b.title, "zh-CN") || a.id.localeCompare(b.id));
+}
+
+function positionRow(positions: Map<string, { x: number; y: number }>, ids: string[], y: number, spacing: number) {
+  ids.forEach((id, index) => positions.set(id, {
+    x: (index - (ids.length - 1) / 2) * spacing,
+    y
+  }));
+}
+
+export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string): HierarchyView {
+  const domains = domainsOf(dataset);
+  const entityMap = new Map([rootEntity, ...dataset.entities].map((entity) => [entity.id, entity]));
+  const selected = entityMap.get(selectedId) ?? rootEntity;
+  const pairs = structuralPairs(dataset);
+  const positions = new Map<string, { x: number; y: number }>();
+
+  if (selected.id === GRAPH_ROOT_ID) {
+    const entities = [rootEntity, ...domains];
+    positions.set(GRAPH_ROOT_ID, { x: 0, y: 90 });
+    positionRow(positions, domains.map(({ id }) => id), 360, 220);
+    return {
+      entities,
+      edges: domains.map(({ id }) => ({ source: GRAPH_ROOT_ID, target: id, kind: "parent_of" })),
+      parentIds: [],
+      childIds: domains.map(({ id }) => id),
+      positions,
+      relations: []
+    };
+  }
+
+  const structuralParentIds = pairs.filter(({ child }) => child === selected.id).map(({ parent }) => parent);
+  const fallbackParentIds = selected.domainIds.filter((id) => entityMap.has(id));
+  const parentIds = [...new Set([...structuralParentIds, ...fallbackParentIds])]
+    .filter((id) => entityMap.has(id))
+    .slice(0, 2);
+  const childIds = sortEntities(pairs
+    .filter(({ parent }) => parent === selected.id)
+    .map(({ child }) => entityMap.get(child))
+    .filter((entity): entity is KnowledgeEntity => Boolean(entity)))
+    .map(({ id }) => id);
+  const parentEntities = parentIds.map((id) => entityMap.get(id)).filter((entity): entity is KnowledgeEntity => Boolean(entity));
+  const childEntities = childIds.map((id) => entityMap.get(id)).filter((entity): entity is KnowledgeEntity => Boolean(entity));
+  const edges: KnowledgeEdge[] = [
+    ...parentIds.map((parent) => ({ source: parent, target: selected.id, kind: "parent_of" as const })),
+    ...childIds.map((child) => ({ source: selected.id, target: child, kind: "parent_of" as const }))
+  ];
+
+  positionRow(positions, parentIds, 90, 260);
+  positions.set(selected.id, { x: 0, y: 300 });
+  positionRow(positions, childIds, 520, 190);
+
+  const relations = relationGroups.map((group) => {
+    const seen = new Set<string>();
+    const entities = dataset.edges
+      .filter(({ source, target, kind }) =>
+        group.kinds.includes(kind) && (source === selected.id || target === selected.id))
+      .map((edge) => entityMap.get(otherId(edge, selected.id)))
+      .filter((entity): entity is KnowledgeEntity => {
+        if (!entity || seen.has(entity.id)) return false;
+        seen.add(entity.id);
+        return true;
+      });
+    return { id: group.id, label: group.label, entities: sortEntities(entities) };
+  }).filter(({ entities }) => entities.length > 0);
+
+  return {
+    entities: [...parentEntities, selected, ...childEntities],
+    edges,
+    parentIds,
+    childIds,
+    positions,
+    relations
+  };
+}
+
 function visibleData(dataset: KnowledgeDataset, selectedId: string) {
   const domains = domainsOf(dataset);
   const ids = new Set([GRAPH_ROOT_ID, ...domains.map(({ id }) => id)]);

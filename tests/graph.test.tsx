@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { GraphExplorer } from "../src/app/GraphExplorer";
+import { buildHierarchyView, GRAPH_ROOT_ID, GraphExplorer } from "../src/app/GraphExplorer";
 import { MobileTree } from "../src/app/MobileTree";
 import type { KnowledgeDataset, KnowledgeEntity } from "../src/model";
 
@@ -35,6 +35,8 @@ const dataset: KnowledgeDataset = {
   edges: [
     { source: "domain-combat", target: "neutral", kind: "parent_of" },
     { source: "neutral", target: "domain-combat", kind: "child_of" },
+    { source: "domain-enemy-boss", target: "neutral", kind: "parent_of" },
+    { source: "domain-presentation", target: "neutral", kind: "parent_of" },
     { source: "domain-combat", target: "pressure", kind: "parent_of" },
     { source: "domain-production-philosophy", target: "deep-child", kind: "parent_of" },
     { source: "domain-combat", target: "combat-conflict", kind: "conflicts_with" }
@@ -42,6 +44,46 @@ const dataset: KnowledgeDataset = {
   searchRecords: [],
   stats: { concepts: 9, cases: 0, conflicts: 1, sources: 0, games: 0, media: 0 }
 };
+
+describe("buildHierarchyView", () => {
+  it("keeps the root view to the root and six ordered domains", () => {
+    const view = buildHierarchyView(dataset, GRAPH_ROOT_ID);
+
+    expect(view.entities.map(({ id }) => id)).toEqual([
+      GRAPH_ROOT_ID,
+      "domain-type-boundary",
+      "domain-system-depth",
+      "domain-combat",
+      "domain-enemy-boss",
+      "domain-presentation",
+      "domain-production-philosophy"
+    ]);
+    expect(view.edges).toHaveLength(6);
+    expect(view.edges.every(({ kind }) => kind === "parent_of")).toBe(true);
+  });
+
+  it("focuses the canvas on parents, the selected node and direct children", () => {
+    const view = buildHierarchyView(dataset, "domain-combat");
+
+    expect(view.entities.map(({ id }) => id)).toEqual([
+      GRAPH_ROOT_ID, "domain-combat", "neutral", "pressure"
+    ]);
+    expect(view.entities.some(({ id }) => id === "domain-enemy-boss")).toBe(false);
+    expect(view.entities.some(({ id }) => id === "combat-conflict")).toBe(false);
+    expect(view.edges.every(({ kind }) => kind === "parent_of")).toBe(true);
+    expect(view.edges.filter(({ source, target }) =>
+      source === "domain-combat" && target === "neutral")).toHaveLength(1);
+  });
+
+  it("caps structural parents at two and groups cross-relations separately", () => {
+    const neutralView = buildHierarchyView(dataset, "neutral");
+    const combatView = buildHierarchyView(dataset, "domain-combat");
+
+    expect(neutralView.parentIds).toEqual(["domain-combat", "domain-enemy-boss"]);
+    expect(combatView.relations.find(({ id }) => id === "conflict")?.entities.map(({ id }) => id))
+      .toEqual(["combat-conflict"]);
+  });
+});
 
 describe("GraphExplorer", () => {
   it("starts with the root and six first-ring domains", () => {
