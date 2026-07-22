@@ -91,11 +91,36 @@ describe("GraphExplorer", () => {
     expect(screen.getAllByTestId("graph-node")).toHaveLength(7);
   });
 
-  it("expands direct children and conflicts without unrelated deep nodes", () => {
+  it("focuses the canvas on the current hierarchy without unrelated domains or cross-relations", () => {
     render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={vi.fn()} />);
+
+    expect(screen.getAllByTestId("graph-node")).toHaveLength(4);
     expect(screen.getByRole("button", { name: /立回/ })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /主动与被动之争/ }).getAttribute("data-kind")).toBe("conflict");
+    expect(screen.queryByText("主动与被动之争")).toBeNull();
+    expect(screen.queryByText("敌人与 Boss 设计")).toBeNull();
     expect(screen.queryByText("制作人与导演")).toBeNull();
+  });
+
+  it("reveals grouped cross-relations on demand", () => {
+    render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={vi.fn()} />);
+
+    const toggle = screen.getByRole("button", { name: "展开关联节点" });
+    expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    fireEvent.click(toggle);
+
+    expect(screen.getByRole("group", { name: "冲突" }).textContent).toContain("主动与被动之争");
+    expect(screen.getByRole("button", { name: "收起关联节点" }).getAttribute("aria-expanded")).toBe("true");
+  });
+
+  it("selects a related node and closes the relation disclosure", () => {
+    const onSelect = vi.fn();
+    render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={onSelect} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "展开关联节点" }));
+    fireEvent.click(screen.getByRole("button", { name: "主动与被动之争" }));
+
+    expect(onSelect).toHaveBeenCalledWith("combat-conflict");
+    expect(screen.queryByRole("group", { name: "冲突" })).toBeNull();
   });
 
   it("never duplicates a node when parent_of and child_of both exist for the same pair", () => {
@@ -105,7 +130,7 @@ describe("GraphExplorer", () => {
     expect(neutralButtons).toHaveLength(1);
   });
 
-  it("supports arrow movement, Enter selection, Escape parent navigation, breadcrumbs and tooltips", () => {
+  it("supports arrow movement, Enter selection, Escape parent navigation and breadcrumbs", () => {
     const onSelect = vi.fn();
     render(<GraphExplorer dataset={dataset} selectedId="domain-combat" highlightedIds={[]} onSelect={onSelect} />);
     const combat = screen.getAllByTestId("graph-node").find((node) => node.textContent?.includes("战斗思路")) as HTMLButtonElement;
@@ -114,8 +139,6 @@ describe("GraphExplorer", () => {
     expect(document.activeElement).not.toBe(combat);
     fireEvent.keyDown(document.activeElement as HTMLElement, { key: "Enter" });
     expect(onSelect).toHaveBeenCalled();
-    fireEvent.focus(combat);
-    expect(screen.getByRole("tooltip").textContent).toContain("关系");
     fireEvent.keyDown(combat, { key: "Escape" });
     expect(onSelect).toHaveBeenCalledWith("root-action-design");
     expect(screen.getByRole("navigation", { name: "图谱路径" }).textContent).toContain("动作游戏设计");

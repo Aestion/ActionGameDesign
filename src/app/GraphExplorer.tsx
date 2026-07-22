@@ -16,11 +16,6 @@ const rootEntity: KnowledgeEntity = {
   citations: [], media: [], examples: []
 };
 
-const relationPriority: Record<RelationKind, number> = {
-  conflicts_with: 0, contrasts_with: 1, related_to: 2, exemplified_by: 3,
-  applies_to: 4, supports: 5, parent_of: 6, child_of: 6
-};
-
 function domainsOf(dataset: KnowledgeDataset) {
   return dataset.entities.filter(({ id }) => id.startsWith("domain-")).sort((a, b) => {
     const ai = domainOrder.indexOf(a.id);
@@ -31,25 +26,6 @@ function domainsOf(dataset: KnowledgeDataset) {
 
 function otherId(edge: KnowledgeEdge, id: string) {
   return edge.source === id ? edge.target : edge.source;
-}
-
-function parentIdFor(id: string, dataset: KnowledgeDataset): string | undefined {
-  if (id === GRAPH_ROOT_ID) return undefined;
-  if (id.startsWith("domain-")) return GRAPH_ROOT_ID;
-  const edge = dataset.edges.find((candidate) =>
-    (candidate.kind === "parent_of" && candidate.target === id) ||
-    (candidate.kind === "child_of" && candidate.source === id)
-  );
-  if (edge) return otherId(edge, id);
-  return dataset.entities.find(({ id: candidateId }) => candidateId === id)?.domainIds[0];
-}
-
-function childIdsFor(id: string, dataset: KnowledgeDataset): string[] {
-  if (id === GRAPH_ROOT_ID) return domainsOf(dataset).map(({ id: domainId }) => domainId);
-  return [...new Set(dataset.edges.filter((edge) =>
-    (edge.kind === "parent_of" && edge.source === id) ||
-    (edge.kind === "child_of" && edge.target === id)
-  ).map((edge) => otherId(edge, id)))];
 }
 
 export type RelationGroupId = "conflict" | "contrast" | "related" | "application";
@@ -169,58 +145,6 @@ export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string
   };
 }
 
-function visibleData(dataset: KnowledgeDataset, selectedId: string) {
-  const domains = domainsOf(dataset);
-  const ids = new Set([GRAPH_ROOT_ID, ...domains.map(({ id }) => id)]);
-  const selected = dataset.entities.find(({ id }) => id === selectedId);
-  if (selected) {
-    ids.add(selected.id);
-    const parentId = parentIdFor(selected.id, dataset);
-    if (parentId) ids.add(parentId);
-    childIdsFor(selected.id, dataset).forEach((id) => ids.add(id));
-    const crossEdges = dataset.edges
-      .filter((edge) => edge.source === selected.id || edge.target === selected.id)
-      .filter((edge) => !["parent_of", "child_of"].includes(edge.kind))
-      .sort((a, b) => relationPriority[a.kind] - relationPriority[b.kind]);
-    crossEdges.filter(({ kind }) => kind === "conflicts_with" || kind === "contrasts_with")
-      .forEach((edge) => ids.add(otherId(edge, selected.id)));
-    crossEdges.filter(({ kind }) => kind !== "conflicts_with" && kind !== "contrasts_with")
-      .slice(0, 8).forEach((edge) => ids.add(otherId(edge, selected.id)));
-  }
-  const entities = [rootEntity, ...dataset.entities].filter(({ id }) => ids.has(id));
-  const edges: KnowledgeEdge[] = domains.map(({ id }): KnowledgeEdge => ({ source: GRAPH_ROOT_ID, target: id, kind: "parent_of" }))
-    .concat(dataset.edges.filter(({ source, target }) => ids.has(source) && ids.has(target) && (source === selectedId || target === selectedId)));
-  return { entities, edges };
-}
-
-function graphPosition(entity: KnowledgeEntity, entities: KnowledgeEntity[], selectedId: string) {
-  if (entity.id === GRAPH_ROOT_ID) return { x: 0, y: 0 };
-  const domainIndex = domainOrder.indexOf(entity.id);
-  if (domainIndex >= 0) {
-    const angle = (Math.PI * 2 * domainIndex / 6) - Math.PI / 2;
-    return { x: Math.cos(angle) * 300, y: Math.sin(angle) * 210 };
-  }
-  const selected = entities.find(({ id }) => id === selectedId);
-  const anchorId = selected?.id.startsWith("domain-") ? selected.id : selected?.domainIds[0];
-  const anchorIndex = Math.max(0, domainOrder.indexOf(anchorId ?? ""));
-  const anchorAngle = (Math.PI * 2 * anchorIndex / 6) - Math.PI / 2;
-  const siblings = entities.filter(({ id }) => !id.startsWith("domain-") && id !== GRAPH_ROOT_ID);
-  const index = Math.max(0, siblings.findIndex(({ id }) => id === entity.id));
-  const spread = (index - (siblings.length - 1) / 2) * 0.28;
-  return { x: Math.cos(anchorAngle + spread) * 500, y: Math.sin(anchorAngle + spread) * 350 };
-}
-
-function countMetrics(entity: KnowledgeEntity, dataset: KnowledgeDataset) {
-  const neighborIds = new Set<string>();
-  for (const edge of dataset.edges) {
-    if (edge.source === entity.id) neighborIds.add(edge.target);
-    else if (edge.target === entity.id) neighborIds.add(edge.source);
-  }
-  const conflicts = dataset.edges.filter(({ source, target, kind }) =>
-    kind === "conflicts_with" && (source === entity.id || target === entity.id)).length + (entity.kind === "conflict" ? 1 : 0);
-  return { relations: neighborIds.size, cases: entity.examples.length, conflicts };
-}
-
 const graphStyles: StylesheetJson = [
   { selector: "node", style: { "background-color": "#142633", "border-color": "#61e4c9", "border-width": 2, color: "#e7f0f2", label: "data(label)", "font-size": "12px", "text-wrap": "wrap", "text-max-width": "110px", "text-valign": "center", "text-halign": "center", width: 112, height: 54, shape: "ellipse" } },
   { selector: "node.domain", style: { shape: "round-rectangle", width: 142, height: 64 } },
@@ -249,17 +173,17 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
   const cyRef = useRef<Core | null>(null);
   const selectRef = useRef(onSelect);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const [tooltipId, setTooltipId] = useState<string>();
-  const visible = useMemo(() => visibleData(dataset, selectedId), [dataset, selectedId]);
+  const [relationsOpen, setRelationsOpen] = useState(false);
+  const view = useMemo(() => buildHierarchyView(dataset, selectedId), [dataset, selectedId]);
   selectRef.current = onSelect;
+
+  useEffect(() => setRelationsOpen(false), [selectedId]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
     const headless = typeof navigator !== "undefined" && /jsdom/i.test(navigator.userAgent);
     const cy = cytoscape({ container: headless ? undefined : canvasRef.current, headless, style: graphStyles, elements: [] });
     cy.on("tap", "node", (event) => selectRef.current(event.target.id()));
-    cy.on("mouseover", "node", (event) => setTooltipId(event.target.id()));
-    cy.on("mouseout", "node", () => setTooltipId(undefined));
     cyRef.current = cy;
     return () => { cy.destroy(); cyRef.current = null; };
   }, []);
@@ -268,21 +192,30 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
     const cy = cyRef.current;
     if (!cy) return;
     const highlighted = new Set(highlightedIds);
-    const nodes: ElementDefinition[] = visible.entities.map((entity) => ({
+    const parents = new Set(view.parentIds);
+    const children = new Set(view.childIds);
+    const nodes: ElementDefinition[] = view.entities.map((entity) => ({
       group: "nodes", data: { id: entity.id, label: entity.title, kind: entity.kind },
-      classes: [entity.id === GRAPH_ROOT_ID ? "root" : "", entity.id.startsWith("domain-") ? "domain" : "", entity.id === selectedId ? "selected" : "", highlighted.has(entity.id) ? "highlighted" : ""].filter(Boolean).join(" "),
-      position: graphPosition(entity, visible.entities, selectedId)
+      classes: [
+        entity.id === GRAPH_ROOT_ID ? "root" : "",
+        entity.id.startsWith("domain-") ? "domain" : "",
+        parents.has(entity.id) ? "parent" : "",
+        entity.id === selectedId ? "selected" : "",
+        children.has(entity.id) ? "child" : "",
+        highlighted.has(entity.id) ? "highlighted" : ""
+      ].filter(Boolean).join(" "),
+      position: view.positions.get(entity.id)
     }));
-    const edges: ElementDefinition[] = visible.edges.map((edge, index) => ({
+    const edges: ElementDefinition[] = view.edges.map((edge, index) => ({
       group: "edges", data: { id: `${edge.source}-${edge.kind}-${edge.target}-${index}`, source: edge.source, target: edge.target, kind: edge.kind }
     }));
     cy.batch(() => { cy.elements().remove(); cy.add([...nodes, ...edges]); });
     cy.layout({ name: "preset", fit: true, padding: 44, animate: false }).run();
-  }, [visible, selectedId, highlightedIds]);
+  }, [view, selectedId, highlightedIds]);
 
   const entityById = (id: string) => id === GRAPH_ROOT_ID ? rootEntity : dataset.entities.find((entity) => entity.id === id);
   const highlightedSet = new Set(highlightedIds);
-  const selectedParentId = parentIdFor(selectedId, dataset);
+  const selectedParentId = view.parentIds[0];
   const crumbs = [rootEntity];
   if (selectedId !== GRAPH_ROOT_ID) {
     const parent = selectedParentId && entityById(selectedParentId);
@@ -290,20 +223,24 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
     if (parent && parent.id !== GRAPH_ROOT_ID) crumbs.push(parent);
     if (selected && !crumbs.some(({ id }) => id === selected.id)) crumbs.push(selected);
   }
-  const tooltip = tooltipId && entityById(tooltipId);
-
   const onKeyDown = (index: number, event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "ArrowDown" || event.key === "ArrowRight" || event.key === "ArrowUp" || event.key === "ArrowLeft") {
       event.preventDefault();
       const direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : -1;
-      const next = (index + direction + visible.entities.length) % visible.entities.length;
+      const next = (index + direction + view.entities.length) % view.entities.length;
       buttonRefs.current[next]?.focus();
     } else if (event.key === "Enter") {
-      onSelect(visible.entities[index].id);
+      onSelect(view.entities[index].id);
     } else if (event.key === "Escape") {
       event.preventDefault();
-      onSelect(parentIdFor(selectedId, dataset) ?? GRAPH_ROOT_ID);
+      onSelect(view.parentIds[0] ?? GRAPH_ROOT_ID);
     }
+  };
+
+  const relationCount = view.relations.reduce((total, group) => total + group.entities.length, 0);
+  const selectRelation = (id: string) => {
+    setRelationsOpen(false);
+    onSelect(id);
   };
 
   return (
@@ -314,15 +251,24 @@ export function GraphExplorer({ dataset, selectedId, highlightedIds, onSelect }:
       </nav>
       <div className="graph-stage">
         <div ref={canvasRef} className="graph-canvas" aria-hidden="true" />
-        <div className="graph-legend" aria-label="关系图例"><span>○ 概念</span><span>◇ 冲突</span><span>┄ 对照</span><span>╌ 冲突关系</span></div>
-        {tooltip && <div className="graph-tooltip" role="tooltip"><strong>{tooltip.title}</strong><p>{tooltip.summary}</p>{(() => { const metrics = countMetrics(tooltip, dataset); return <span>关系 {metrics.relations} · 案例 {metrics.cases} · 冲突 {metrics.conflicts}</span>; })()}</div>}
       </div>
       <div className="graph-node-access" role="list" aria-label="可键盘浏览的图谱节点">
-        {visible.entities.map((entity, index) => {
-          const metrics = countMetrics(entity, dataset);
-          return <span role="listitem" key={entity.id} data-testid={`graph-node-${entity.id}`} data-highlighted={highlightedSet.has(entity.id) ? "true" : "false"}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} data-highlighted={highlightedSet.has(entity.id) ? "true" : undefined} onFocus={() => setTooltipId(entity.id)} onBlur={() => setTooltipId(undefined)} onMouseEnter={() => setTooltipId(entity.id)} onMouseLeave={() => setTooltipId(undefined)} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={`${entity.title}，关系 ${metrics.relations}，案例 ${metrics.cases}，冲突 ${metrics.conflicts}`}><span aria-hidden="true">{entity.kind === "conflict" ? "◇" : entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>;
-        })}
+        {view.entities.map((entity, index) => <span role="listitem" key={entity.id} data-testid={`graph-node-${entity.id}`} data-highlighted={highlightedSet.has(entity.id) ? "true" : "false"}><button ref={(node) => { buttonRefs.current[index] = node; }} type="button" data-testid="graph-node" data-kind={entity.kind} data-active={entity.id === selectedId || undefined} data-highlighted={highlightedSet.has(entity.id) ? "true" : undefined} onKeyDown={(event) => onKeyDown(index, event)} onClick={() => onSelect(entity.id)} aria-label={entity.title}><span aria-hidden="true">{entity.id === GRAPH_ROOT_ID ? "◆" : "○"}</span>{entity.title}</button></span>)}
       </div>
+      {relationCount > 0 && <section className="graph-relations" aria-label="关联节点">
+        <div className="graph-relations-heading">
+          <div><span>关联节点</span><strong>{relationCount} 项</strong></div>
+          <button type="button" aria-expanded={relationsOpen} onClick={() => setRelationsOpen((open) => !open)}>
+            {relationsOpen ? "收起关联节点" : "展开关联节点"}
+          </button>
+        </div>
+        {relationsOpen && <div className="graph-relation-groups">
+          {view.relations.map((group) => <section key={group.id} className="graph-relation-group" role="group" aria-label={group.label}>
+            <h3>{group.label}</h3>
+            <div>{group.entities.map((entity) => <button type="button" key={entity.id} onClick={() => selectRelation(entity.id)}>{entity.title}</button>)}</div>
+          </section>)}
+        </div>}
+      </section>}
     </section>
   );
 }
