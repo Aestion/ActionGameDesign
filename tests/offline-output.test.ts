@@ -19,12 +19,18 @@ async function writePackagedCandidate(outputDir: string, body: string): Promise<
 }
 
 describe("offline build output", () => {
-  it("uses the approved sub-800px tree/drawer breakpoint and accessibility fallbacks", async () => {
+  it("uses the responsive tree/drawer breakpoint and accessibility fallbacks", async () => {
     const css = await readFile("src/styles.css", "utf8");
 
-    expect(css).toMatch(/@media\s*\(max-width:\s*799px\)[\s\S]*?\.graph-explorer\s*\{\s*display:\s*none/u);
-    expect(css).toMatch(/@media\s*\(max-width:\s*799px\)[\s\S]*?\.mobile-tree\s*\{\s*display:\s*block/u);
-    expect(css).toMatch(/@media\s*\(max-width:\s*799px\)[\s\S]*?\.detail-panel[\s\S]*?width:\s*100%/u);
+    expect(css).toMatch(/@media\s*\(max-width:\s*909px\)[\s\S]*?\.graph-explorer\s*\{\s*display:\s*none/u);
+    expect(css).toMatch(/@media\s*\(max-width:\s*909px\)[\s\S]*?\.mobile-tree\s*\{\s*display:\s*block/u);
+    expect(css).toMatch(/@media\s*\(max-width:\s*909px\)[\s\S]*?\.detail-panel[\s\S]*?width:\s*100%/u);
+    expect(css).toMatch(/@media\s*\(max-width:\s*1180px\)[\s\S]*?\.atlas-layout\s*\{\s*grid-template-columns:\s*190px\s+minmax\(300px,\s*1fr\)\s+minmax\(420px,\s*480px\)/u);
+    expect(css).toMatch(/\.atlas-layout[\s\S]*grid-template-columns:\s*220px\s+minmax\(320px,\s*1fr\)\s+minmax\(480px,\s*560px\)/u);
+    expect(css).toMatch(/\.detail-section\.detail-brief/u);
+    expect(css).toMatch(/\.detail-section\.detail-detailed/u);
+    expect(css).toMatch(/\.detail-section\.detail-supplement/u);
+    expect(css).not.toMatch(/\.detail-depth-controls\s*\{/u);
     expect(css).toMatch(/:focus-visible/u);
     expect(css).toMatch(/prefers-reduced-motion:\s*reduce/u);
     expect(css).toMatch(/\.conflict[^\n{]*\{[^}]*border[^}]*dashed|\.conflict[^\n{]*::before/u);

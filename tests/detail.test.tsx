@@ -79,25 +79,18 @@ describe("atlas state", () => {
   it("hydrates a selected node from a shareable hash", () => {
     expect(createInitialState("#node=domain-combat")).toMatchObject({
       selectedId: "domain-combat",
-      view: "graph",
-      detailDepth: 1
+      view: "graph"
     });
+    expect(createInitialState("#node=domain-combat")).not.toHaveProperty("detailDepth");
   });
 
-  it("selects a node and can move through all three detail depths", () => {
+  it("selects a node without introducing detail depth state", () => {
     const selected = atlasReducer(createInitialState(""), {
       type: "select-node",
       id: "domain-combat"
     });
     expect(selected.selectedId).toBe("domain-combat");
-    expect(atlasReducer(selected, { type: "set-detail-depth", depth: 3 }).detailDepth).toBe(3);
-  });
-
-  it("preserves the current detail depth when navigating between nodes", () => {
-    const researching = atlasReducer(createInitialState(""), { type: "set-detail-depth", depth: 3 });
-    const next = atlasReducer(researching, { type: "select-node", id: "domain-combat" });
-    expect(next.selectedId).toBe("domain-combat");
-    expect(next.detailDepth).toBe(3);
+    expect(selected).not.toHaveProperty("detailDepth");
   });
 });
 
@@ -127,7 +120,7 @@ describe("App", () => {
     render(<App dataset={fixtureDataset} />);
 
     await user.click(screen.getByRole("button", { name: "战斗思路" }));
-    await user.click(screen.getByRole("button", { name: /^压制/ }));
+    await user.click(screen.getByTestId("graph-node-pressure"));
 
     expect(pushSpy).toHaveBeenCalled();
     expect(replaceSpy).not.toHaveBeenCalled();
@@ -136,39 +129,41 @@ describe("App", () => {
 
 describe("NodeDetail", () => {
   it("labels source view, editorial explanation, and editorial synthesis separately", () => {
-    render(<NodeDetail entity={fixtureEntity} dataset={fixtureDataset} depth={3} />);
+    render(<NodeDetail entity={fixtureEntity} dataset={fixtureDataset} />);
 
     expect(screen.getByText("来源观点")).toBeTruthy();
     expect(screen.getByText("编者解释")).toBeTruthy();
     expect(screen.getByText("编者归纳")).toBeTruthy();
   });
 
-  it("reveals research material only at the third depth", () => {
-    const { rerender } = render(
-      <NodeDetail entity={fixtureEntity} dataset={fixtureDataset} depth={1} />
-    );
-    expect(screen.getByRole("heading", { name: "节点速览" })).toBeTruthy();
-    expect(screen.queryByRole("heading", { name: "案例" })).toBeNull();
+  it("renders complete research material in three semantic sections", () => {
+    render(<NodeDetail entity={fixtureEntity} dataset={fixtureDataset} />);
 
-    rerender(<NodeDetail entity={fixtureEntity} dataset={fixtureDataset} depth={3} />);
+    const brief = screen.getByRole("region", { name: "简述" });
+    const detailed = screen.getByRole("region", { name: "详细" });
+    const supplement = screen.getByRole("region", { name: "补充" });
+
+    expect(brief.compareDocumentPosition(detailed) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(detailed.compareDocumentPosition(supplement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "一眼看懂" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "展开理解" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "深入研究" })).toBeNull();
+    expect(screen.getByText("结构化说明。")).toBeTruthy();
+    expect(screen.getByRole("button", { name: /压制/ })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "案例" })).toBeTruthy();
     expect(screen.getByText("斋藤利三")).toBeTruthy();
+    expect(screen.getByText("战斗思路章节")).toBeTruthy();
     expect(screen.getByText("战斗主轴会随资源和敌人性能发生转换。")).toBeTruthy();
   });
 
-  it("uses semantic buttons to change detail depth", () => {
-    const onDepthChange = vi.fn();
-    render(
-      <NodeDetail
-        entity={fixtureEntity}
-        dataset={fixtureDataset}
-        depth={1}
-        onDepthChange={onDepthChange}
-      />
-    );
+  it("keeps related-node navigation available in the full detail view", async () => {
+    const user = userEvent.setup();
+    const onSelectEntity = vi.fn();
+    render(<NodeDetail entity={fixtureEntity} dataset={fixtureDataset} onSelectEntity={onSelectEntity} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "展开理解" }));
-    expect(onDepthChange).toHaveBeenCalledWith(2);
+    await user.click(screen.getByRole("button", { name: "压制" }));
+
+    expect(onSelectEntity).toHaveBeenCalledWith("pressure");
   });
 
   it("shows every conflict side with conditions, source labels, and separate synthesis", () => {
@@ -180,7 +175,7 @@ describe("NodeDetail", () => {
       ],
       editorialSynthesis: "编者归纳：取舍取决于玩家是否必须立即负责结果。"
     });
-    render(<NodeDetail entity={conflict} dataset={fixtureDataset} depth={3} />);
+    render(<NodeDetail entity={conflict} dataset={fixtureDataset} />);
     expect(screen.getByText("可读性优先")).toBeTruthy();
     expect(screen.getByText("条件：高惩罚实时操作")).toBeTruthy();
     expect(screen.getAllByText("战斗资料")).toHaveLength(2);
@@ -195,7 +190,7 @@ describe("NodeDetail", () => {
         kind: "gif", sourceId: "source-combat"
       }]
     });
-    render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} depth={3} />);
+    render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} />);
     const image = screen.getByRole("img", { name: "压制循环演示" });
     expect(image.getAttribute("loading")).toBe("lazy");
     expect(screen.getByText("来源：战斗资料")).toBeTruthy();
@@ -213,7 +208,7 @@ describe("NodeDetail", () => {
         kind: "gif", sourceId: "source-combat"
       }]
     });
-    render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} depth={3} />);
+    render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} />);
     await user.click(screen.getByRole("button", { name: "放大：压制循环演示" }));
     const dialog = screen.getByRole("dialog", { name: "压制循环演示" }) as HTMLDialogElement;
     expect(dialog).toBeTruthy();

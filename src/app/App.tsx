@@ -9,6 +9,8 @@ import {
   NodeDetail
 } from "./components";
 import { ComparisonMatrix } from "./ComparisonMatrix";
+import { CombatAnalysisView } from "./CombatAnalysisView";
+import { EE2CombatView } from "./EE2CombatView";
 import { GRAPH_ROOT_ID, GraphExplorer } from "./GraphExplorer";
 import { IndexViews } from "./IndexViews";
 import { MobileTree } from "./MobileTree";
@@ -107,6 +109,10 @@ function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
     dispatch({ type: "set-view", view: "graph" });
     selectEntity(id);
   };
+  const showDetailPanel = state.view === "graph"
+    || state.view === "cases"
+    || state.view === "conflicts"
+    || state.view === "sources";
 
   return (
     <div className="atlas-shell">
@@ -117,7 +123,7 @@ function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
           onClear={() => { dispatch({ type: "set-query", query: "" }); dispatch({ type: "clear-filters" }); }}
           onSelect={openInGraph} />
       </AtlasHeader>
-      <div className="atlas-layout">
+      <div className={`atlas-layout${showDetailPanel ? "" : " atlas-layout--full"}`}>
         <AtlasNavigation
           view={state.view}
           onViewChange={(view) => dispatch({ type: "set-view", view })}
@@ -131,21 +137,27 @@ function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
             <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={highlightedIds} onSelect={selectEntity} />
             <MobileTree dataset={dataset} selectedId={selectedId} onSelect={selectEntity} />
           </main>
+        ) : state.view === "analysis" ? (
+          <main className="atlas-workspace combat-analysis-workspace" id="atlas-workspace">
+            <CombatAnalysisView dataset={dataset} onSelect={openInGraph} />
+          </main>
+        ) : state.view === "ee2-combat" ? (
+          <main className="atlas-workspace ee2-combat-workspace" id="atlas-workspace">
+            <EE2CombatView dataset={dataset} onSelect={openInGraph} />
+          </main>
         ) : (
           <main className="atlas-workspace" id="atlas-workspace">
             <div className="workspace-heading"><div><p className="eyebrow">研究视图</p><h1>{state.view === "matrix" ? "游戏比较矩阵" : state.view === "cases" ? "案例索引" : state.view === "conflicts" ? "冲突索引" : "来源档案"}</h1></div><p className="workspace-instruction">从结构化记录打开依据；右侧详情与稳定链接会同步保留。</p></div>
             {state.view === "matrix" ? <ComparisonMatrix dataset={dataset} onSelect={openInGraph} /> : <IndexViews dataset={dataset} view={state.view} onSelect={selectEntity} />}
           </main>
         )}
-        {selected ? (
+        {showDetailPanel && (selected ? (
           <NodeDetail
             entity={selected}
             dataset={dataset}
-            depth={state.detailDepth}
-            onDepthChange={(depth) => dispatch({ type: "set-detail-depth", depth })}
             onSelectEntity={selectEntity}
           />
-        ) : <EmptyDetail />}
+        ) : <EmptyDetail />)}
       </div>
     </div>
   );

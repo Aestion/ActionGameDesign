@@ -1,4 +1,4 @@
-export type AtlasView = "graph" | "matrix" | "cases" | "conflicts" | "sources";
+export type AtlasView = "graph" | "analysis" | "ee2-combat" | "matrix" | "cases" | "conflicts" | "sources";
 
 export interface AtlasFilters {
   domains: string[];
@@ -12,7 +12,6 @@ export interface AtlasState {
   view: AtlasView;
   query: string;
   filters: AtlasFilters;
-  detailDepth: 1 | 2 | 3;
 }
 
 export type AtlasAction =
@@ -20,7 +19,6 @@ export type AtlasAction =
   | { type: "hydrate-hash"; id: string }
   | { type: "set-view"; view: AtlasView }
   | { type: "set-query"; query: string }
-  | { type: "set-detail-depth"; depth: 1 | 2 | 3 }
   | { type: "set-filters"; filters: Partial<AtlasFilters> }
   | { type: "clear-filters" };
 
@@ -45,8 +43,7 @@ export function createInitialState(hash = ""): AtlasState {
     selectedId: nodeIdFromHash(hash),
     view: "graph",
     query: "",
-    filters: emptyFilters(),
-    detailDepth: 1
+    filters: emptyFilters()
   };
 }
 
@@ -62,8 +59,6 @@ export function atlasReducer(state: AtlasState, action: AtlasAction): AtlasState
       return { ...state, view: action.view };
     case "set-query":
       return { ...state, query: action.query };
-    case "set-detail-depth":
-      return { ...state, detailDepth: action.depth };
     case "set-filters":
       return { ...state, filters: { ...state.filters, ...action.filters } };
     case "clear-filters":

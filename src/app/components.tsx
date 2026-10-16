@@ -19,10 +19,12 @@ const domainOrder = [
 
 const viewLabels: Array<{ id: AtlasView; label: string; code: string }> = [
   { id: "graph", label: "概念星图", code: "01" },
-  { id: "matrix", label: "游戏矩阵", code: "02" },
-  { id: "cases", label: "案例索引", code: "03" },
-  { id: "conflicts", label: "冲突索引", code: "04" },
-  { id: "sources", label: "来源档案", code: "05" }
+  { id: "analysis", label: "战斗博弈", code: "02" },
+  { id: "ee2-combat", label: "EE2 战斗", code: "03" },
+  { id: "matrix", label: "游戏矩阵", code: "04" },
+  { id: "cases", label: "案例索引", code: "05" },
+  { id: "conflicts", label: "冲突索引", code: "06" },
+  { id: "sources", label: "来源档案", code: "07" }
 ];
 const conflictTypeLabels: Record<string, string> = {
   definition: "定义冲突", goal: "目标冲突", condition: "条件差异", direct: "直接分歧"
@@ -163,8 +165,6 @@ export function AtlasWorkspace({ dataset, selectedId, view, onSelect }: AtlasWor
 interface NodeDetailProps {
   entity: KnowledgeEntity;
   dataset?: KnowledgeDataset;
-  depth?: 1 | 2 | 3;
-  onDepthChange?: (depth: 1 | 2 | 3) => void;
   onSelectEntity?: (id: string) => void;
 }
 
@@ -242,8 +242,6 @@ function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDat
 export function NodeDetail({
   entity,
   dataset,
-  depth = 1,
-  onDepthChange,
   onSelectEntity
 }: NodeDetailProps) {
   const relations = edgesFor(entity, dataset);
@@ -263,7 +261,6 @@ export function NodeDetail({
           <p className="eyebrow">{entity.kind} / {entity.reviewStatus}</p>
           <h2 id="detail-title">{entity.title}</h2>
         </div>
-        <span className="depth-indicator" aria-label={`当前信息深度 ${depth}`}>L{depth}</span>
       </div>
 
       <div className="provenance-key" aria-label="内容归属标记">
@@ -272,27 +269,9 @@ export function NodeDetail({
         <span data-provenance="synthesis">编者归纳</span>
       </div>
 
-      <div className="detail-depth-controls" aria-label="信息深度">
-        {([
-          [1, "一眼看懂"],
-          [2, "展开理解"],
-          [3, "深入研究"]
-        ] as const).map(([level, label]) => (
-          <button
-            type="button"
-            key={level}
-            aria-label={label}
-            aria-pressed={depth === level}
-            onClick={() => onDepthChange?.(level)}
-          >
-            <span>L{level}</span>{label}
-          </button>
-        ))}
-      </div>
-
       <div className="detail-scroll-region">
-        <section className="detail-section" aria-labelledby="detail-summary-title">
-          <h3 id="detail-summary-title">节点速览</h3>
+        <section className="detail-section detail-brief" aria-labelledby="detail-brief-title">
+          <h3 id="detail-brief-title">简述</h3>
           <p className="detail-summary">{entity.summary || "此节点尚无摘要。"}</p>
           <dl className="detail-metadata">
             <div><dt>知识域</dt><dd>{domainTitles.join(" / ") || (entity.id.startsWith("domain-") ? entity.title : "跨域")}</dd></div>
@@ -305,26 +284,26 @@ export function NodeDetail({
           </ul>
         </section>
 
-        {depth >= 2 && (
-          <>
-            <section className="detail-section" aria-labelledby="detail-explanation-title">
-              <h3 id="detail-explanation-title">结构化解释</h3>
+        <section className="detail-section detail-detailed" aria-labelledby="detail-detailed-title">
+          <h3 id="detail-detailed-title">详细</h3>
+          <div className="detail-subsection">
+            <h4 id="detail-explanation-title">结构化解释</h4>
               {entity.bodyHtml ? (
                 <div className="prose" dangerouslySetInnerHTML={{ __html: entity.bodyHtml }} />
               ) : (
                 <p className="empty-state">此节点暂无展开正文。</p>
               )}
-            </section>
-            <section className="detail-section" aria-labelledby="detail-conditions-title">
-              <h3 id="detail-conditions-title">适用条件</h3>
+          </div>
+          <div className="detail-subsection">
+            <h4 id="detail-conditions-title">适用条件</h4>
               {entity.tags.length ? (
                 <ul className="tag-list">{entity.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
               ) : (
                 <p className="empty-state">条件与边界见上方结构化解释。</p>
               )}
-            </section>
-            <section className="detail-section" aria-labelledby="detail-related-title">
-              <h3 id="detail-related-title">相关概念</h3>
+          </div>
+          <div className="detail-subsection">
+            <h4 id="detail-related-title">相关概念</h4>
               {relatedConcepts.length ? (
                 <ul className="related-list">
                   {relatedConcepts.map((concept) => (
@@ -338,14 +317,13 @@ export function NodeDetail({
               ) : (
                 <p className="empty-state">暂无直接关联概念。</p>
               )}
-            </section>
-          </>
-        )}
+          </div>
+        </section>
 
-        {depth >= 3 && (
-          <>
-            <section className="detail-section" aria-labelledby="detail-cases-title">
-              <h3 id="detail-cases-title">案例</h3>
+        <section className="detail-section detail-supplement" aria-labelledby="detail-supplement-title">
+          <h3 id="detail-supplement-title">补充</h3>
+          <div className="detail-subsection">
+            <h4 id="detail-cases-title">案例</h4>
               {entity.examples.length ? (
                 <div className="research-grid">
                   {entity.examples.map((example) => (
@@ -355,9 +333,9 @@ export function NodeDetail({
               ) : relatedCases.length ? (
                 <ul className="related-list">{relatedCases.map((caseEntity) => <li key={caseEntity.id}><button type="button" onClick={() => onSelectEntity?.(caseEntity.id)}>{caseEntity.title}<span aria-hidden="true">↗</span></button></li>)}</ul>
               ) : <p className="empty-state">暂无直接案例。</p>}
-            </section>
-            <section className="detail-section" aria-labelledby="detail-conflicts-title">
-              <h3 id="detail-conflicts-title">冲突观点</h3>
+          </div>
+          <div className="detail-subsection">
+            <h4 id="detail-conflicts-title">冲突观点</h4>
               {entity.conflictSides?.length ? (
                 <><p className="conflict-question">争议问题：{entity.summary}</p><p className="conflict-type-label">类型：{conflictTypeLabels[entity.conflictType ?? ""] ?? "未分类"}</p><div className="research-grid">
                   {entity.conflictSides.map((side) => (
@@ -372,15 +350,15 @@ export function NodeDetail({
               ) : conflicts.length ? (
                 <ul className="related-list">{conflicts.map((conflict) => <li key={conflict.id}><button type="button" onClick={() => onSelectEntity?.(conflict.id)}>{conflict.title}<span aria-hidden="true">↗</span></button></li>)}</ul>
               ) : <p className="empty-state">当前节点没有直接冲突卡。</p>}
-            </section>
-            <section className="detail-section" aria-labelledby="detail-media-title">
-              <h3 id="detail-media-title">媒体</h3>
+          </div>
+          <div className="detail-subsection">
+            <h4 id="detail-media-title">媒体</h4>
               {entity.media.length ? (
                 <div className="media-grid">{entity.media.map((media) => <MediaCard key={media.src} media={media} dataset={dataset} />)}</div>
               ) : <p className="empty-state">当前节点没有关联媒体。</p>}
-            </section>
-            <section className="detail-section" aria-labelledby="detail-citations-title">
-              <h3 id="detail-citations-title">引用与来源</h3>
+          </div>
+          <div className="detail-subsection">
+            <h4 id="detail-citations-title">引用与来源</h4>
               {entity.citations.length ? (
                 <ol className="citation-list">
                   {entity.citations.map((citation, index) => {
@@ -389,13 +367,12 @@ export function NodeDetail({
                   })}
                 </ol>
               ) : <p className="empty-state">当前节点没有引用记录。</p>}
-            </section>
-            <section className="detail-section editorial-synthesis" aria-labelledby="detail-synthesis-title">
-              <h3 id="detail-synthesis-title">综合判断</h3>
+          </div>
+          <div className="detail-subsection editorial-synthesis">
+            <h4 id="detail-synthesis-title">综合判断</h4>
               <p>{synthesis || "此节点暂未形成编者综合判断。"}</p>
-            </section>
-          </>
-        )}
+          </div>
+        </section>
       </div>
     </aside>
   );
@@ -406,7 +383,7 @@ export function EmptyDetail() {
     <aside className="detail-panel empty-detail" aria-label="节点详情">
       <p className="eyebrow">NODE DETAIL</p>
       <h2>选择一个知识节点</h2>
-      <p>详情将在此按速览、理解和研究三层展开。</p>
+      <p>详情将在此按简述、详细和补充三段展开。</p>
     </aside>
   );
 }

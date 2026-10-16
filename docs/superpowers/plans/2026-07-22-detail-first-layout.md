@@ -172,7 +172,7 @@ Update `src/styles.css`:
 .detail-subsection:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
 ```
 
-Remove the unused depth-control rules. At the `max-width: 1180px` breakpoint use `190px minmax(300px, 1fr) minmax(420px, 480px)`. Preserve the existing `max-width: 799px` one-column layout and mobile graph/tree visibility rules.
+Remove the unused depth-control rules. At the `max-width: 1180px` breakpoint use `190px minmax(300px, 1fr) minmax(420px, 480px)`. Use a `max-width: 909px` one-column layout so the minimum medium-width columns cannot overflow, and preserve the mobile graph/tree visibility rules.
 
 - [ ] **Step 4: Run the focused CSS test to verify GREEN**
 
