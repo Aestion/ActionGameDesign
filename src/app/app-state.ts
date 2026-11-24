@@ -1,4 +1,5 @@
-export type AtlasView = "graph" | "analysis" | "ee2-combat" | "matrix" | "cases" | "conflicts" | "sources";
+export type AtlasView = "graph" | "matrix" | "cases" | "conflicts" | "sources" | "reader";
+const atlasViews = new Set<AtlasView>(["graph", "matrix", "cases", "conflicts", "sources", "reader"]);
 
 export interface AtlasFilters {
   domains: string[];
@@ -16,7 +17,7 @@ export interface AtlasState {
 
 export type AtlasAction =
   | { type: "select-node"; id: string }
-  | { type: "hydrate-hash"; id: string }
+  | { type: "hydrate-hash"; id: string; view?: AtlasView }
   | { type: "set-view"; view: AtlasView }
   | { type: "set-query"; query: string }
   | { type: "set-filters"; filters: Partial<AtlasFilters> }
@@ -29,19 +30,30 @@ const emptyFilters = (): AtlasFilters => ({
   reviewStatuses: []
 });
 
-export function nodeIdFromHash(hash: string): string {
-  const value = hash.startsWith("#") ? hash.slice(1) : hash;
-  return new URLSearchParams(value).get("node")?.trim() ?? "";
+function hashParams(hash: string): URLSearchParams {
+  return new URLSearchParams(hash.startsWith("#") ? hash.slice(1) : hash);
 }
 
-export function nodeHash(id: string): string {
-  return id ? `#${new URLSearchParams({ node: id }).toString()}` : "";
+export function nodeIdFromHash(hash: string): string {
+  return hashParams(hash).get("node")?.trim() ?? "";
+}
+
+export function viewFromHash(hash: string): AtlasView {
+  const view = hashParams(hash).get("view");
+  return view && atlasViews.has(view as AtlasView) ? view as AtlasView : "graph";
+}
+
+export function nodeHash(id: string, view: AtlasView = "graph"): string {
+  if (!id) return "";
+  const params = new URLSearchParams({ node: id });
+  if (view !== "graph") params.set("view", view);
+  return "#" + params.toString();
 }
 
 export function createInitialState(hash = ""): AtlasState {
   return {
     selectedId: nodeIdFromHash(hash),
-    view: "graph",
+    view: viewFromHash(hash),
     query: "",
     filters: emptyFilters()
   };
@@ -52,8 +64,9 @@ export function atlasReducer(state: AtlasState, action: AtlasAction): AtlasState
     case "select-node":
       return { ...state, selectedId: action.id };
     case "hydrate-hash":
-      return action.id && action.id !== state.selectedId
-        ? { ...state, selectedId: action.id }
+      if (!action.id) return state;
+      return action.id !== state.selectedId || (action.view && action.view !== state.view)
+        ? { ...state, selectedId: action.id, view: action.view ?? state.view }
         : state;
     case "set-view":
       return { ...state, view: action.view };

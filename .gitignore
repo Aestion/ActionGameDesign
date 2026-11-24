@@ -5,3 +5,7 @@ dist/
 dist-last-good/
 .build-tmp/
 src/generated/knowledge.ts
+_quarantine/
+tmp/
+downloads/
+腾讯文档_12种动作机制与210+案例/

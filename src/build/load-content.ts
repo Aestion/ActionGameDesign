@@ -58,13 +58,16 @@ export async function loadContent(contentRoot: string): Promise<LoadedContent> {
     }
 
     const data = parseWithFileContext(file, () => EntityFileSchema.parse(parsed.data));
+    const rendered = await renderMarkdown(parsed.content);
     entities.push({
       id: data.id,
       kind: data.kind,
       title: data.title,
       aliases: data.aliases,
       summary: data.summary,
-      bodyHtml: await renderMarkdown(parsed.content),
+      bodyHtml: rendered.html,
+      headings: rendered.headings,
+      readingMinutes: rendered.readingMinutes,
       domainIds: data.domainIds,
       depth: data.depth,
       tags: data.tags,

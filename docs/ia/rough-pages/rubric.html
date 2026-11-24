@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="动作游戏战斗设计的制作标尺：五维质量、四种节奏、检查表与红线。">
+  <title>标尺 · 动作游戏粗稿</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">动作游戏 / 研究粗稿<span>ROUGH DRAFT · 2026-11</span></a>
+    <nav class="nav" aria-label="章节">
+      <a href="development.html">发展</a>
+      <a href="definition.html">定义</a>
+      <a href="difficulty.html">难点</a>
+      <a href="voices.html">观点</a>
+      <a href="comparison.html">对比</a>
+      <a href="rubric.html" class="active" aria-current="page">标尺</a>
+      <a href="sources.html">来源</a>
+    </nav>
+    <span class="draft">DRAFT 0.3</span>
+  </header>
+
+  <main class="page">
+    <div class="page-head">
+      <p class="kicker">06 / 标尺</p>
+      <h1>制作标尺：看它站不站得住</h1>
+      <p class="page-lede">这一页不定义动作游戏，也不讲历史，也不重复难点页的原因分析。它只回答：一套战斗设计交付前，哪些地方必须过线。</p>
+    </div>
+
+    <div class="page-body">
+      <section class="rubric-block" aria-labelledby="quality-title">
+        <div class="rubric-head">
+          <p class="kicker">01 / 五维</p>
+          <div>
+            <h2 id="quality-title">五维质量</h2>
+            <p class="rubric-intro">用五个问题定位，不给总分。1 / 3 / 5 只是刻度；不同品类不必五项同分，只记录哪一项拉低体验。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="rubric-table">
+            <thead>
+              <tr>
+                <th>维度</th>
+                <th>问什么</th>
+                <th>1</th>
+                <th>3</th>
+                <th>5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>可读性</strong></td>
+                <td>玩家能不能一眼看懂这招是什么、怎么应对？</td>
+                <td><b>1</b> 只能背板</td>
+                <td><b>3</b> 前摇清楚，但应对单一</td>
+                <td><b>5</b> 多色预警、多种解法、有教学意图</td>
+              </tr>
+              <tr>
+                <td><strong>操作反馈</strong></td>
+                <td>按下按键后，多快、多强收到反馈？</td>
+                <td><b>1</b> 没反馈或延迟</td>
+                <td><b>3</b> 轻 / 重 / 暴击有区分</td>
+                <td><b>5</b> 帧级 hit-stop、残影、音效、振动叠加</td>
+              </tr>
+              <tr>
+                <td><strong>决策密度</strong></td>
+                <td>每分钟有多少有意义的决策？</td>
+                <td><b>1</b> 按 ABCD 循环</td>
+                <td><b>3</b> 每 5–10 秒一个选择</td>
+                <td><b>5</b> 几乎每秒都在选</td>
+              </tr>
+              <tr>
+                <td><strong>记忆点</strong></td>
+                <td>打完能讲出什么独有？</td>
+                <td><b>1</b> 玩完就忘</td>
+                <td><b>3</b> 记得 1–2 个招式名</td>
+                <td><b>5</b> 玩家取外号、做二创</td>
+              </tr>
+              <tr>
+                <td><strong>耐玩度</strong></td>
+                <td>通关后还想再玩吗？</td>
+                <td><b>1</b> 一次就够</td>
+                <td><b>3</b> 难度 / 评分 / 多 build</td>
+                <td><b>5</b> 数百小时、速通文化</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="rubric-block" aria-labelledby="rhythm-title">
+        <div class="rubric-head">
+          <p class="kicker">02 / 节奏</p>
+          <div>
+            <h2 id="rhythm-title">四种战斗节奏</h2>
+            <p class="rubric-intro">先给游戏定节奏，再看招式是否服务这个节奏。同一游戏可以混合，不必只归一类；例子只作节奏锚点，不代表已进入对比表。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="rhythm-table">
+            <thead>
+              <tr>
+                <th>类型</th>
+                <th>手感</th>
+                <th>例子（仅示意）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>高速流水</strong></td>
+                <td>hit-stop 密集、连段编织、高 APM</td>
+                <td>鬼泣、猎天使魔女</td>
+              </tr>
+              <tr>
+                <td><strong>重锤呼吸</strong></td>
+                <td>招式之间留停顿、重量感、commitment</td>
+                <td>战神、怪物猎人（大剑）</td>
+              </tr>
+              <tr>
+                <td><strong>拼刀博弈</strong></td>
+                <td>高频弹反、见招拆招、心理博弈</td>
+                <td>只狼、仁王</td>
+              </tr>
+              <tr>
+                <td><strong>指令策略</strong></td>
+                <td>半实时、ATB / 资源管理、协同</td>
+                <td>FF7 Rebirth、异度神剑 3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="rubric-block" aria-labelledby="check-title">
+        <div class="rubric-head">
+          <p class="kicker">03 / 检查</p>
+          <div>
+            <h2 id="check-title">交付前检查表</h2>
+            <p class="rubric-intro">逐项打勾；打勾只在本页有效，不写文件。打不上钩的，先记录证据，不急着改。</p>
+          </div>
+        </div>
+        <div class="check-grid">
+          <div class="check-col">
+            <h3>Boss / 敌人</h3>
+            <label class="check"><input type="checkbox"><span>打完这个 Boss，玩家学到什么？</span></label>
+            <label class="check"><input type="checkbox"><span>阶段切换有可读信号？</span></label>
+            <label class="check"><input type="checkbox"><span>每招有预警 + 解法？</span></label>
+            <label class="check"><input type="checkbox"><span>有稳定破绽 / 惩罚窗口？</span></label>
+            <label class="check"><input type="checkbox"><span>场地为招式服务？</span></label>
+            <label class="check"><input type="checkbox"><span>支持 2–3 种通关路径？</span></label>
+            <label class="check"><input type="checkbox"><span>失败后能复盘“我哪里错了”？</span></label>
+          </div>
+          <div class="check-col">
+            <h3>手感 / 输入</h3>
+            <label class="check"><input type="checkbox"><span>轻 / 重 / 必杀 hit-stop 有分级？</span></label>
+            <label class="check"><input type="checkbox"><span>命中同时有音效、画面、镜头、触觉？</span></label>
+            <label class="check"><input type="checkbox"><span>有 input buffer / 取消窗口？</span></label>
+            <label class="check"><input type="checkbox"><span>预警同时有视觉 + 音效？</span></label>
+            <label class="check"><input type="checkbox"><span>VFX 不遮挡判定？</span></label>
+            <label class="check"><input type="checkbox"><span>按键到动作跟手？</span></label>
+          </div>
+          <div class="check-col">
+            <h3>空间 / 遭遇</h3>
+            <label class="check"><input type="checkbox"><span>战斗空间服务招式？</span></label>
+            <label class="check"><input type="checkbox"><span>敌群出手受控（attack token）？</span></label>
+            <label class="check"><input type="checkbox"><span>近远程敌人分工清楚？</span></label>
+            <label class="check"><input type="checkbox"><span>出生节奏给玩家喘息？</span></label>
+            <label class="check"><input type="checkbox"><span>有安全区 / 高低差 / 可破坏物？</span></label>
+            <label class="check"><input type="checkbox"><span>有 1–2 条反常规路径？</span></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="rubric-block" aria-labelledby="redline-title">
+        <div class="rubric-head">
+          <p class="kicker">04 / 红线</p>
+          <div>
+            <h2 id="redline-title">常见红线</h2>
+            <p class="rubric-intro">命中多条就回看设计，不是扣分。红线用来提前发现“玩起来会难受”的地方。</p>
+          </div>
+        </div>
+        <div class="redline-grid">
+          <div class="redline">单一机制收益过高，其他玩法贬值。</div>
+          <div class="redline">蓄力 / 大招期间玩家无事可做。</div>
+          <div class="redline">Telegraph 模糊，只能靠背板。</div>
+          <div class="redline">全屏 AOE 没有安全区或破解方式。</div>
+          <div class="redline">机制堆砌，UI 信息过载。</div>
+          <div class="redline">战斗循环机械重复，没有变化。</div>
+          <div class="redline">召唤物太强，玩家变成观众。</div>
+          <div class="redline">战斗与剧情割裂，玩法没有叙事。</div>
+          <div class="redline">通关后没有成长 / 解锁。</div>
+          <div class="redline">失败后无法复盘，只能骂街。</div>
+        </div>
+      </section>
+
+      <section class="rubric-block" aria-labelledby="record-title">
+        <div class="rubric-head">
+          <p class="kicker">05 / 记录</p>
+          <div>
+            <h2 id="record-title">评审记录</h2>
+            <p class="rubric-intro">只记录有证据的问题；没有证据的直觉放“待验证”，不要写成结论。</p>
+          </div>
+        </div>
+        <div class="record">
+          <div class="record-row"><span>对象</span><span>角色 / Boss / 关卡</span></div>
+          <div class="record-row"><span>维度</span><span>可读性 / 反馈 / 决策 / 记忆点 / 耐玩度 / 节奏</span></div>
+          <div class="record-row"><span>观察</span><span>具体发生了什么，不写“手感不好”这种结论</span></div>
+          <div class="record-row"><span>证据</span><span>视频时间、招式名、来源链接</span></div>
+          <div class="record-row"><span>结论</span><span>保留 / 修改 / 待验证</span></div>
+        </div>
+      </section>
+
+      <p class="sec-note"><b>依据：</b><a href="https://github.com/koisama0411/act-combat-design" target="_blank" rel="noreferrer">act-combat-design</a> 的五维标尺、打击感五柱与反模式。它是项目方法论，不是行业标准；这一页也不承担定义、历史、观点、游戏对比与难点归因。</p>
+    </div>
+  </main>
+
+  <footer class="page-foot">
+    <a href="comparison.html">← 对比</a>
+    <span class="count">06 / 07</span>
+    <a href="sources.html">来源 →</a>
+  </footer>
+</body>
+</html>

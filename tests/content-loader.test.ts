@@ -7,6 +7,9 @@ describe("loadContent", () => {
 
     expect(result.entities[0].id).toBe("concept-sample");
     expect(result.entities[0].bodyHtml).toContain("<strong>Markdown</strong>");
+    expect(result.entities[0].headings).toEqual([{ id: "详细解释", text: "详细解释", level: 2 }]);
+    expect(result.entities[0].readingMinutes).toBeGreaterThanOrEqual(1);
+    expect(result.entities[0].updated).toBe("2026-07-17");
     expect(result.declaredEdges).toEqual([
       { source: "concept-sample", target: "concept-peer", kind: "related_to" }
     ]);

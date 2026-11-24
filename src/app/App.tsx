@@ -1,19 +1,20 @@
 import { useEffect, useMemo, useReducer } from "react";
 import type { BuildReport, KnowledgeDataset } from "../model";
 import { searchDataset } from "../search";
-import { atlasReducer, createInitialState, nodeHash, nodeIdFromHash } from "./app-state";
+import { atlasReducer, createInitialState, nodeHash, nodeIdFromHash, viewFromHash, type AtlasView } from "./app-state";
 import {
+  AtlasFooter,
   AtlasHeader,
   AtlasNavigation,
   EmptyDetail,
-  NodeDetail
+  NodeDetail,
+  viewEntryFor,
+  type ViewId
 } from "./components";
+import { ArticleReader } from "./ArticleReader";
 import { ComparisonMatrix } from "./ComparisonMatrix";
-import { CombatAnalysisView } from "./CombatAnalysisView";
-import { EE2CombatView } from "./EE2CombatView";
-import { GRAPH_ROOT_ID, GraphExplorer } from "./GraphExplorer";
+import { GRAPH_ROOT_ID, StructureExplorer } from "./StructureExplorer";
 import { IndexViews } from "./IndexViews";
-import { MobileTree } from "./MobileTree";
 import { SearchPanel } from "./SearchPanel";
 
 export interface AppProps {
@@ -30,7 +31,7 @@ function BuildStatePage({ report }: { report?: BuildReport }) {
         <p>请按下面的文件与错误信息修复内容，然后重新运行“更新知识库.cmd”。上一版可用网站不会被覆盖。</p>
         <ul>
           {report.issues.length ? report.issues.map((issue, index) => (
-            <li key={`${issue.code}-${issue.file}-${index}`}>
+            <li key={issue.code + "-" + issue.file + "-" + index}>
               <strong>{issue.file}</strong>
               <span>{issue.message}</span>
               <small>错误代码：{issue.code}</small>
@@ -92,73 +93,108 @@ function AtlasApplication({ dataset }: { dataset: KnowledgeDataset }) {
   useEffect(() => {
     const onHashChange = () => {
       const id = nodeIdFromHash(window.location.hash);
-      if (entityIds.has(id) || id === GRAPH_ROOT_ID) dispatch({ type: "hydrate-hash", id });
+      if (entityIds.has(id) || id === GRAPH_ROOT_ID) {
+        dispatch({ type: "hydrate-hash", id, view: viewFromHash(window.location.hash) });
+      }
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [entityIds]);
 
+  const writeHash = (id: string, view: AtlasView) => {
+    const nextUrl = window.location.pathname + window.location.search + nodeHash(id, view);
+    window.history.pushState(window.history.state, "", nextUrl);
+  };
+
   const selectEntity = (id: string) => {
     if (!entityIds.has(id) && id !== GRAPH_ROOT_ID) return;
     dispatch({ type: "select-node", id });
-    const nextHash = nodeHash(id);
-    const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
-    window.history.pushState(window.history.state, "", nextUrl);
+    writeHash(id, state.view);
   };
-  const openInGraph = (id: string) => {
-    dispatch({ type: "set-view", view: "graph" });
-    selectEntity(id);
+
+  const changeView = (view: AtlasView, id = selectedId) => {
+    if (!entityIds.has(id) && id !== GRAPH_ROOT_ID) return;
+    dispatch({ type: "set-view", view });
+    if (id !== selectedId) dispatch({ type: "select-node", id });
+    writeHash(id, view);
   };
+
+  const openInGraph = (id: string) => changeView("graph", id);
+  const openView = (view: ViewId) => changeView(view);
   const showDetailPanel = state.view === "graph"
     || state.view === "cases"
     || state.view === "conflicts"
     || state.view === "sources";
+  const entry = viewEntryFor(state.view);
 
   return (
     <div className="atlas-shell">
       <AtlasHeader dataset={dataset}>
+        <AtlasNavigation view={state.view} onViewChange={openView} />
         <SearchPanel dataset={dataset} query={state.query} filters={state.filters} resultIds={resultIds}
           onQueryChange={(query) => dispatch({ type: "set-query", query })}
           onFiltersChange={(filters) => dispatch({ type: "set-filters", filters })}
           onClear={() => { dispatch({ type: "set-query", query: "" }); dispatch({ type: "clear-filters" }); }}
           onSelect={openInGraph} />
       </AtlasHeader>
-      <div className={`atlas-layout${showDetailPanel ? "" : " atlas-layout--full"}`}>
-        <AtlasNavigation
-          view={state.view}
-          onViewChange={(view) => dispatch({ type: "set-view", view })}
-        />
-        {state.view === "graph" ? (
-          <main className="atlas-workspace" id="atlas-workspace">
-            <div className="workspace-heading">
-              <div><p className="eyebrow">概念星图</p><h1>动作游戏设计</h1></div>
-              <p className="workspace-instruction">沿父级、当前节点和直接子节点逐层阅读；其他关联可在图下按需展开。</p>
-            </div>
-            <GraphExplorer dataset={dataset} selectedId={selectedId} highlightedIds={highlightedIds} onSelect={selectEntity} />
-            <MobileTree dataset={dataset} selectedId={selectedId} onSelect={selectEntity} />
-          </main>
-        ) : state.view === "analysis" ? (
-          <main className="atlas-workspace combat-analysis-workspace" id="atlas-workspace">
-            <CombatAnalysisView dataset={dataset} onSelect={openInGraph} />
-          </main>
-        ) : state.view === "ee2-combat" ? (
-          <main className="atlas-workspace ee2-combat-workspace" id="atlas-workspace">
-            <EE2CombatView dataset={dataset} onSelect={openInGraph} />
-          </main>
-        ) : (
-          <main className="atlas-workspace" id="atlas-workspace">
-            <div className="workspace-heading"><div><p className="eyebrow">研究视图</p><h1>{state.view === "matrix" ? "游戏比较矩阵" : state.view === "cases" ? "案例索引" : state.view === "conflicts" ? "冲突索引" : "来源档案"}</h1></div><p className="workspace-instruction">从结构化记录打开依据；右侧详情与稳定链接会同步保留。</p></div>
-            {state.view === "matrix" ? <ComparisonMatrix dataset={dataset} onSelect={openInGraph} /> : <IndexViews dataset={dataset} view={state.view} onSelect={selectEntity} />}
-          </main>
-        )}
-        {showDetailPanel && (selected ? (
-          <NodeDetail
+
+      {state.view === "reader" ? (
+        selected?.bodyHtml ? (
+          <ArticleReader
+            key={selected.id}
             entity={selected}
             dataset={dataset}
+            onBack={() => changeView("graph")}
             onSelectEntity={selectEntity}
           />
-        ) : <EmptyDetail />)}
-      </div>
+        ) : (
+          <main className="page reader-empty-page" id="atlas-workspace">
+            <div className="page-head">
+              <p className="kicker">READING MODE</p>
+              <h1>此节点暂时没有完整正文</h1>
+              <p className="page-lede">请返回图谱选择带正文的概念、案例或来源节点；这类记录仍可在右侧详情里查看结构化依据。</p>
+            </div>
+            <button type="button" className="reader-back" onClick={() => changeView("graph")}>返回图谱</button>
+          </main>
+        )
+      ) : (
+        <main className="page" id="atlas-page">
+          <div className="page-head">
+            <p className="kicker">{entry.code} / {entry.label}</p>
+            <h1>{entry.title}</h1>
+            <p className="page-lede">{entry.lede}</p>
+          </div>
+          <div className={"page-body" + (showDetailPanel ? "" : " page-body--full")}>
+            <section className="atlas-workspace" id="atlas-workspace" aria-label={entry.label}>
+              {state.view === "graph" ? (
+                <StructureExplorer
+                  dataset={dataset}
+                  selectedId={selectedId}
+                  highlightedIds={highlightedIds}
+                  onSelect={selectEntity}
+                  onRead={(id) => changeView("reader", id)}
+                />
+              ) : state.view === "matrix" ? (
+                <ComparisonMatrix dataset={dataset} onSelect={openInGraph} />
+              ) : (
+                <IndexViews dataset={dataset} view={state.view} onSelect={selectEntity} />
+              )}
+            </section>
+            {showDetailPanel && (selected ? (
+              <NodeDetail
+                entity={selected}
+                dataset={dataset}
+                onSelectEntity={selectEntity}
+                onRead={(id) => changeView("reader", id)}
+              />
+            ) : <EmptyDetail />)}
+          </div>
+        </main>
+      )}
+
+      {state.view !== "reader" && (
+        <AtlasFooter view={state.view} dataset={dataset} onViewChange={openView} />
+      )}
     </div>
   );
 }

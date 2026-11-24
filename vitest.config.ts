@@ -2,6 +2,13 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    environment: "jsdom"
+    environment: "jsdom",
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/dist-last-good/**",
+      "**/.build-tmp/**",
+      "_quarantine/**"
+    ]
   }
 });

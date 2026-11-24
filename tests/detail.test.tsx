@@ -191,13 +191,16 @@ describe("NodeDetail", () => {
       }]
     });
     render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} />);
-    const image = screen.getByRole("img", { name: "压制循环演示" });
-    expect(image.getAttribute("loading")).toBe("lazy");
+    expect(screen.queryByRole("img", { name: "压制循环演示" })).toBeNull();
     expect(screen.getByText("来源：战斗资料")).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "放大：压制循环演示" }));
-    expect(screen.getByRole("dialog", { name: "压制循环演示" })).toBeTruthy();
-    fireEvent.error(image);
-    expect(screen.getByText("媒体加载失败：压制循环演示")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "加载并放大动图：压制循环演示" }));
+    const dialog = screen.getByRole("dialog", { name: "压制循环演示" });
+    expect(dialog.querySelector("img")).toBeTruthy();
+    const figure = screen.getAllByText("来源：战斗资料")[0].closest("figure");
+    const inlineImage = figure?.querySelector("img");
+    expect(inlineImage).toBeTruthy();
+    fireEvent.error(inlineImage!);
+    expect(screen.getByText(/媒体加载失败：压制循环演示/)).toBeTruthy();
   });
 
   it("closes the media dialog on Escape via the cancel event", async () => {
@@ -209,7 +212,7 @@ describe("NodeDetail", () => {
       }]
     });
     render(<NodeDetail entity={mediaEntity} dataset={fixtureDataset} />);
-    await user.click(screen.getByRole("button", { name: "放大：压制循环演示" }));
+    await user.click(screen.getByRole("button", { name: "加载并放大动图：压制循环演示" }));
     const dialog = screen.getByRole("dialog", { name: "压制循环演示" }) as HTMLDialogElement;
     expect(dialog).toBeTruthy();
 

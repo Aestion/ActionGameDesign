@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { createElement, type ComponentType } from "react";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach } from "vitest";
 import { describe, expect, it } from "vitest";
 import { App } from "../src/app/App";
@@ -42,12 +42,17 @@ describe("final release acceptance", () => {
     expect(conflicts.every(({ conflictType }) => conflictTypes.includes(conflictType!))).toBe(true);
   });
 
-  it("exposes the small-screen tree and gives every icon-only control an accessible name", async () => {
+  it("exposes the structure outline and small-screen tree, and gives every icon-only control an accessible name", async () => {
     const content = await loadContent("content");
     const dataset = compileContent(content, "2026-07-17T00:00:00.000Z");
     const { container } = render(createElement(App, { dataset }));
 
+    expect(screen.getByRole("navigation", { name: "结构路径" })).toBeTruthy();
+    expect(screen.getByRole("list", { name: "知识结构目录" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("tab", { name: "关系图" }));
     expect(screen.getByRole("region", { name: "分层知识树" })).toBeTruthy();
+
     const iconOnlyButtons = [...container.querySelectorAll("button")].filter((button) =>
       /^[+\-−×◇↗]+$/u.test(button.textContent?.trim() ?? "")
     );

@@ -47,7 +47,6 @@ export function ComparisonMatrix({ dataset, onSelect }: ComparisonMatrixProps) {
 
   return (
     <section className="matrix-view" aria-label="游戏比较矩阵">
-      <p className="matrix-note">矩阵呈现结构化倾向与可追溯材料，不是评分。没有资料的格子会明确标记为空。</p>
       <div className="matrix-scroll"><table><thead><tr><th scope="col">游戏 / 系列</th>{matrixDimensions.map((dimension) => <th scope="col" key={dimension.id}>{dimension.label}</th>)}</tr></thead><tbody>{games.map((game) => <tr key={game.id}><th scope="row">{game.title}</th>{matrixDimensions.map((dimension) => {
         const explicit = explicitValue(game, dimension);
         const count = evidenceFor(dataset, game.id, dimension).length;

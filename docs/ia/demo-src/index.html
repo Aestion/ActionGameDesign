@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="动作游戏研究：发展、定义、难点与观点、横向对比的交互结构示例。">
+  <title>动作游戏研究 · 交互结构示例</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="demo-banner" role="note">
+    <span>结构示例 v0.1</span>
+    <span>定义、观点、冲突与来源引用现有资料；发展时间轴与对比单元格含演示占位，正式版需逐条补来源。</span>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="回到总览">
+      <span class="brand-mark">AG</span>
+      <span class="brand-copy">
+        <strong>动作游戏研究</strong>
+        <small>ACTION GAME READER</small>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#overview" data-view="overview">总览</a>
+      <a href="#history" data-view="history">发展</a>
+      <a href="#definitions" data-view="definitions">定义</a>
+      <a href="#voices" data-view="voices">难点与观点</a>
+      <a href="#compare" data-view="compare">横向对比</a>
+      <a href="#sources" data-view="sources">来源</a>
+    </nav>
+    <div class="header-tools">
+      <button class="tool-button" type="button" data-action="search" aria-label="搜索">
+        <span>搜索</span><kbd>Ctrl K</kbd>
+      </button>
+      <button class="tool-button" type="button" data-action="structure" aria-pressed="false" aria-label="切换结构层">
+        <span>结构层</span>
+      </button>
+      <button class="tool-button tool-button--icon" type="button" data-action="theme" aria-label="切换主题">
+        <span data-theme-label>纸面</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+
+  <main class="page" id="main">
+    <section class="view" id="view-overview" aria-labelledby="overview-title"></section>
+    <section class="view" id="view-history" aria-labelledby="history-title" hidden></section>
+    <section class="view" id="view-definitions" aria-labelledby="definitions-title" hidden></section>
+    <section class="view" id="view-voices" aria-labelledby="voices-title" hidden></section>
+    <section class="view" id="view-compare" aria-labelledby="compare-title" hidden></section>
+    <section class="view" id="view-sources" aria-labelledby="sources-title" hidden></section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>动作游戏研究</strong>
+      <span>交互结构示例 · 不是最终内容</span>
+    </div>
+    <div class="footer-links">
+      <a href="#overview">总览</a>
+      <a href="#compare">对比工作台</a>
+      <a href="#sources">来源与方法</a>
+    </div>
+  </footer>
+
+  <div class="drawer-backdrop" data-close-drawer hidden></div>
+  <aside class="drawer" data-drawer role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden></aside>
+
+  <dialog class="search-dialog" data-search-dialog aria-labelledby="search-title">
+    <div class="search-head">
+      <div>
+        <p class="kicker">GLOBAL SEARCH</p>
+        <h2 id="search-title">搜索整份研究</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-search aria-label="关闭搜索">×</button>
+    </div>
+    <label class="search-field">
+      <span class="sr-only">搜索关键词</span>
+      <input type="search" autocomplete="off" data-search-input placeholder="例如：传统 ACT、可读性、立回、稻叶、只狼">
+    </label>
+    <p class="search-hint">检索页面、定义、事件、主题、人物、观点、冲突、游戏、对比单元格和来源。</p>
+    <div class="search-results" data-search-results aria-live="polite"></div>
+  </dialog>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+  <noscript>
+    <p class="noscript">这个示例需要 JavaScript 才能展示交互结构。</p>
+  </noscript>
+
+  <script src="app.js"></script>
+</body>
+</html>

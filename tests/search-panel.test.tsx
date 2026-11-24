@@ -43,6 +43,19 @@ function renderPanel(overrides: Partial<React.ComponentProps<typeof SearchPanel>
   );
 }
 
+describe("SearchPanel shortcuts", () => {
+  it("focuses search with Ctrl+K and leaves it on Escape", () => {
+    renderPanel();
+    const input = screen.getByRole("searchbox", { name: "全局检索" });
+
+    fireEvent.keyDown(window, { key: "k", ctrlKey: true });
+    expect(document.activeElement).toBe(input);
+
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(document.activeElement).not.toBe(input);
+  });
+});
+
 describe("SearchPanel result pagination", () => {
   it("reveals more results beyond the initial cap via a show-more control", async () => {
     const user = userEvent.setup();

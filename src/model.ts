@@ -34,6 +34,12 @@ export interface InlineExample {
   sourceIds: string[];
 }
 
+export interface ArticleHeading {
+  id: string;
+  text: string;
+  level: 2 | 3 | 4;
+}
+
 export interface KnowledgeEntity {
   id: string;
   kind: EntityKind;
@@ -41,6 +47,8 @@ export interface KnowledgeEntity {
   aliases: string[];
   summary: string;
   bodyHtml: string;
+  headings?: ArticleHeading[];
+  readingMinutes?: number;
   domainIds: string[];
   depth: 1 | 2 | 3;
   tags: string[];

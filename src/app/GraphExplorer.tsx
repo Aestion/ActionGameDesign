@@ -9,7 +9,7 @@ const domainOrder = [
   "domain-presentation", "domain-production-philosophy"
 ];
 
-const rootEntity: KnowledgeEntity = {
+export const rootEntity: KnowledgeEntity = {
   id: GRAPH_ROOT_ID, kind: "concept", title: "动作游戏设计", aliases: [],
   summary: "从六大知识域进入动作游戏设计的概念、案例、冲突与来源。", bodyHtml: "",
   domainIds: [], depth: 1, tags: [], reviewStatus: "reviewed", updated: "2026-07-17",
@@ -165,13 +165,13 @@ export function buildHierarchyView(dataset: KnowledgeDataset, selectedId: string
 }
 
 const graphStyles: StylesheetJson = [
-  { selector: "node", style: { "background-color": "#142633", "border-color": "#4c7d82", "border-width": 2, color: "#e7f0f2", label: "data(label)", "font-size": "14px", "font-weight": 600, "text-wrap": "wrap", "text-max-width": "142px", "text-valign": "center", "text-halign": "center", width: 168, height: 64, shape: "round-rectangle" } },
-  { selector: "node.parent", style: { "background-color": "#101f2a", "border-color": "#55707a", color: "#aabdc3" } },
-  { selector: "node.child", style: { "background-color": "#132a32", "border-color": "#4c948c" } },
-  { selector: "node.root", style: { width: 186, height: 70, "background-color": "#0f1b25", "font-weight": 700 } },
-  { selector: "node.selected", style: { width: 196, height: 74, "background-color": "#244653", "border-color": "#61e4c9", "border-width": 4, "font-weight": 700, "overlay-opacity": 0 } },
-  { selector: "node.highlighted", style: { "background-color": "#365e65", "border-color": "#ffffff" } },
-  { selector: "edge", style: { width: 1.5, "line-color": "#3f5e68", "target-arrow-shape": "none", "curve-style": "straight" } }
+  { selector: "node", style: { "background-color": "#fbf8f1", "border-color": "#b8ae9c", "border-width": 1.5, color: "#1c2324", label: "data(label)", "font-size": "13px", "font-weight": 600, "text-wrap": "wrap", "text-max-width": "142px", "text-valign": "center", "text-halign": "center", width: 168, height: 64, shape: "round-rectangle" } },
+  { selector: "node.parent", style: { "background-color": "#efe8dc", "border-color": "#b8ae9c", color: "#68706c" } },
+  { selector: "node.child", style: { "background-color": "#fbf8f1", "border-color": "#2f6f68" } },
+  { selector: "node.root", style: { width: 186, height: 70, "background-color": "#1c2324", "border-color": "#1c2324", color: "#f6f2e9", "font-weight": 700 } },
+  { selector: "node.selected", style: { width: 196, height: 74, "background-color": "#fbf8f1", "border-color": "#a4442f", "border-width": 3, color: "#1c2324", "font-weight": 700, "overlay-opacity": 0 } },
+  { selector: "node.highlighted", style: { "background-color": "#e6efeb", "border-color": "#2f6f68" } },
+  { selector: "edge", style: { width: 1.5, "line-color": "#c3b9a8", "target-arrow-shape": "none", "curve-style": "straight" } }
 ];
 
 export interface GraphExplorerProps {

@@ -35,6 +35,11 @@ const SourceMetaSchema = z.object({
   secondaryUrls: z.array(z.string().url()).default([])
 });
 
+const IsoDate = z.preprocess(
+  (value) => value instanceof Date ? value.toISOString().slice(0, 10) : value,
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
+);
+
 export const EntityFileSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
   kind: z.enum(entityKinds),
@@ -45,7 +50,7 @@ export const EntityFileSchema = z.object({
   depth: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   tags: z.array(z.string()).default([]),
   reviewStatus: z.enum(["draft", "reviewed"]),
-  updated: z.coerce.string(),
+  updated: IsoDate,
   relations: z.array(RelationSchema).default([]),
   citations: z.array(CitationSchema).default([]),
   media: z.array(MediaSchema).default([]),

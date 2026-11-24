@@ -8,38 +8,61 @@ import type {
 } from "../model";
 import type { AtlasView } from "./app-state";
 
-const domainOrder = [
-  "domain-type-boundary",
-  "domain-system-depth",
-  "domain-combat",
-  "domain-enemy-boss",
-  "domain-presentation",
-  "domain-production-philosophy"
+export type ViewId = Exclude<AtlasView, "reader">;
+
+export interface ViewEntry {
+  id: ViewId;
+  code: string;
+  label: string;
+  title: string;
+  lede: string;
+}
+
+export const viewEntries: ViewEntry[] = [
+  {
+    id: "graph",
+    code: "01",
+    label: "知识结构",
+    title: "动作游戏设计",
+    lede: "按知识域逐层展开目录，点标题选中节点、点 + 展开下一级；右侧详情追溯关系与正文全文，需要整体关系时切换到关系图。"
+  },
+  {
+    id: "matrix",
+    code: "02",
+    label: "游戏矩阵",
+    title: "同一维度上，各家怎么做",
+    lede: "矩阵呈现结构化倾向与可追溯材料，不是评分。没有资料的格子会明确标记为空，不自动补判断。"
+  },
+  {
+    id: "cases",
+    code: "03",
+    label: "案例索引",
+    title: "案例索引",
+    lede: "按标题或更新时间排列的结构化案例；打开任意一条可在右侧查看依据，或直接进入全文阅读。"
+  },
+  {
+    id: "conflicts",
+    code: "04",
+    label: "冲突索引",
+    title: "冲突与分歧",
+    lede: "同一问题下的不同主张并列呈现，不做正确性排名；每一侧都带适用条件与来源。"
+  },
+  {
+    id: "sources",
+    code: "05",
+    label: "来源档案",
+    title: "来源与方法",
+    lede: "来源观点与编者解释分开记录；引用可回到正文、案例与图谱节点，未完成处保持空白。"
+  }
 ];
 
-const viewLabels: Array<{ id: AtlasView; label: string; code: string }> = [
-  { id: "graph", label: "概念星图", code: "01" },
-  { id: "analysis", label: "战斗博弈", code: "02" },
-  { id: "ee2-combat", label: "EE2 战斗", code: "03" },
-  { id: "matrix", label: "游戏矩阵", code: "04" },
-  { id: "cases", label: "案例索引", code: "05" },
-  { id: "conflicts", label: "冲突索引", code: "06" },
-  { id: "sources", label: "来源档案", code: "07" }
-];
+export function viewEntryFor(view: AtlasView): ViewEntry {
+  const id: ViewId = view === "reader" ? "graph" : view;
+  return viewEntries.find((entry) => entry.id === id) ?? viewEntries[0];
+}
 const conflictTypeLabels: Record<string, string> = {
   definition: "定义冲突", goal: "目标冲突", condition: "条件差异", direct: "直接分歧"
 };
-
-export function getDomainEntities(dataset: KnowledgeDataset): KnowledgeEntity[] {
-  return dataset.entities
-    .filter(({ id }) => id.startsWith("domain-"))
-    .sort((a, b) => {
-      const aIndex = domainOrder.indexOf(a.id);
-      const bIndex = domainOrder.indexOf(b.id);
-      return (aIndex < 0 ? domainOrder.length : aIndex) -
-        (bIndex < 0 ? domainOrder.length : bIndex);
-    });
-}
 
 interface AtlasHeaderProps {
   dataset: KnowledgeDataset;
@@ -49,116 +72,81 @@ interface AtlasHeaderProps {
 export function AtlasHeader({ dataset, children }: AtlasHeaderProps) {
   return (
     <header className="atlas-header">
-      <a className="atlas-brand" href="#atlas-workspace" aria-label="动作游戏设计知识图谱首页">
-        <span aria-hidden="true" className="brand-mark">A/D</span>
-        <span>
+      <div className="atlas-header-inner">
+        <a className="atlas-brand" href="#atlas-workspace" aria-label="动作游戏设计知识图谱首页">
           <strong>动作设计图谱</strong>
           <small>TACTICAL KNOWLEDGE ATLAS</small>
-        </span>
-      </a>
-      {children}
-      <dl className="build-status" aria-label="知识库状态">
-        <div><dt>节点</dt><dd>{dataset.stats.concepts}</dd></div>
-        <div><dt>案例</dt><dd>{dataset.stats.cases}</dd></div>
-        <div><dt>冲突</dt><dd>{dataset.stats.conflicts}</dd></div>
-        <div><dt>状态</dt><dd className="status-ready">离线就绪</dd></div>
-      </dl>
+        </a>
+        {children}
+        <p className="atlas-status" aria-label="知识库状态">
+          <span className="status-ready">离线就绪</span>
+          <span>本地构建</span>
+        </p>
+      </div>
     </header>
   );
 }
 
 interface AtlasNavigationProps {
   view: AtlasView;
-  onViewChange: (view: AtlasView) => void;
+  onViewChange: (view: ViewId) => void;
 }
 
 export function AtlasNavigation({ view, onViewChange }: AtlasNavigationProps) {
+  const active = view === "reader" ? "graph" : view;
   return (
-    <nav className="atlas-navigation" aria-label="研究工具">
-      <p className="eyebrow">研究视图</p>
+    <nav className="atlas-navigation" aria-label="研究视图">
       <ul>
-        {viewLabels.map((item) => (
-          <li key={item.id}>
+        {viewEntries.map((entry) => (
+          <li key={entry.id}>
             <button
               type="button"
-              aria-current={view === item.id ? "page" : undefined}
-              onClick={() => onViewChange(item.id)}
+              aria-current={active === entry.id ? "page" : undefined}
+              onClick={() => onViewChange(entry.id)}
             >
-              <span aria-hidden="true">{item.code}</span>
-              {item.label}
+              <span aria-hidden="true">{entry.code}</span>
+              {entry.label}
             </button>
           </li>
         ))}
       </ul>
-      <div className="navigation-note">
-        <span aria-hidden="true">⌁</span>
-        <p>所有页面数据已嵌入本地构建，无运行时网络请求。</p>
-      </div>
     </nav>
   );
 }
 
-interface AtlasWorkspaceProps {
-  dataset: KnowledgeDataset;
-  selectedId: string;
+interface AtlasFooterProps {
   view: AtlasView;
-  onSelect: (id: string) => void;
+  dataset: KnowledgeDataset;
+  onViewChange: (view: ViewId) => void;
 }
 
-export function AtlasWorkspace({ dataset, selectedId, view, onSelect }: AtlasWorkspaceProps) {
-  const domains = getDomainEntities(dataset);
-  const selected = dataset.entities.find(({ id }) => id === selectedId);
-
+export function AtlasFooter({ view, dataset, onViewChange }: AtlasFooterProps) {
+  const active = viewEntryFor(view);
+  const index = Math.max(0, viewEntries.findIndex((entry) => entry.id === active.id));
+  const previous = viewEntries[(index - 1 + viewEntries.length) % viewEntries.length];
+  const next = viewEntries[(index + 1) % viewEntries.length];
   return (
-    <main className="atlas-workspace" id="atlas-workspace">
-      <div className="workspace-heading">
-        <div>
-          <p className="eyebrow">{viewLabels.find(({ id }) => id === view)?.label}</p>
-          <h1>动作游戏设计</h1>
-        </div>
-        <p className="workspace-instruction">选择知识域以聚焦直接关系与研究材料</p>
-      </div>
-
-      {view === "graph" ? (
-        <section className="domain-map" aria-labelledby="domain-map-title">
-          <h2 className="visually-hidden" id="domain-map-title">六大知识域</h2>
-          <div className="domain-core" aria-hidden="true">
-            <span>CORE</span>
-            <strong>动作游戏<br />设计</strong>
-          </div>
-          <div className="domain-grid">
-            {domains.map((domain, index) => (
-              <button
-                type="button"
-                key={domain.id}
-                className="domain-node"
-                data-active={selectedId === domain.id ? "true" : undefined}
-                aria-pressed={selectedId === domain.id}
-                aria-label={domain.title}
-                onClick={() => onSelect(domain.id)}
-              >
-                <span className="domain-index">D-{String(index + 1).padStart(2, "0")}</span>
-                <strong>{domain.title}</strong>
-                <span>{domain.summary}</span>
-              </button>
-            ))}
-          </div>
-          <div className="focus-readout" aria-live="polite">
-            <span>当前焦点</span>
-            <strong>{selected?.title ?? "等待选择"}</strong>
-            <span>{selected?.summary ?? "从六个知识域开始探索。"}</span>
-          </div>
-        </section>
-      ) : (
-        <section className="view-placeholder" aria-labelledby="view-placeholder-title">
-          <p className="eyebrow">模块接口已就绪</p>
-          <h2 id="view-placeholder-title">
-            {viewLabels.find(({ id }) => id === view)?.label}
-          </h2>
-          <p>本视图将复用当前选择、搜索条件与右侧分层详情。</p>
-        </section>
-      )}
-    </main>
+    <footer className="page-foot">
+      <button
+        type="button"
+        className="page-foot-link"
+        aria-label={`上一视图：${previous.label}`}
+        onClick={() => onViewChange(previous.id)}
+      >
+        <span aria-hidden="true">←</span> {previous.code} / {previous.label}
+      </button>
+      <span className="count">
+        {active.code} / {String(viewEntries.length).padStart(2, "0")} · 节点 {dataset.stats.concepts} · 案例 {dataset.stats.cases} · 冲突 {dataset.stats.conflicts}
+      </span>
+      <button
+        type="button"
+        className="page-foot-link"
+        aria-label={`下一视图：${next.label}`}
+        onClick={() => onViewChange(next.id)}
+      >
+        {next.code} / {next.label} <span aria-hidden="true">→</span>
+      </button>
+    </footer>
   );
 }
 
@@ -166,6 +154,7 @@ interface NodeDetailProps {
   entity: KnowledgeEntity;
   dataset?: KnowledgeDataset;
   onSelectEntity?: (id: string) => void;
+  onRead?: (id: string) => void;
 }
 
 function edgesFor(entity: KnowledgeEntity, dataset?: KnowledgeDataset): KnowledgeEdge[] {
@@ -184,7 +173,7 @@ function Metric({ value, children }: { value: number; children: ReactNode }) {
   return <li><strong>{String(value).padStart(2, "0")}</strong><span>{children}</span></li>;
 }
 
-function ExampleCard({ example, dataset }: { example: InlineExample; dataset?: KnowledgeDataset }) {
+export function ExampleCard({ example, dataset }: { example: InlineExample; dataset?: KnowledgeDataset }) {
   const game = dataset?.entities.find(({ id }) => id === example.gameId);
   return (
     <article className="research-card">
@@ -196,11 +185,18 @@ function ExampleCard({ example, dataset }: { example: InlineExample; dataset?: K
   );
 }
 
-function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDataset }) {
+export function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDataset }) {
   const [failed, setFailed] = useState(false);
   const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(media.kind !== "gif");
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const source = dataset?.entities.find(({ id }) => id === media.sourceId);
+
+  useEffect(() => {
+    setFailed(false);
+    setOpen(false);
+    setLoaded(media.kind !== "gif");
+  }, [media.kind, media.src]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -217,9 +213,15 @@ function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDat
   return (
     <>
       <figure className="media-card">
-        {failed ? <div className="media-fallback" role="status">媒体加载失败：{media.alt}<small>{media.caption}</small></div> : (
+        {failed ? <div className="media-fallback" role="status">媒体加载失败：{media.alt}<small>{media.caption}</small></div> : !loaded ? (
+          <button type="button" className="media-deferred" aria-label={`加载并放大动图：${media.alt}`} onClick={() => { setLoaded(true); setOpen(true); }}>
+            <span className="media-deferred-mark" aria-hidden="true">▶</span>
+            <strong>加载动作样本</strong>
+            <small>为减少离线包首屏流量，动图在点击后载入。</small>
+          </button>
+        ) : (
           <button type="button" className="media-open" aria-label={`放大：${media.alt}`} onClick={() => setOpen(true)}>
-            <img src={media.src} alt={media.alt} loading="lazy" onError={() => setFailed(true)} />
+            <img src={media.src} alt={media.alt} loading="lazy" decoding="async" onError={() => setFailed(true)} />
           </button>
         )}
         <figcaption><span>{media.caption || media.alt}</span><small>来源：{source?.title ?? media.sourceId}</small></figcaption>
@@ -242,7 +244,8 @@ function MediaCard({ media, dataset }: { media: MediaRef; dataset?: KnowledgeDat
 export function NodeDetail({
   entity,
   dataset,
-  onSelectEntity
+  onSelectEntity,
+  onRead
 }: NodeDetailProps) {
   const relations = edgesFor(entity, dataset);
   const related = relatedEntities(entity, dataset);
@@ -261,6 +264,11 @@ export function NodeDetail({
           <p className="eyebrow">{entity.kind} / {entity.reviewStatus}</p>
           <h2 id="detail-title">{entity.title}</h2>
         </div>
+        {entity.bodyHtml && onRead && (
+          <button type="button" className="read-mode-button" onClick={() => onRead(entity.id)}>
+            阅读全文 <span aria-hidden="true">↗</span>
+          </button>
+        )}
       </div>
 
       <div className="provenance-key" aria-label="内容归属标记">
